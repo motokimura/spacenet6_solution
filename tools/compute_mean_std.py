@@ -39,4 +39,4 @@ if __name__ == '__main__':
     print(f'std: {std}')
 
     np.save(os.path.join(out_dir, 'mean.npy'), mean)
-    np.save(os.path.join(out_dir, 'std.py'), std)
+    np.save(os.path.join(out_dir, 'std.npy'), std)

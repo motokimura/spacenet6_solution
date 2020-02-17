@@ -5,7 +5,7 @@
 
 import solaris as sol
 import os
-import skimage
+from skimage import io
 import geopandas as gpd
 import numpy as np
 from tqdm import tqdm
@@ -44,7 +44,7 @@ def combine_masks(footprint_mask, boundary_mask):
     )
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # parameters
     data_dir = '../data/spacenet6/train/'
     out_dir = '../data/footprint_boundary_mask/'
@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
         # load sar image and compute roi mask from sar intensity values
         sar_image_path = os.path.join(sar_image_dir, sar_image_filename)
-        sar_image = skimage.io.imread(sar_image_path)
+        sar_image = io.imread(sar_image_path)
         roi_mask = get_roi_mask(sar_image)
 
         # load building label
@@ -101,5 +101,5 @@ if __name__ == "__main__":
 
         # save masks
         out_filename = f'{building_label_filename}.png'
-        skimage.io.imsave(os.path.join(out_dir, 'labels', out_filename), combined_mask)
-        skimage.io.imsave(os.path.join(out_dir, 'labels_color', out_filename), combined_mask_color)
+        io.imsave(os.path.join(out_dir, 'labels', out_filename), combined_mask)
+        io.imsave(os.path.join(out_dir, 'labels_color', out_filename), combined_mask_color)

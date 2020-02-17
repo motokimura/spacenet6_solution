@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # this script generates building footprint and boundary mask PNG files
 # from given building polygon GeoJSON files
 # see also notebooks/geojson_to_mask.ipynb

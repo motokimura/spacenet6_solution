@@ -66,9 +66,9 @@ def dump_to_file(out_path, data_list):
 
 if __name__ == '__main__':
     # parameters
-    data_dir = '../data/spacenet6/train/'
-    mask_dir = '../data/footprint_boundary_mask/labels/'
-    out_dir = '../data/split/'
+    data_dir = '/data/spacenet6/train/'
+    mask_dir = '/data/footprint_boundary_mask/labels/'
+    out_dir = '/data/split/'
     train_val_split_ratio = (0.8, 0.2)
     seed = 0
 

@@ -46,8 +46,8 @@ def combine_masks(footprint_mask, boundary_mask):
 
 if __name__ == '__main__':
     # parameters
-    data_dir = '../data/spacenet6/train/'
-    out_dir = '../data/footprint_boundary_mask/'
+    data_dir = '/data/spacenet6/train/'
+    out_dir = '/data/footprint_boundary_mask/'
     boundary_type = 'outer'  # 'outer' or 'inner'
     boundary_width_px = 10
 

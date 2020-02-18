@@ -10,8 +10,8 @@ from tqdm import tqdm
 
 if __name__ == '__main__':
     # parameters
-    data_dir = '../data/spacenet6/train/'
-    out_base_dir = '../data/image_mean_std/'
+    data_dir = '/data/spacenet6/train/'
+    out_base_dir = '/data/image_mean_std/'
     # --SAR
     image_subdir = 'SAR-Intensity'
     image_width, image_height, image_channel = 900, 900, 4

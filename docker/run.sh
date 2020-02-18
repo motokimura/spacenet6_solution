@@ -11,7 +11,7 @@ THIS_DIR=$(cd $(dirname $0); pwd)
 PROJ_DIR=`dirname ${THIS_DIR}`
 
 # set spacenet6 data directory to map to docker
-DATA_DIR=${HOME}/data/spacenet6
+DATA_DIR=${HOME}/data
 
 # run container
 CONTAINER="spacenet6_data"

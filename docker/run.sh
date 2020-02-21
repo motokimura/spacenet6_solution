@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# set jupyter port
+JUPYTER_PORT=8889
+if [ $# -eq 1 ]; then
+    JUPYTER_PORT=$1
+fi
+
+echo "mapping port docker:${JUPYTER_PORT} --> host:${JUPYTER_PORT}"
+
 # set image name
 IMAGE="spacenet6_data:latest"
-if [ $# -eq 1 ]; then
-    IMAGE=$1
-fi
 
 # set project root dicrectory to map to docker
 THIS_DIR=$(cd $(dirname $0); pwd)
@@ -17,7 +22,7 @@ DATA_DIR=${HOME}/data
 CONTAINER="spacenet6_data"
 
 docker run -it --rm --ipc=host \
-	-p 8888:8888 -p 6006:6006 \
+	-p ${JUPYTER_PORT}:${JUPYTER_PORT} \
 	-v ${PROJ_DIR}:/work \
 	-v ${DATA_DIR}:/data \
 	--name ${CONTAINER} \

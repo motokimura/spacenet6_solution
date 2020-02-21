@@ -68,7 +68,7 @@ if __name__ == '__main__':
     # parameters
     data_dir = '/data/spacenet6/spacenet6/train/'
     mask_dir = '/data/spacenet6/footprint_boundary_mask/labels/'
-    out_dir = '/data/split/'
+    out_dir = '/data/spacenet6/split/'
     train_val_split_ratio = (0.8, 0.2)
     seed = 0
 

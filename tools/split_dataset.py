@@ -2,7 +2,6 @@
 # this script splits train dataset into train and val splits
 
 import json
-import numpy as np
 import os
 
 
@@ -51,17 +50,54 @@ def check_filename_validity(data_list):
         assert mask_filename[37:-12] == identity
 
 
-def dump_to_file(out_path, data_list):
-    N = len(data_list)
-    with open(out_path, 'w') as f:
-        json.dump(
-            data_list,
-            f,
-            ensure_ascii=False,
-            indent=4,
-            sort_keys=False,
-            separators=(',', ': ')
+def assign_split_id(data_list, sar_image_dir, split_num):
+    """Assign the tile to one of a small number of groups (split),
+    for setting aside validation data (or for k-fold cross-validation).
+    Caveats: These groups slightly overlap each other.
+    Also, they are not of equal size.
+    """
+    import gdal
+    import math
+
+    west_edge = 591550  # approximate west edge of training data area
+    east_edge = 596250  # approximate east edge of training data area
+    
+    split_ids = []
+    for data in data_list:
+        sar_path = os.path.join(sar_image_dir, data['SAR-Intensity'])
+        sar_gdal_data = gdal.Open(sar_path)
+        sar_transform = sar_gdal_data.GetGeoTransform()
+        x = sar_transform[0]
+        split_id = min(
+            split_num - 1,
+            max(0, math.floor((x - west_edge) / (east_edge - west_edge) * split_num))
         )
+        split_ids.append(split_id)
+    return split_ids
+
+
+def dump_to_files(out_dir, data_list, split_ids, split_num):
+    def dump_to_file(out_path, data_list):
+        with open(out_path, 'w') as f:
+            json.dump(
+                data_list,
+                f,
+                ensure_ascii=False,
+                indent=4,
+                sort_keys=False,
+                separators=(',', ': ')
+            )
+
+    for val_split_id in range(split_num):
+        train_list, val_list = [], []
+        for data, split_id in zip(data_list, split_ids):
+            if split_id == val_split_id:
+                val_list.append(data)
+            else:
+                train_list.append(data)
+
+        dump_to_file(os.path.join(out_dir, f'train_{val_split_id}.json'), train_list)
+        dump_to_file(os.path.join(out_dir, f'val_{val_split_id}.json'), val_list)
 
 
 if __name__ == '__main__':
@@ -69,10 +105,7 @@ if __name__ == '__main__':
     data_dir = '/data/spacenet6/spacenet6/train/'
     mask_dir = '/data/spacenet6/footprint_boundary_mask/labels/'
     out_dir = '/data/spacenet6/split/'
-    train_val_split_ratio = (0.8, 0.2)
-    seed = 0
-
-    np.random.seed(seed)
+    split_num = 5
 
     os.makedirs(out_dir, exist_ok=True)
 
@@ -144,14 +177,8 @@ if __name__ == '__main__':
     # check order of data_list
     check_filename_validity(data_list)
 
-    # shufffle data_list and split into train/val
-    np.random.shuffle(data_list)
+    # assign split id to each tile based on x-coord
+    split_ids = assign_split_id(data_list, sar_image_dir, split_num)
 
-    ratio_train, ratio_val = train_val_split_ratio
-    N_train = int(N * ratio_train / (ratio_train + ratio_val))
-    train_list = data_list[:N_train]
-    val_list = data_list[N_train:]
-
-    # dump train_list and val_list as json file
-    dump_to_file(os.path.join(out_dir, 'train.json'), train_list)
-    dump_to_file(os.path.join(out_dir, 'val.json'), val_list)
+    # dump train/val filenames for each split 
+    dump_to_files(out_dir, data_list, split_ids, split_num)

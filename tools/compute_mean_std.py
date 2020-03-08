@@ -2,27 +2,55 @@
 # this script computes mean and std values of given images
 # forr each channel
 
+import argparse
 import numpy as np
 import os
 from skimage import io
 from tqdm import tqdm
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--data_dir',
+        help='directory containing spacenet6 train dataset',
+        default='/data/spacenet6/spacenet6/train/'
+    )
+    parser.add_argument(
+        '--image_subdir',
+        help='sub directory containing images under data_dir',
+        default='SAR-Intensity'
+    )
+    parser.add_argument(
+        '--out_dir',
+        help='output root directory',
+        default='/data/spacenet6/image_mean_std/'
+    )
+    return parser.parse_args()
+
+
+def get_image_shape(image_subdir):
+    if image_subdir == 'SAR-Intensity':
+        image_width, image_height, image_channel = 900, 900, 4
+    elif image_subdir == 'PS-MS':
+        image_width, image_height, image_channel = 900, 900, 4
+    elif image_subdir == 'PAN':
+        image_width, image_height, image_channel = 900, 900, 1
+    else:
+        raise ValueError
+    return (image_width, image_height, image_channel)
+
+
 if __name__ == '__main__':
-    # parameters
-    data_dir = '/data/spacenet6/spacenet6/train/'
-    out_base_dir = '/data/spacenet6/image_mean_std/'
-    # --SAR
-    image_subdir = 'SAR-Intensity'
-    image_width, image_height, image_channel = 900, 900, 4
-    # --PAN
-    #image_subdir = 'PAN'
-    #image_width, image_height, image_channel = 900, 900, 1
+    args = parse_args()
 
-    image_dir = os.path.join(data_dir, image_subdir)
+    image_dir = os.path.join(args.data_dir, args.image_subdir)
 
-    out_dir = os.path.join(out_base_dir, image_subdir)
+    out_dir = os.path.join(args.out_dir, args.image_subdir)
     os.makedirs(out_dir, exist_ok=True)
+
+    image_width, image_height, image_channel = \
+        get_image_shape(args.image_subdir)
 
     if image_channel == 1:
         mean = np.zeros(shape=(image_height, image_width))

@@ -19,6 +19,7 @@ def parse_args():
     parser.add_argument(
         '--image_subdir',
         help='sub directory containing images under data_dir',
+        choices=['SAR-Intensity', 'PS-MS', 'PAN'],
         default='SAR-Intensity'
     )
     parser.add_argument(

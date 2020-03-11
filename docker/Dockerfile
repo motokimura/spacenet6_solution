@@ -20,6 +20,8 @@ RUN apt-get update \
     ca-certificates \
     curl \
     git \
+    sudo \
+    libx11-6 \
     libgdal-dev \
     libssl-dev \
     libffi-dev \
@@ -70,6 +72,15 @@ RUN conda install -n solaris \
                      jupyter \
                      jupyterlab \
                      ipykernel
+
+# install segmentation_models.pytorch
+RUN pip install git+https://github.com/qubvel/segmentation_models.pytorch  # install latest master
+RUN pip install yacs  # required to use spacenet6_model library
+RUN pip install gitpython tensorboard tensorboardX  # required to run scripts under tools/
+
+# to show tqdm progress bar on jupyter lab nicely
+RUN conda install -n solaris -y -c conda-forge nodejs
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 # add a jupyter kernel for the conda environment in case it's wanted
 RUN source activate solaris && python -m ipykernel.kernelspec \

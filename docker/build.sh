@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set image name
-IMAGE="spacenet6_data:latest"
+IMAGE="spacenet6:latest"
 
 # get project root dicrectory
 THIS_DIR=$(cd $(dirname $0); pwd)

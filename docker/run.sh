@@ -9,7 +9,7 @@ fi
 echo "mapping port docker:${JUPYTER_PORT} --> host:${JUPYTER_PORT}"
 
 # set image name
-IMAGE="spacenet6_data:latest"
+IMAGE="spacenet6:latest"
 
 # set project root dicrectory to map to docker
 THIS_DIR=$(cd $(dirname $0); pwd)
@@ -19,7 +19,7 @@ PROJ_DIR=`dirname ${THIS_DIR}`
 DATA_DIR=${HOME}/data
 
 # run container
-CONTAINER="spacenet6_data"
+CONTAINER="spacenet6"
 
 docker run -it --rm --ipc=host \
 	-p ${JUPYTER_PORT}:${JUPYTER_PORT} \

@@ -1,2 +1,2 @@
-# spacenet6_dataset
-code to preprocess SpaceNet-6 dataset
+# spacenet6_solution
+a solution to spacenet6 challenge

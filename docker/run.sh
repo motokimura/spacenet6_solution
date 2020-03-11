@@ -21,7 +21,7 @@ DATA_DIR=${HOME}/data
 # run container
 CONTAINER="spacenet6"
 
-docker run -it --rm --ipc=host \
+docker run --runtime=nvidia -it --rm --ipc=host \
 	-p ${JUPYTER_PORT}:${JUPYTER_PORT} \
 	-v ${PROJ_DIR}:/work \
 	-v ${DATA_DIR}:/data \

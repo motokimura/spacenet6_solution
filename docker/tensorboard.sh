@@ -8,4 +8,4 @@ if [ $# -eq 1 ]; then
 fi
 
 # launch tensorboard from project root directory
-tensorboard --logdir ${LOG_ROOT} --bind_all
+tensorboard --logdir ${LOG_ROOT} #--bind_all

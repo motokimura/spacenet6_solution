@@ -58,7 +58,11 @@ _C.SOLVER.LR_ANNEALING_ETA_MIN = 0.0
 _C.SOLVER.LOSSES = ['dice', 'bce']  # ['dice', 'bce', 'focal']
 _C.SOLVER.LOSS_WEIGHTS = [1.0, 1.0]
 _C.SOLVER.FOCAL_LOSS_GAMMA = 2.0
-_C.SOLVER.METRIC = 'iou_score'
+
+# Eval
+_C.EVAL = CN()
+_C.EVAL.METRICS = ['iou',]  # ['iou']
+_C.EVAL.MAIN_METRIC = 'iou/all'
 
 # Misc
 _C.LOG_ROOT = '/work/logs'

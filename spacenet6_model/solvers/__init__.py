@@ -47,7 +47,7 @@ def get_lr_scheduler(config, optimizer):
 def get_loss(config):
     """
     """
-    def get_loss_module(config, loss_name):
+    def _get_loss(config, loss_name):
         if loss_name == 'bce':
             return smp.utils.losses.BCELoss()
         elif loss_name == 'dice':
@@ -61,23 +61,9 @@ def get_loss(config):
 
     loss_modules = []
     for loss_name in config.SOLVER.LOSSES:
-        loss_module = get_loss_module(config, loss_name)
-        loss_modules.append(loss_module)
+        loss_modules.append(_get_loss(config, loss_name))
 
     return CombinedLoss(
         loss_modules,
         config.SOLVER.LOSS_WEIGHTS
     )
-
-
-def get_metrics(config):
-    """
-    """
-    # TODO: support multiple metrics
-    metric_name = config.SOLVER.METRIC
-    if metric_name == 'iou_score':
-        return [
-            smp.utils.metrics.IoU(threshold=0.5),
-        ]
-    else:
-        raise ValueError()

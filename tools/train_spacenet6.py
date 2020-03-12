@@ -12,9 +12,10 @@ init_path()
 
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_dataloader
+from spacenet6_model.evaluations import get_metrics
 from spacenet6_model.models import get_model
-from spacenet6_model.solver import (
-    get_metrics, get_loss, get_lr_scheduler, get_optimizer
+from spacenet6_model.solvers import (
+    get_loss, get_lr_scheduler, get_optimizer
 )
 from spacenet6_model.transforms import get_augmentation, get_preprocess
 
@@ -83,8 +84,7 @@ def main():
 
     # train loop
     best_score = 0
-    loss_name = 'loss'
-    metric_name = config.SOLVER.METRIC
+    metric_name = config.EVAL.MAIN_METRIC
 
     for i in range(config.SOLVER.EPOCHS):
         lr = optimizer.param_groups[0]['lr']
@@ -103,12 +103,14 @@ def main():
             )
             print('Model saved!')
 
-        # log lr, loss, and score values to tensorboard
+        # log lr to tensorboard
         tblogger.add_scalar('lr', lr, i)
-        tblogger.add_scalar(f'train/{loss_name}', train_logs[loss_name], i)
-        tblogger.add_scalar(f'train/{metric_name}', train_logs[metric_name], i)
-        tblogger.add_scalar(f'val/{loss_name}', val_logs[loss_name], i)
-        tblogger.add_scalar(f'val/{metric_name}', val_logs[metric_name], i)
+        # log train losses and scores
+        for k, v in train_logs.items():
+            tblogger.add_scalar(f'train/{k}', v, i)
+        # log val losses and scores
+        for k, v in val_logs.items():
+            tblogger.add_scalar(f'val/{k}', v, i)
 
         # update lr for the next epoch
         lr_scheduler.step()

@@ -62,7 +62,7 @@ _C.SOLVER.FOCAL_LOSS_GAMMA = 2.0
 # Eval
 _C.EVAL = CN()
 _C.EVAL.METRICS = ['iou',]  # ['iou']
-_C.EVAL.MAIN_METRIC = 'iou/all'
+_C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 
 # Misc
 _C.LOG_ROOT = '/work/logs'

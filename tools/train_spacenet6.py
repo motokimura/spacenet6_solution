@@ -94,14 +94,20 @@ def main():
         train_logs = train_epoch.run(train_dataloader)
         val_logs = val_epoch.run(val_dataloader)
 
+        # save model weight every epoch
+        torch.save(
+            model.state_dict(),
+            os.path.join(log_dir, f'model_{i:04d}.pth')
+        )
+
         # save model weight if score updated
         if best_score < val_logs[metric_name]:
             best_score = val_logs[metric_name]
             torch.save(
                 model.state_dict(),
-                os.path.join(log_dir, 'best_model.pth')
+                os.path.join(log_dir, 'model_best.pth')
             )
-            print('Model saved!')
+            print('Best val score updated!')
 
         # log lr to tensorboard
         tblogger.add_scalar('lr', lr, i)

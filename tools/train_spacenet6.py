@@ -12,9 +12,9 @@ init_path()
 
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_dataloader
-from spacenet6_model.metrics import get_metrics
+from spacenet6_model.evaluations import get_metrics
 from spacenet6_model.models import get_model
-from spacenet6_model.solver import (
+from spacenet6_model.solvers import (
     get_loss, get_lr_scheduler, get_optimizer
 )
 from spacenet6_model.transforms import get_augmentation, get_preprocess

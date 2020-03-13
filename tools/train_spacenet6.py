@@ -59,11 +59,14 @@ def main():
         verbose=True,
     )
 
+    # prepare directories to output log/weight files
     exp_id = config.EXP_ID
     assert exp_id <= 9999
     out_subdir = f'exp_{exp_id:04d}'
     log_dir = os.path.join(config.LOG_ROOT, out_subdir)
     weight_dir = os.path.join(config.WEIGHT_ROOT, out_subdir)
+    os.makedirs(log_dir, exist_ok=False)
+    os.makedirs(weight_dir, exist_ok=False)
 
     # prepare tensorboard
     tblogger = SummaryWriter(log_dir)

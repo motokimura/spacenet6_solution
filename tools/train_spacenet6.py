@@ -92,6 +92,7 @@ def main():
     # train loop
     best_score = 0
     metric_name = config.EVAL.MAIN_METRIC
+    split_id = config.INPUT.TRAIN_VAL_SPLIT_ID
 
     for i in range(config.SOLVER.EPOCHS):
         lr = optimizer.param_groups[0]['lr']
@@ -120,10 +121,10 @@ def main():
         tblogger.add_scalar('lr', lr, i)
         # log train losses and scores
         for k, v in train_logs.items():
-            tblogger.add_scalar(f'train/{k}', v, i)
+            tblogger.add_scalar(f'train/split_{split_id}/{k}', v, i)
         # log val losses and scores
         for k, v in val_logs.items():
-            tblogger.add_scalar(f'val/{k}', v, i)
+            tblogger.add_scalar(f'val/split_{split_id}/{k}', v, i)
 
         # update lr for the next epoch
         lr_scheduler.step()

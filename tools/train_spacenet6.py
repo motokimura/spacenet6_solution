@@ -121,10 +121,10 @@ def main():
         tblogger.add_scalar('lr', lr, i)
         # log train losses and scores
         for k, v in train_logs.items():
-            tblogger.add_scalar(f'train/split_{split_id}/{k}', v, i)
+            tblogger.add_scalar(f'split_{split_id}/train/{k}', v, i)
         # log val losses and scores
         for k, v in val_logs.items():
-            tblogger.add_scalar(f'val/split_{split_id}/{k}', v, i)
+            tblogger.add_scalar(f'split_{split_id}/val/{k}', v, i)
 
         # update lr for the next epoch
         lr_scheduler.step()

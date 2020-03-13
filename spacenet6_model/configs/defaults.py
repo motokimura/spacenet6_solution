@@ -65,8 +65,9 @@ _C.EVAL.METRICS = ['iou',]  # ['iou']
 _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 
 # Misc
-_C.LOG_ROOT = '/work/logs'
-_C.LOG_DIR = 'exp_9999'
+_C.LOG_ROOT = '/logs'
+_C.WEIGHT_ROOT = '/weights'
+_C.EXP_ID = 9999  # 0~9999
 
 
 def get_default_config():

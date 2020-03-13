@@ -59,7 +59,11 @@ def main():
         verbose=True,
     )
 
-    log_dir = os.path.join(config.LOG_ROOT, config.LOG_DIR)
+    exp_id = config.EXP_ID
+    assert exp_id <= 9999
+    out_subdir = f'exp_{exp_id:04d}'
+    log_dir = os.path.join(config.LOG_ROOT, out_subdir)
+    weight_dir = os.path.join(config.WEIGHT_ROOT, out_subdir)
 
     # prepare tensorboard
     tblogger = SummaryWriter(log_dir)
@@ -97,7 +101,7 @@ def main():
         # save model weight every epoch
         torch.save(
             model.state_dict(),
-            os.path.join(log_dir, f'model_{i:04d}.pth')
+            os.path.join(weight_dir, f'model_{i:04d}.pth')
         )
 
         # save model weight if score updated
@@ -105,7 +109,7 @@ def main():
             best_score = val_logs[metric_name]
             torch.save(
                 model.state_dict(),
-                os.path.join(log_dir, 'model_best.pth')
+                os.path.join(weight_dir, 'model_best.pth')
             )
             print('Best val score updated!')
 

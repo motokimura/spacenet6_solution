@@ -15,8 +15,10 @@ IMAGE="spacenet6:latest"
 THIS_DIR=$(cd $(dirname $0); pwd)
 PROJ_DIR=`dirname ${THIS_DIR}`
 
-# set spacenet6 data directory to map to docker
+# set path to directories to map to docker
 DATA_DIR=${HOME}/data
+WEIGHTS_DIR=/mnt/sdb1/spacenet6/weights
+LOG_DIR=/mnt/sdb1/spacenet6/logs
 
 # run container
 CONTAINER="spacenet6"
@@ -26,5 +28,7 @@ docker run --runtime=nvidia -it --rm --ipc=host \
 	-p 6006:6006 \
 	-v ${PROJ_DIR}:/work \
 	-v ${DATA_DIR}:/data \
+	-v ${WEIGHTS_DIR}:/weights \
+	-v ${LOG_DIR}:/logs \
 	--name ${CONTAINER} \
 	${IMAGE} /bin/bash

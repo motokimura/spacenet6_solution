@@ -5,8 +5,8 @@ _C = CN()
 
 # Input
 _C.INPUT = CN()
-_C.INPUT.TRAIN_DATA_LIST = '/data/spacenet6/split/train_0.json'
-_C.INPUT.VAL_DATA_LIST = '/data/spacenet6/split/val_0.json'
+_C.INPUT.TRAIN_VAL_SPLIT_DIR = '/data/spacenet6/split'
+_C.INPUT.TRAIN_VAL_SPLIT_ID = 0
 _C.INPUT.IMAGE_DIR = '/data/spacenet6/spacenet6/train'
 _C.INPUT.IMAGE_TYPE = 'SAR-Intensity'
 _C.INPUT.BUILDING_DIR = '/data/spacenet6/footprint_boundary_mask/v_01/labels'

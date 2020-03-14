@@ -95,12 +95,6 @@ class SpaceNet6Dataset(Dataset):
         """
         return len(self.image_paths)
 
-    def mask_channel_of(self, class_name):
-        """
-        """
-        assert class_name in self.CLASSES
-        return self.class_values.index(self.CLASSES.index(class_name))
-
     def _get_data_list(self, data_list_path):
         """
         """

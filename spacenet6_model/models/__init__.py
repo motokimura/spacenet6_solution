@@ -33,7 +33,7 @@ def get_model(config):
 
     model = torch.nn.DataParallel(model)
 
-    if config.MODEL.WEIGHT:
+    if config.MODEL.WEIGHT and config.MODEL.WEIGHT != 'none':
         # load weight from file
         model.load_state_dict(
             torch.load(

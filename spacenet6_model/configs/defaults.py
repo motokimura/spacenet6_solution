@@ -42,7 +42,7 @@ _C.MODEL.ENCODER_PRETRAINED_FROM = 'imagenet'
 _C.MODEL.ACTIVATION = 'sigmoid'
 _C.MODEL.DEVICE = 'cuda'
 _C.MODEL.IN_CHANNELS = 4
-_C.MODEL.WEIGHT = ''
+_C.MODEL.WEIGHT = 'none'
 
 # Solver
 _C.SOLVER = CN()

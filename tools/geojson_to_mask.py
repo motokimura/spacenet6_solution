@@ -3,6 +3,7 @@
 # from given building polygon GeoJSON files
 # see also notebooks/geojson_to_mask.ipynb
 
+import argparse
 import cv2
 import geopandas as gpd
 import numpy as np
@@ -10,6 +11,33 @@ import os
 import solaris as sol
 from skimage import io
 from tqdm import tqdm
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--data_dir',
+        help='directory containing spacenet6 train dataset',
+        default='/data/spacenet6/spacenet6/train/'
+    )
+    parser.add_argument(
+        '--out_dir',
+        help='output root directory',
+        default='/data/spacenet6/footprint_boundary_mask/v_01'
+    )
+    parser.add_argument(
+        '--boundary_width',
+        help='width of building boundary class in pixel',
+        type=int,
+        default=6
+    )
+    parser.add_argument(
+        '--min_area',
+        help='minmum area of building to consider in pixel',
+        type=int,
+        default=20
+    )
+    return parser.parse_args()
 
 
 def check_filenames_validity(sar_image_filename, building_label_filename):
@@ -86,22 +114,18 @@ def combine_masks(footprint_mask, boundary_mask):
 
 
 if __name__ == '__main__':
-    # parameters
-    data_dir = '/data/spacenet6/spacenet6/train/'
-    out_dir = '/data/spacenet6/footprint_boundary_mask/v_01'
-    boundary_width_px = 6
-    min_building_area_px = 20
+    args = parse_args()
 
-    os.makedirs(os.path.join(out_dir, 'labels'), exist_ok=True)
-    os.makedirs(os.path.join(out_dir, 'labels_color'), exist_ok=True)
+    os.makedirs(os.path.join(args.out_dir, 'labels'), exist_ok=True)
+    os.makedirs(os.path.join(args.out_dir, 'labels_color'), exist_ok=True)
 
     # SAR intensity
-    sar_image_dir = os.path.join(data_dir, 'SAR-Intensity')
+    sar_image_dir = os.path.join(args.data_dir, 'SAR-Intensity')
     sar_image_filenames = os.listdir(sar_image_dir)
     sar_image_filenames.sort()
 
     # building label
-    building_label_dir = os.path.join(data_dir, 'Buildings')
+    building_label_dir = os.path.join(args.data_dir, 'Buildings')
     building_label_filenames = os.listdir(building_label_dir)
     building_label_filenames.sort()
 
@@ -135,7 +159,7 @@ if __name__ == '__main__':
         # remove small buildings
         instance_mask = remove_small_building(
             instance_mask,
-            min_extent=min_building_area_px
+            min_extent=args.min_area
         )
 
         # gen building footprint mask of the roi
@@ -144,7 +168,7 @@ if __name__ == '__main__':
         # gen building boundary mask of the roi
         boundary_mask = generate_boundary_mask(
             instance_mask,
-            boundary_width_pixel=boundary_width_px
+            boundary_width_pixel=args.boundary_width
         )
         boundary_mask[np.logical_not(roi_mask)] = 0
 
@@ -153,5 +177,5 @@ if __name__ == '__main__':
 
         # save masks
         out_filename = f'{building_label_filename}.png'
-        io.imsave(os.path.join(out_dir, 'labels', out_filename), combined_mask)
-        io.imsave(os.path.join(out_dir, 'labels_color', out_filename), combined_mask_color)
+        io.imsave(os.path.join(args.out_dir, 'labels', out_filename), combined_mask)
+        io.imsave(os.path.join(args.out_dir, 'labels_color', out_filename), combined_mask_color)

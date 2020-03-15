@@ -9,7 +9,7 @@ fi
 echo "mapping port docker:${JUPYTER_PORT} --> host:${JUPYTER_PORT}"
 
 # set image name
-IMAGE="spacenet6:latest"
+IMAGE="spacenet6:dev"
 
 # set project root dicrectory to map to docker
 THIS_DIR=$(cd $(dirname $0); pwd)
@@ -21,7 +21,7 @@ WEIGHTS_DIR=/mnt/sdb1/spacenet6/weights
 LOG_DIR=/mnt/sdb1/spacenet6/logs
 
 # run container
-CONTAINER="spacenet6"
+CONTAINER="spacenet6_dev"
 
 docker run --runtime=nvidia -it --rm --ipc=host \
 	-p ${JUPYTER_PORT}:${JUPYTER_PORT} \

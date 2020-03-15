@@ -1,5 +1,5 @@
 #!/bin/bash
-# launch tensorboard from spacenet6 container
+# launch tensorboard from spacenet6_dev container
 
 # set log_dir
 LOG_ROOT=/logs

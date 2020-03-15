@@ -1,5 +1,5 @@
 #!/bin/bash
-# launch jupyter from spacenet6 container
+# launch jupyter from spacenet6_dev container
 
 # set jupyter port
 JUPYTER_PORT=8889

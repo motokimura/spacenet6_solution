@@ -1,6 +1,6 @@
 #!/bin/bash
 
 # exec
-CONTAINER="spacenet6"
+CONTAINER="spacenet6_dev"
 
 docker exec -it ${CONTAINER} /bin/bash

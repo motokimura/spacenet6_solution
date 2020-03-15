@@ -41,7 +41,7 @@ class SpaceNet6Dataset(Dataset):
         assert config.TRANSFORM.TARGET_SAR_ORIENTATION in [0, 1]  # north (0) or south (1)
         if image_type == 'SAR-Intensity' and config.TRANSFORM.ALIGN_SAR_ORIENTATION:
             self.orientation_df = read_orientation_file(
-                config.INPUT.SAR_ORIENTATION
+                os.path.join(image_root, 'SummaryData/SAR_orientations.txt')
             )
             self.target_orientation = config.TRANSFORM.TARGET_SAR_ORIENTATION
         else:

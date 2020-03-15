@@ -29,8 +29,33 @@ def get_model(config):
             classes=n_classes,
             activation=activation
         )
+    elif arch == 'pan':
+        model = smp.PAN(
+            encoder_name=backbone,
+            encoder_weights=encoder_weights,
+            in_channels=in_channels,
+            classes=n_classes,
+            activation=activation
+        )
+    elif arch == 'pspnet':
+        model = smp.PSPNet(
+            encoder_name=backbone,
+            encoder_weights=encoder_weights,
+            psp_dropout=config.MODEL.PSPNET_DROPOUT,
+            in_channels=in_channels,
+            classes=n_classes,
+            activation=activation
+        )
     elif arch == 'deeplabv3':
         model = smp.DeepLabV3(
+            encoder_name=backbone,
+            encoder_weights=encoder_weights,
+            in_channels=in_channels,
+            classes=n_classes,
+            activation=activation
+        )
+    elif arch == 'linknet':
+        model = smp.Linknet(
             encoder_name=backbone,
             encoder_weights=encoder_weights,
             in_channels=in_channels,

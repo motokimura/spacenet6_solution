@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import git
-import json
 import os.path
 import segmentation_models_pytorch as smp
 import torch
@@ -18,6 +16,11 @@ from spacenet6_model.solvers import (
     get_loss, get_lr_scheduler, get_optimizer
 )
 from spacenet6_model.transforms import get_augmentation, get_preprocess
+from spacenet6_model.utils import (
+    config_filename, experiment_subdir, git_filename,
+    weight_best_filename, weight_epoch_filename,
+    dump_git_info
+)
 
 
 def main():
@@ -60,11 +63,9 @@ def main():
     )
 
     # prepare directories to output log/weight files
-    exp_id = config.EXP_ID
-    assert exp_id <= 9999
-    out_subdir = f'exp_{exp_id:04d}'
-    log_dir = os.path.join(config.LOG_ROOT, out_subdir)
-    weight_dir = os.path.join(config.WEIGHT_ROOT, out_subdir)
+    exp_subdir = experiment_subdir(config.EXP_ID)
+    log_dir = os.path.join(config.LOG_ROOT, exp_subdir)
+    weight_dir = os.path.join(config.WEIGHT_ROOT, exp_subdir)
     os.makedirs(log_dir, exist_ok=False)
     os.makedirs(weight_dir, exist_ok=False)
 
@@ -72,21 +73,10 @@ def main():
     tblogger = SummaryWriter(log_dir)
 
     # save git hash
-    repo = git.Repo(search_parent_directories=True)
-    sha = repo.head.object.hexsha
-    git_data = {'version': '0.0.0', 'sha': sha}
-    with open(os.path.join(log_dir, 'git.json'), 'w') as f:
-        json.dump(
-            git_data,
-            f,
-            ensure_ascii=False,
-            indent=4,
-            sort_keys=False,
-            separators=(',', ': ')
-        )
+    dump_git_info(os.path.join(log_dir, git_filename()))
 
     # dump config to a file
-    with open(os.path.join(log_dir, 'config.yml'), 'w') as f:
+    with open(os.path.join(log_dir, config_filename()), 'w') as f:
         f.write(str(config))
 
     # train loop
@@ -105,7 +95,7 @@ def main():
         # save model weight every epoch
         torch.save(
             model.state_dict(),
-            os.path.join(weight_dir, f'model_{i:04d}.pth')
+            os.path.join(weight_dir, weight_epoch_filename(i))
         )
 
         # save model weight if score updated
@@ -113,7 +103,7 @@ def main():
             best_score = val_logs[metric_name]
             torch.save(
                 model.state_dict(),
-                os.path.join(weight_dir, 'model_best.pth')
+                os.path.join(weight_dir, weight_best_filename())
             )
             print('Best val score updated!')
 

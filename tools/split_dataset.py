@@ -16,7 +16,7 @@ def parse_args():
     parser.add_argument(
         '--mask_dir',
         help='directory containing building mask image files',
-        default='/data/spacenet6/footprint_boundary_mask/labels/'
+        default='/data/spacenet6/footprint_boundary_mask/v_01/labels/'
     )
     parser.add_argument(
         '--out_dir',

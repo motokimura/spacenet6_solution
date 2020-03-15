@@ -22,8 +22,13 @@ def parse_args():
     )
     parser.add_argument(
         '--out_dir',
-        help='output root directory',
-        default='/data/spacenet6/footprint_boundary_mask/v_01'
+        help='directory to output mask images',
+        default='/data/spacenet6/footprint_boundary_mask/v_01/labels/'
+    )
+    parser.add_argument(
+        '--vis_dir',
+        help='directory to output colorized mask images',
+        default=''
     )
     parser.add_argument(
         '--boundary_width',
@@ -116,8 +121,9 @@ def combine_masks(footprint_mask, boundary_mask):
 if __name__ == '__main__':
     args = parse_args()
 
-    os.makedirs(os.path.join(args.out_dir, 'labels'), exist_ok=True)
-    os.makedirs(os.path.join(args.out_dir, 'labels_color'), exist_ok=True)
+    os.makedirs(os.path.join(args.out_dir), exist_ok=True)
+    if args.vis_dir:
+        os.makedirs(os.path.join(args.vis_dir), exist_ok=True)
 
     # SAR intensity
     sar_image_dir = os.path.join(args.data_dir, 'SAR-Intensity')
@@ -177,5 +183,6 @@ if __name__ == '__main__':
 
         # save masks
         out_filename = f'{building_label_filename}.png'
-        io.imsave(os.path.join(args.out_dir, 'labels', out_filename), combined_mask)
-        io.imsave(os.path.join(args.out_dir, 'labels_color', out_filename), combined_mask_color)
+        io.imsave(os.path.join(args.out_dir, out_filename), combined_mask)
+        if args.vis_dir:
+            io.imsave(os.path.join(args.vis_dir, out_filename), combined_mask_color)

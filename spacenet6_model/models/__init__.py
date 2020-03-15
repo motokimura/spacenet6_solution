@@ -8,25 +8,34 @@ def get_model(config):
     arch = config.MODEL.ARCHITECTURE
     backbone = config.MODEL.BACKBONE
     encoder_weights = config.MODEL.ENCODER_PRETRAINED_FROM
+    in_channels = config.MODEL.IN_CHANNELS
     n_classes = len(config.INPUT.CLASSES)
     activation = config.MODEL.ACTIVATION
-    in_channels = config.MODEL.IN_CHANNELS
 
     if arch == 'unet':
         model = smp.Unet(
             encoder_name=backbone,
             encoder_weights=encoder_weights,
+            in_channels=in_channels,
             classes=n_classes,
-            activation=activation,
-            in_channels=in_channels
+            activation=activation
+        )
+    elif arch == 'fpn':
+        model = smp.FPN(
+            encoder_name=backbone,
+            encoder_weights=encoder_weights,
+            decoder_dropout=config.MODEL.FPN_DECODER_DROPOUT,
+            in_channels=in_channels,
+            classes=n_classes,
+            activation=activation
         )
     elif arch == 'deeplabv3':
         model = smp.DeepLabV3(
             encoder_name=backbone,
             encoder_weights=encoder_weights,
+            in_channels=in_channels,
             classes=n_classes,
-            activation=activation,
-            in_channels=in_channels
+            activation=activation
         )
     else:
         raise ValueError()

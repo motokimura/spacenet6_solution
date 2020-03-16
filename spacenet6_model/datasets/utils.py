@@ -24,19 +24,3 @@ def lookup_orientation(tilepath, rotationdf):
     stripname = '_'.join(tilename.split('_')[-4:-2])
     rotation = rotationdf.loc[stripname].squeeze()
     return rotation
-
-
-def crop_center(array, crop_wh):
-    """
-    """
-    _, h, w = array.shape
-    crop_w, crop_h = crop_wh
-    assert w >= crop_w
-    assert h >= crop_h
-
-    left = (w - crop_w) // 2
-    right = w - crop_w - left
-    top = (h - crop_h) // 2
-    bottom = h - crop_h - top
-
-    return array[:, top:bottom, left:right]

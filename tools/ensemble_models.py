@@ -65,7 +65,7 @@ if __name__ == '__main__':
         ensembled_score = np.zeros(shape=[args.pred_channel, h, w])
 
         array_filename, _ = os.path.splitext(sar_image_filename)
-        array_filename = '{array_filename}.npy'
+        array_filename = f'{array_filename}.npy'
 
         for exp_id in args.exp_ids:
             exp_subdir = experiment_subdir(exp_id)

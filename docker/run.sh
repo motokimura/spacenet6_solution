@@ -19,6 +19,7 @@ PROJ_DIR=`dirname ${THIS_DIR}`
 DATA_DIR=${HOME}/data
 WEIGHTS_DIR=/mnt/sdb1/spacenet6/weights
 LOG_DIR=/mnt/sdb1/spacenet6/logs
+PREDICTION_DIR=/mnt/sdb1/spacenet6/predictions
 
 # run container
 CONTAINER="spacenet6_dev"
@@ -30,5 +31,6 @@ docker run --runtime=nvidia -it --rm --ipc=host \
 	-v ${DATA_DIR}:/data \
 	-v ${WEIGHTS_DIR}:/weights \
 	-v ${LOG_DIR}:/logs \
+	-v ${PREDICTION_DIR}:/predictions \
 	--name ${CONTAINER} \
 	${IMAGE} /bin/bash

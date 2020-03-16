@@ -72,6 +72,7 @@ _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 # Misc
 _C.LOG_ROOT = '/logs'
 _C.WEIGHT_ROOT = '/weights'
+_C.PREDICTION_ROOT = '/predictions'
 _C.EXP_ID = 9999  # 0~9999
 
 

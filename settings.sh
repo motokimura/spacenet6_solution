@@ -24,3 +24,6 @@ MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 
 # test_spacenet6_model.py
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
+
+# ensemble_models.py
+ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled

@@ -3,12 +3,14 @@
 source activate solaris
 
 TEST_DIR=$1  # path/to/spacenet6/test/
-OUTPUT_PATH=$2  # path/to/solution.csv
+OUTPUT_CSV_PATH=$2  # path/to/solution.csv
+TEST_IMAGE_DIR=${TEST_DIR}/SAR-Intensity
+
 source settings.sh
 
 # predict with trained models
 TEST_ARGS="\
-    INPUT.TEST_IMAGE_DIR ${TEST_DIR} \
+    INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
     INPUT.SAR_ORIEENTATION ${SAR_ORIENTATION_PATH} \
     LOG_ROOT ${TRAIN_LOG_DIR} \
     WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
@@ -36,7 +38,11 @@ TEST_ARGS="\
     ${TEST_ARGS}
 
 # ensemble
-# TBI
+./tools/ensemble_models.py \
+    --test_image_dir ${TEST_IMAGE_DIR} \
+    --pred_root_dir ${MODEL_PREDICTION_DIR} \
+    --out_dir ${ENSEMBLED_PREDICTION_DIR} \
+    --exp_id 0 1 2 3 4
 
 # mask to poly
 # TBI

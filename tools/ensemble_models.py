@@ -56,6 +56,8 @@ if __name__ == '__main__':
     sar_image_paths.sort()
     N = len(args.exp_ids)
 
+    os.makedirs(args.out_dir, exist_ok=False)
+
     for sar_image_path in tqdm(sar_image_paths):
         sar_image = io.imread(sar_image_path)
         roi_mask = get_roi_mask(sar_image)

@@ -2,6 +2,8 @@
 import numpy as np
 import os.path
 
+from tqdm import tqdm
+
 from _init_path import init_path
 init_path()
 
@@ -31,7 +33,7 @@ def main():
     os.makedirs(pred_dir, exist_ok=False)
 
     # test loop
-    for batch in test_dataloader:
+    for batch in tqdm(test_dataloader):
         images = batch['image'].to(config.MODEL.DEVICE)
         rotated_flags = batch['rotated']
         image_paths = batch['image_path']

@@ -115,11 +115,7 @@ class SpaceNet6TestDataset(Dataset):
     ):
         # generate full path to image files
         image_dir = config.INPUT.TEST_IMAGE_DIR
-        image_filenames = glob(os.path.join(image_dir, '*.tif'))
-        image_filenames.sort()
-        self.image_paths = [
-            os.path.join(image_dir, fn) for fn in image_filenames
-        ]
+        self.image_paths = glob(os.path.join(image_dir, '*.tif'))
 
         # prepare sar orientation look up table to align orientation of all SAR images
         assert config.TRANSFORM.TARGET_SAR_ORIENTATION in [0, 1]  # north (0) or south (1)

@@ -52,18 +52,19 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
 
-    sar_image_filenames = glob(os.path.join(args.test_image_dir, '*.tif'))
-    sar_image_filenames.sort()
+    sar_image_paths = glob(os.path.join(args.test_image_dir, '*.tif'))
+    sar_image_paths.sort()
     N = len(args.exp_ids)
 
-    for sar_image_filename in tqdm(sar_image_filenames):
-        sar_image = io.imread(os.path.join(args.test_image_dir, sar_image_filename))
+    for sar_image_path in tqdm(sar_image_paths):
+        sar_image = io.imread(sar_image_path)
         roi_mask = get_roi_mask(sar_image)
 
         h, w = roi_mask.shape
         assert h == 900 and w == 900
         ensembled_score = np.zeros(shape=[args.pred_channel, h, w])
 
+        sar_image_filename = os.path.basename(sar_image_path)
         array_filename, _ = os.path.splitext(sar_image_filename)
         array_filename = f'{array_filename}.npy'
 

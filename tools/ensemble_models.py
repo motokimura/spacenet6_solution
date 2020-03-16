@@ -52,7 +52,7 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
 
-    sar_image_filenames = glob(os.path.join(args.test_image_dir), '*.tif')
+    sar_image_filenames = glob(os.path.join(args.test_image_dir, '*.tif'))
     sar_image_filenames.sort()
     N = len(args.exp_ids)
 

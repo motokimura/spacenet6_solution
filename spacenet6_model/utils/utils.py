@@ -63,8 +63,8 @@ def crop_center(array, crop_wh):
     assert h >= crop_h
 
     left = (w - crop_w) // 2
-    right = w - crop_w - left
+    right = crop_w + left
     top = (h - crop_h) // 2
-    bottom = h - crop_h - top
+    bottom = crop_h + top
 
     return array[:, top:bottom, left:right]

@@ -54,7 +54,7 @@ class SpaceNet6Dataset(Dataset):
         if not classes:
             # if classes is empty, use all classes
             classes = self.CLASSES
-        self.class_values = [seelf.CLASSES.index(cls.lower()) for cls in classes]
+        self.class_values = [self.CLASSES.index(cls.lower()) for cls in classes]
 
         self.augmentation = augmentation
         self.preprocessing = preprocessing

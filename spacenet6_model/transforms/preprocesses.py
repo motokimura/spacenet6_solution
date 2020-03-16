@@ -3,6 +3,7 @@ import albumentations as albu
 import functools
 import numpy as np
 import os.path
+import torch
 
 
 def get_spacenet6_preprocess(config, is_test):
@@ -58,4 +59,5 @@ def _normalize_image(image, mean, std, **kwargs):
 def _to_tensor(x, **kwargs):
     """
     """
-    return x.transpose(2, 0, 1).astype('float32')
+    x = x.transpose(2, 0, 1).astype('float32')
+    return torch.from_numpy(x)

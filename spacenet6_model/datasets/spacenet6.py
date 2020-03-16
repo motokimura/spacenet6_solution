@@ -56,6 +56,8 @@ class SpaceNet6Dataset(Dataset):
             classes = self.CLASSES
         self.class_values = [self.CLASSES.index(cls.lower()) for cls in classes]
 
+        self.device = config.MODEL.DEVICE
+
         self.augmentation = augmentation
         self.preprocessing = preprocessing
 
@@ -88,6 +90,9 @@ class SpaceNet6Dataset(Dataset):
         if self.preprocessing:
             sample = self.preprocessing(image=image, mask=mask)
             image, mask = sample['image'], sample['mask']
+            # send tensors to device
+            image = image.to(self.device)
+            mask = mask.to(self.device)
 
         return image, mask
 
@@ -133,6 +138,8 @@ class SpaceNet6TestDataset(Dataset):
             self.orientation_df = None
             self.target_orientation = None
 
+        self.device = config.MODEL.DEVICE
+
         self.augmentation = augmentation
         self.preprocessing = preprocessing
 
@@ -163,6 +170,8 @@ class SpaceNet6TestDataset(Dataset):
         if self.preprocessing:
             sample = self.preprocessing(image=image)
             image = sample['image']
+            # send tensors to device
+            image = image.to(self.device)
 
         return {
             'image': image,

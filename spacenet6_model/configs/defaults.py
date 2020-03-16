@@ -12,6 +12,7 @@ _C.INPUT.IMAGE_TYPE = 'SAR-Intensity'
 _C.INPUT.BUILDING_DIR = '/data/spacenet6/footprint_boundary_mask/v_01/labels'
 _C.INPUT.CLASSES = ['building_footprint', 'building_boundary']
 _C.INPUT.MEAN_STD_DIR = '/data/spacenet6/image_mean_std/'
+_C.INPUT.TEST_IMAGE_DIR = 'data/spacenet6/spacenet6/test_public/SAR-Intensity'
 
 # Transforms
 _C.TRANSFORM = CN()
@@ -29,9 +30,12 @@ _C.TRANSFORM.TARGET_SAR_ORIENTATION = 0  # 0: north, 1: south
 _C.DATALOADER = CN()
 _C.DATALOADER.TRAIN_BATCH_SIZE = 24
 _C.DATALOADER.VAL_BATCH_SIZE = 16
+_C.DATALOADER.TEST_BATCH_SIZE = 16
 _C.DATALOADER.TRAIN_NUM_WORKERS = 8
 _C.DATALOADER.VAL_NUM_WORKERS = 8
+_C.DATALOADER.TEST_NUM_WORKERS = 8
 _C.DATALOADER.TRAIN_SHUFFLE = True
+
 
 # Model
 _C.MODEL = CN()

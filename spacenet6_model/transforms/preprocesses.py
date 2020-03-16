@@ -5,7 +5,7 @@ import numpy as np
 import os.path
 
 
-def get_spacenet6_preprocess(config):
+def get_spacenet6_preprocess(config, is_test):
     """
     """
     mean_path = os.path.join(
@@ -24,6 +24,16 @@ def get_spacenet6_preprocess(config):
     std = np.load(std_path)
     std = std[np.newaxis, np.newaxis, :]
 
+    if is_test:
+        to_tensor = albu.Lambda(
+            image=functools.partial(_to_tensor)
+        )
+    else:
+        to_tensor = albu.Lambda(
+            image=functools.partial(_to_tensor),
+            mask=functools.partial(_to_tensor)
+        )
+
     preprocess = [
         albu.Lambda(
             image=functools.partial(
@@ -32,10 +42,7 @@ def get_spacenet6_preprocess(config):
                 std=std
             )
         ),
-        albu.Lambda(
-            image=functools.partial(_to_tensor),
-            mask=functools.partial(_to_tensor)
-        ),
+        to_tensor,
     ]
     return albu.Compose(preprocess)
 

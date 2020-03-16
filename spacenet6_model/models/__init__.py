@@ -76,4 +76,5 @@ def get_model(config):
             )
         )
 
+    model = model.to(config.MODEL.DEVICE)
     return model

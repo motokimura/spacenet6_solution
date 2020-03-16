@@ -72,7 +72,7 @@ if __name__ == '__main__':
             score_array = np.load(
                 os.path.join(
                     args.pred_root_dir,
-                    args.exp_subdir,
+                    exp_subdir,
                     array_filename
                 )
             )

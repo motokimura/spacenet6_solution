@@ -8,7 +8,7 @@ from ..utils import config_filename, experiment_subdir, weight_best_filename
 def _load_previous_experiment(config, exp_id, log_dir):
     """
     """
-    log_dir = log_dir if log_dir else config.LOG_DIR
+    log_dir = log_dir if log_dir else config.LOG_ROOT
     exp_subdir = experiment_subdir(exp_id)
 
     # overwrite config

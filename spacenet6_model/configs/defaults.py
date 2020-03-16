@@ -12,7 +12,7 @@ _C.INPUT.IMAGE_TYPE = 'SAR-Intensity'
 _C.INPUT.BUILDING_DIR = '/data/spacenet6/footprint_boundary_mask/v_01/labels'
 _C.INPUT.CLASSES = ['building_footprint', 'building_boundary']
 _C.INPUT.MEAN_STD_DIR = '/data/spacenet6/image_mean_std/'
-_C.INPUT.TEST_IMAGE_DIR = 'data/spacenet6/spacenet6/test_public/SAR-Intensity'
+_C.INPUT.TEST_IMAGE_DIR = '/data/spacenet6/spacenet6/test_public/SAR-Intensity'
 
 # Transforms
 _C.TRANSFORM = CN()

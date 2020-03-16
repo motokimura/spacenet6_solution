@@ -90,9 +90,6 @@ class SpaceNet6Dataset(Dataset):
         if self.preprocessing:
             sample = self.preprocessing(image=image, mask=mask)
             image, mask = sample['image'], sample['mask']
-            # send tensors to device
-            image = image.to(self.device)
-            mask = mask.to(self.device)
 
         return image, mask
 
@@ -170,8 +167,6 @@ class SpaceNet6TestDataset(Dataset):
         if self.preprocessing:
             sample = self.preprocessing(image=image)
             image = sample['image']
-            # send tensors to device
-            image = image.to(self.device)
 
         return {
             'image': image,

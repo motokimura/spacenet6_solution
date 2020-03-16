@@ -80,7 +80,9 @@ if __name__ == '__main__':
                 )
             )
             score_array[:, np.logical_not(roi_mask)] = 0
+            assert score_array.min() >= 0 and score_array.max() <= 1
             ensembled_score += score_array
 
         ensembled_score = ensembled_score / N
+        assert ensembled_score.min() >= 0 and ensembled_score.max() <= 1
         np.save(os.path.join(args.out_dir, array_filename), ensembled_score)

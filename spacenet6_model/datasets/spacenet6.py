@@ -116,6 +116,7 @@ class SpaceNet6TestDataset(Dataset):
         # generate full path to image files
         image_dir = config.INPUT.TEST_IMAGE_DIR
         image_filenames = glob(os.path.join(image_dir, '*.tif'))
+        image_filenames.sort()
         self.image_paths = [
             os.path.join(image_dir, fn) for fn in image_filenames
         ]

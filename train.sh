@@ -32,31 +32,31 @@ TRAIN_ARGS="\
     WEIGHT_DIR ${MODEL_WEIGHT_DIR} \
 "
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \

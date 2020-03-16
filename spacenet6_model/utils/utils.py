@@ -54,6 +54,11 @@ def dump_git_info(path):
         )
 
 
+def get_roi_mask(sar_image):
+    mask = sar_image.sum(axis=-1) > 0.0
+    return mask
+
+
 def crop_center(array, crop_wh):
     """
     """

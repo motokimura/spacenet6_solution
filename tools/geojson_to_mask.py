@@ -9,8 +9,14 @@ import geopandas as gpd
 import numpy as np
 import os
 import solaris as sol
+
 from skimage import io
 from tqdm import tqdm
+
+from _init_path import init_path
+init_path()
+
+from spacenet6_model.utils import get_roi_mask
 
 
 def parse_args():
@@ -55,11 +61,6 @@ def check_filenames_validity(sar_image_filename, building_label_filename):
 
     # check if both of sar image and building label cover the same tile
     assert sar_image_filename[41:-4] == building_label_filename[37:-8]
-
-
-def get_roi_mask(sar_image):
-    mask = sar_image.sum(axis=-1) > 0.0
-    return mask
 
 
 def compute_instance_pixel_extents(instance_mask):

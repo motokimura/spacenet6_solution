@@ -8,7 +8,7 @@ init_path()
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_test_dataloader
 from spacenet6_model.models import get_model
-from spacenet6_model.utils import crop_center
+from spacenet6_model.utils import crop_center, experiment_subdir
 
 
 def main():
@@ -25,9 +25,14 @@ def main():
     model = get_model(config)
     model.eval()
 
+    # prepare directory to output predictions
+    exp_subdir = experiment_subdir(config.EXP_ID)
+    pred_dir = os.path.join(config.PREDICTION_ROOT, exp_subdir)
+    os.makedirs(pred_dir, exist_ok=False)
+
     # test loop
     for batch in test_dataloader:
-        images = batch['image']
+        images = batch['image'].to(config.MODEL.DEVICE)
         rotated_flags = batch['rotated']
         image_paths = batch['image_path']
         original_heights, original_widths, _ = batch['original_shape']
@@ -66,7 +71,7 @@ def main():
             filename, _ = os.path.splitext(filename)
             filename = f'{filename}.npy'
             np.save(
-                os.path.join(config.PREDICTION_ROOT, filename),
+                os.path.join(pred_dir, filename),
                 pred
             )
 

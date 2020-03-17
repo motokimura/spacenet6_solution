@@ -70,11 +70,16 @@ if __name__ == '__main__':
         # add to the cumulative inference to dataframe
         filename = os.path.basename(array_path)
         tilename = '_'.join(os.path.splitext(filename)[0].split('_')[-4:])
+
+        polys = vectordata['geometry']
+        if len(polys) == 0:
+            polys = ["POLYGON EMPTY",]
+
         df = pd.DataFrame(
             {
                 'ImageId': tilename,
                 #'BuildingId': 0,
-                'PolygonWKT_Pix': vectordata['geometry'],
+                'PolygonWKT_Pix': polys,
                 'Confidence': 1  # TODO: compute confidence appropriately
             }
         )

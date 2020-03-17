@@ -17,6 +17,9 @@ def adjust_sar_contrast(sar_intensity, max_percentile=99.95, min_percentile=0.05
 
 
 def compute_building_score(pr_score_footprint, pr_score_boundary, alpha):
+    """
+    """
+    # XXX: deprecated. will be moved under spacenet6_model/utils/utils.py
     pr_score_building = pr_score_footprint * (1.0 - alpha * pr_score_boundary)
     return pr_score_building.clip(min=0.0, max=1.0)
 

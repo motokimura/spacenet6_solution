@@ -75,6 +75,10 @@ _C.LOG_ROOT = '/logs'
 _C.WEIGHT_ROOT = '/weights'
 _C.PREDICTION_ROOT = '/predictions'
 _C.ENSEMBLED_PREDICTION_ROOT = '/ensembled_predictions'
+_C.POLY_CSV_DIR = '/polygons'
+_C.BOUNDARY_SUBSTRACT_COEFF = 0.5
+_C.BUILDING_SCORE_THRESH = 0.5
+_C.BUILDING_MIM_AREA_PIXEL = 0
 _C.EXP_ID = 9999  # 0~9999
 _C.ENSEMBLE_EXP_IDS = []
 

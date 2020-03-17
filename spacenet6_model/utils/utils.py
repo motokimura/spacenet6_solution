@@ -15,6 +15,17 @@ def experiment_subdir(exp_id):
     return f'exp_{exp_id:04d}'
 
 
+def ensemble_subdir(exp_ids):
+    """
+    """
+    exp_ids_ = exp_ids.copy()
+    exp_ids_.sort()
+    subdir = 'exp'
+    for exp_id in exp_ids_:
+        subdir += f'_{exp_id:04d}'
+    return subdir
+
+
 def git_filename():
     """
     """

@@ -74,7 +74,9 @@ _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 _C.LOG_ROOT = '/logs'
 _C.WEIGHT_ROOT = '/weights'
 _C.PREDICTION_ROOT = '/predictions'
+_C.ENSEMBLED_PREDICTION_ROOT = '/ensembled_predictions'
 _C.EXP_ID = 9999  # 0~9999
+_C.ENSEMBLE_EXP_IDS = []
 
 
 def get_default_config():

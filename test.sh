@@ -39,10 +39,11 @@ TEST_ARGS="\
 
 # ensemble
 ./tools/ensemble_models.py \
-    --test_image_dir ${TEST_IMAGE_DIR} \
-    --pred_root_dir ${MODEL_PREDICTION_DIR} \
-    --out_dir ${ENSEMBLED_PREDICTION_DIR} \
-    --exp_id 0 1 2 3 4
+    INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
+    INPUT.CLASSES '["building_footprint", "building_boundary"]' \
+    PREDICTION_ROOT ${MODEL_PREDICTION_DIR} \
+    ENSEMBLED_PREDICTION_ROOT ${ENSEMBLED_PREDICTION_DIR} \
+    ENSEMBLE_EXP_IDS "[0, 1, 2, 3, 4]"
 
 # mask to poly
 # TBI

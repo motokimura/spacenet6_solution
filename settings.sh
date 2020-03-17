@@ -26,4 +26,11 @@ MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
 
 # ensemble_models.py
+CLASSES='["building_footprint", "building_boundary"]'
 ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled
+
+# pred_array_to_poly.py
+POLY_CSV_DIR=${FEATURE_DIR}/polygons
+BOUNDARY_SUBSTRACT_COEFF=0.5
+BUILDING_MIM_AREA_PIXEL=0
+BUILDING_SCORE_THRESH=0.5

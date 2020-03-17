@@ -73,12 +73,12 @@ if __name__ == '__main__':
         df = pd.DataFrame(
             {
                 'ImageId': tilename,
-                'BuildingId': 0,
+                #'BuildingId': 0,
                 'PolygonWKT_Pix': vectordata['geometry'],
                 'Confidence': 1  # TODO: compute confidence appropriately
             }
         )
-        df['BuildingId'] = range(len(df))
+        #df['BuildingId'] = range(len(df))
         if firstfile:
             building_poly_df = df
             firstfile = False

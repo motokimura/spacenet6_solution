@@ -2,6 +2,7 @@ import json
 import numpy as np
 import os.path
 
+from glob import glob
 from skimage import io
 from torch.utils.data import Dataset
 
@@ -40,9 +41,7 @@ class SpaceNet6Dataset(Dataset):
         # prepare sar orientation look up table to align orientation of all SAR images
         assert config.TRANSFORM.TARGET_SAR_ORIENTATION in [0, 1]  # north (0) or south (1)
         if image_type == 'SAR-Intensity' and config.TRANSFORM.ALIGN_SAR_ORIENTATION:
-            self.orientation_df = read_orientation_file(
-                os.path.join(image_root, 'SummaryData/SAR_orientations.txt')
-            )
+            self.orientation_df = read_orientation_file(config.INPUT.SAR_ORIENTATION)
             self.target_orientation = config.TRANSFORM.TARGET_SAR_ORIENTATION
         else:
             self.orientation_df = None
@@ -54,6 +53,8 @@ class SpaceNet6Dataset(Dataset):
             # if classes is empty, use all classes
             classes = self.CLASSES
         self.class_values = [self.CLASSES.index(cls.lower()) for cls in classes]
+
+        self.device = config.MODEL.DEVICE
 
         self.augmentation = augmentation
         self.preprocessing = preprocessing
@@ -101,3 +102,71 @@ class SpaceNet6Dataset(Dataset):
         with open(data_list_path) as f:
             data_list = json.load(f)
         return data_list
+
+
+class SpaceNet6TestDataset(Dataset):
+    """
+    """
+    def __init__(
+        self,
+        config,
+        augmentation=None,
+        preprocessing=None
+    ):
+        # generate full path to image files
+        image_dir = config.INPUT.TEST_IMAGE_DIR
+        self.image_paths = glob(os.path.join(image_dir, '*.tif'))
+
+        # prepare sar orientation look up table to align orientation of all SAR images
+        assert config.TRANSFORM.TARGET_SAR_ORIENTATION in [0, 1]  # north (0) or south (1)
+        if config.TRANSFORM.ALIGN_SAR_ORIENTATION:
+            self.orientation_df = read_orientation_file(config.INPUT.SAR_ORIENTATION)
+            self.target_orientation = config.TRANSFORM.TARGET_SAR_ORIENTATION
+        else:
+            self.orientation_df = None
+            self.target_orientation = None
+
+        self.device = config.MODEL.DEVICE
+
+        self.augmentation = augmentation
+        self.preprocessing = preprocessing
+
+    def __getitem__(self, i):
+        """
+        """
+        image_path = self.image_paths[i]
+        image = io.imread(image_path)
+        original_shape = image.shape
+        rotated = False
+
+        if self.orientation_df is not None:
+            orientation = lookup_orientation(
+                image_path,
+                self.orientation_df
+            )
+            if orientation != self.target_orientation:
+                # align orientation
+                image = np.fliplr(np.flipud(image))
+                rotated = True
+
+        # apply augmentations
+        if self.augmentation:
+            sample = self.augmentation(image=image)
+            image = sample['image']
+
+        # apply preprocessing
+        if self.preprocessing:
+            sample = self.preprocessing(image=image)
+            image = sample['image']
+
+        return {
+            'image': image,
+            'image_path': image_path,
+            'original_shape': original_shape,
+            'rotated': rotated,
+        }
+
+    def __len__(self):
+        """
+        """
+        return len(self.image_paths)

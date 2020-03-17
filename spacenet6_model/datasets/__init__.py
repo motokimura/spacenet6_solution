@@ -1,7 +1,7 @@
 import os.path
 import torch.utils.data
 
-from .spacenet6 import SpaceNet6Dataset
+from .spacenet6 import SpaceNet6Dataset, SpaceNet6TestDataset
 from ..transforms import get_augmentation, get_preprocess
 
 
@@ -22,8 +22,8 @@ def get_dataloader(
         f'val_{split_id}.json'
     )
 
-    preprocessing = get_preprocess(config)
-    augmentation = get_augmentation(config, is_train)
+    preprocessing = get_preprocess(config, is_test=False)
+    augmentation = get_augmentation(config, is_train=is_train)
 
     if is_train:
         data_list_path = train_list
@@ -48,4 +48,24 @@ def get_dataloader(
         batch_size=batch_size,
         shuffle=shuffle,
         num_workers=num_workers
+    )
+
+
+def get_test_dataloader(config):
+    """
+    """
+    preprocessing = get_preprocess(config, is_test=True)
+    augmentation = get_augmentation(config, is_train=False)
+
+    dataset = SpaceNet6TestDataset(
+        config,
+        augmentation=augmentation,
+        preprocessing=preprocessing
+    )
+
+    return torch.utils.data.DataLoader(
+        dataset,
+        batch_size=config.DATALOADER.TEST_BATCH_SIZE,
+        shuffle=False,
+        num_workers=config.DATALOADER.TEST_NUM_WORKERS
     )

@@ -5,6 +5,12 @@ source activate solaris
 TRAIN_DIR=$1  # path/to/spacenet6/train/
 source settings.sh
 
+# prepare directory to output intermediate products
+mkdir -p ${FEATUREE_DIR}
+
+# copy SAR_orientations.txt for test.sh
+cp ${TRAIN_DIR}/SummaryData/SAR_orientations.txt ${SAR_ORIENTATION_PATH}
+
 # prepare dataset
 ./tools/compute_mean_std.py \
     --data_dir ${TRAIN_DIR} \
@@ -28,35 +34,36 @@ TRAIN_ARGS="\
     INPUT.TRAIN_VAL_SPLIT_DIR ${DATA_SPLIT_DIR} \
     INPUT.IMAGE_DIR ${TRAIN_DIR} \
     INPUT.BUILDING_DIR ${BUILDING_MASK_DIR} \
-    LOG_DIR ${TRAIN_LOG_DIR} \
-    WEIGHT_DIR ${MODEL_WEIGHT_DIR} \
+    INPUT.SAR_ORIEENTATION ${SAR_ORIENTATION_PATH} \
+    LOG_ROOT ${TRAIN_LOG_DIR} \
+    WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
 "
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
-./tools/train.py \
+./tools/train_spacenet6_model.py \
     --config ${TRAIN_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \

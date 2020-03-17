@@ -3,9 +3,10 @@ import albumentations as albu
 import functools
 import numpy as np
 import os.path
+import torch
 
 
-def get_spacenet6_preprocess(config):
+def get_spacenet6_preprocess(config, is_test):
     """
     """
     mean_path = os.path.join(
@@ -24,6 +25,16 @@ def get_spacenet6_preprocess(config):
     std = np.load(std_path)
     std = std[np.newaxis, np.newaxis, :]
 
+    if is_test:
+        to_tensor = albu.Lambda(
+            image=functools.partial(_to_tensor)
+        )
+    else:
+        to_tensor = albu.Lambda(
+            image=functools.partial(_to_tensor),
+            mask=functools.partial(_to_tensor)
+        )
+
     preprocess = [
         albu.Lambda(
             image=functools.partial(
@@ -32,10 +43,7 @@ def get_spacenet6_preprocess(config):
                 std=std
             )
         ),
-        albu.Lambda(
-            image=functools.partial(_to_tensor),
-            mask=functools.partial(_to_tensor)
-        ),
+        to_tensor,
     ]
     return albu.Compose(preprocess)
 
@@ -51,4 +59,5 @@ def _normalize_image(image, mean, std, **kwargs):
 def _to_tensor(x, **kwargs):
     """
     """
-    return x.transpose(2, 0, 1).astype('float32')
+    x = x.transpose(2, 0, 1).astype('float32')
+    return torch.from_numpy(x)

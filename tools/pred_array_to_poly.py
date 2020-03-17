@@ -36,8 +36,9 @@ if __name__ == '__main__':
             '*.npy'
         )
     )
+    array_paths.sort()
 
-    firstfile = False
+    firstfile = True
 
     for array_path in tqdm(array_paths):
         pred_array = np.load(array_path)

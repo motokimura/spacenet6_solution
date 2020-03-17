@@ -22,8 +22,8 @@ from spacenet6_model.utils import (
 if __name__ == '__main__':
     config = load_config()
 
+    assert config.ENSEMBLE_EXP_IDS >= 1
     N = len(config.ENSEMBLE_EXP_IDS)
-    assert N >= 1
 
     sar_image_paths = glob(
         os.path.join(config.INPUT.TEST_IMAGE_DIR, '*.tif')

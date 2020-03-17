@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     subdir = ensemble_subdir(config.ENSEMBLE_EXP_IDS)
 
-    out_dir = os.path.join(config.POLY_CSV_DIR, subdir)
+    out_dir = os.path.join(config.POLY_CSV_ROOT, subdir)
     os.makedirs(out_dir, exist_ok=False)
 
     array_paths = glob(

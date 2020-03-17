@@ -61,7 +61,8 @@ def main():
 
             if rotated:
                 # re-rotate if input image is rotated
-                pred = np.flipud(np.fliplr(pred))
+                pred = pred[:, :, ::-1]  # flip lr
+                pred = pred[:, ::-1, :]  # flip ud
 
             c, h, w = pred.shape
             assert c == len(config.INPUT.CLASSES)

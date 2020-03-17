@@ -2,7 +2,6 @@
 # this script conducts model ensemble by averaging 
 # score arrays output by different multiple models
 
-import argparse
 import numpy as np
 import os.path
 
@@ -22,7 +21,7 @@ from spacenet6_model.utils import (
 if __name__ == '__main__':
     config = load_config()
 
-    assert config.ENSEMBLE_EXP_IDS >= 1
+    assert len(config.ENSEMBLE_EXP_IDS) >= 1
     N = len(config.ENSEMBLE_EXP_IDS)
 
     sar_image_paths = glob(

@@ -55,7 +55,7 @@ def copy_images(val_list_path, data_dir, out_dir, image_type):
     ]
 
     # prepare output directory
-    val_split_name = os.path.splitext(os.path.basename(val_split_path))  # supposed to be "val_x"
+    val_split_name, _ = os.path.splitext(os.path.basename(val_split_path))  # supposed to be "val_x"
     out_dir_ = os.path.join(out_dir, val_split_name, image_type)
     os.makedirs(out_dir_, exist_ok=False)
 

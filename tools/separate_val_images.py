@@ -50,6 +50,7 @@ def copy_images(val_list_path, data_dir, out_dir, image_type):
     image_paths = [
         os.path.join(
             data_dir,
+            image_type,
             filenames[image_type]
         ) for filenames in val_list
     ]

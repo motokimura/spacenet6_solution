@@ -73,4 +73,4 @@ if __name__ == '__main__':
         out_csv_path = os.path.join(args.out_dir, f'{val_split_name}.csv')
         df_.to_csv(out_csv_path, index=False)
 
-        print('successfully saved to {out_csv_path}')
+        print(f'successfully saved to {out_csv_path}')

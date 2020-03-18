@@ -9,6 +9,7 @@ import os
 import shutil
 
 from glob import glob
+from tqdm import tqdm
 
 
 def parse_args():
@@ -61,7 +62,7 @@ def copy_images(val_list_path, data_dir, out_dir, image_type):
     os.makedirs(out_dir_, exist_ok=False)
 
     # copy image files under {args.out_dir}/{val_x}/{image_type}/
-    for src_path in image_paths:
+    for src_path in tqdm(image_paths):
         shutil.copy(src_path, out_dir_)
 
 
@@ -73,6 +74,10 @@ if __name__ == '__main__':
     )
     assert len(val_split_paths) == args.split_num
 
+    val_split_paths.sort()
+
     for val_split_path in val_split_paths:
+        val_split_filename = os.path.basename(val_split_path)
         for image_type in args.image_types:
+            print(f'copying {image_type} files listed by {val_split_filename}...')
             copy_images(val_split_path, args.data_dir, args.out_dir, image_type)

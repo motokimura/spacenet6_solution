@@ -5,6 +5,8 @@ import argparse
 import json
 import os
 
+from tqdm import tqdm
+
 from _init_path import init_path
 init_path()
 
@@ -95,7 +97,7 @@ def assign_split_id(data_list, sar_image_dir, split_num):
     east_edge = 596250  # approximate east edge of training data area
     
     split_ids = []
-    for data in data_list:
+    for data in tqdm(data_list):
         sar_path = os.path.join(sar_image_dir, data['SAR-Intensity'])
         sar_gdal_data = gdal.Open(sar_path)
         sar_transform = sar_gdal_data.GetGeoTransform()

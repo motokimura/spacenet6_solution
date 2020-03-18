@@ -76,8 +76,8 @@ if __name__ == '__main__':
 
     val_split_paths.sort()
 
-    for val_split_path in val_split_paths:
-        val_split_filename = os.path.basename(val_split_path)
-        for image_type in args.image_types:
+    for image_type in args.image_types:
+        for val_split_path in val_split_paths:
+            val_split_filename = os.path.basename(val_split_path)
             print(f'copying {image_type} files listed by {val_split_filename}...')
             copy_images(val_split_path, args.data_dir, args.out_dir, image_type)

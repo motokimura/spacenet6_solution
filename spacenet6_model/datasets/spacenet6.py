@@ -26,7 +26,8 @@ class SpaceNet6Dataset(Dataset):
         preprocessing=None
     ):
         # generate full path to image/label files
-        data_list = self._get_data_list(data_list_path)
+        with open(data_list_path) as f:
+            data_list = json.load(f)
 
         image_root = config.INPUT.IMAGE_DIR
         image_type = config.INPUT.IMAGE_TYPE
@@ -95,13 +96,6 @@ class SpaceNet6Dataset(Dataset):
         """
         """
         return len(self.image_paths)
-
-    def _get_data_list(self, data_list_path):
-        """
-        """
-        with open(data_list_path) as f:
-            data_list = json.load(f)
-        return data_list
 
 
 class SpaceNet6TestDataset(Dataset):

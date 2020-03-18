@@ -5,6 +5,11 @@ import argparse
 import json
 import os
 
+from _init_path import init_path
+init_path()
+
+from spacenet6_model.utils import train_list_filename, val_list_filename
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -123,8 +128,8 @@ def dump_to_files(out_dir, data_list, split_ids, split_num):
             else:
                 train_list.append(data)
 
-        dump_to_file(os.path.join(out_dir, f'train_{val_split_id}.json'), train_list)
-        dump_to_file(os.path.join(out_dir, f'val_{val_split_id}.json'), val_list)
+        dump_to_file(os.path.join(out_dir, train_list_filename(val_split_id)), train_list)
+        dump_to_file(os.path.join(out_dir, val_list_filename(val_split_id)), val_list)
 
 
 if __name__ == '__main__':

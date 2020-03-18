@@ -22,6 +22,8 @@ LOG_DIR=/mnt/sdb1/spacenet6/logs
 PREDICTION_DIR=/mnt/sdb1/spacenet6/predictions
 ENSEMBLED_PREDICTION_DIR=/mnt/sdb1/spacenet6/ensembled_predictions
 POLY_CSV_DIR=/mnt/sdb1/spacenet6/polygons
+VAL_PREDICTION_DIR=/mnt/sdb1/spacenet6/val_predictions
+VAL_POLY_CSV_DIR=/mnt/sdb1/spacenet6/val_polygons
 
 # run container
 CONTAINER="spacenet6_dev"
@@ -36,5 +38,7 @@ docker run --runtime=nvidia -it --rm --ipc=host \
 	-v ${PREDICTION_DIR}:/predictions \
 	-v ${ENSEMBLED_PREDICTION_DIR}:/ensembled_predictions \
 	-v ${POLY_CSV_DIR}:/polygons \
+	-v ${VAL_PREDICTION_DIR}:/val_predictions \
+	-v ${VAL_POLY_CSV_DIR}:/val_polygons \
 	--name ${CONTAINER} \
 	${IMAGE} /bin/bash

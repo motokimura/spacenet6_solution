@@ -1,8 +1,12 @@
+import json
 import os.path
 import torch.utils.data
 
+from glob import glob
+
 from .spacenet6 import SpaceNet6Dataset, SpaceNet6TestDataset
 from ..transforms import get_augmentation, get_preprocess
+from ..utils import train_list_filename, val_list_filename
 
 
 def get_dataloader(
@@ -15,11 +19,11 @@ def get_dataloader(
     split_id = config.INPUT.TRAIN_VAL_SPLIT_ID
     train_list = os.path.join(
         config.INPUT.TRAIN_VAL_SPLIT_DIR,
-        f'train_{split_id}.json'
+        train_list_filename(split_id)
     )
     val_list = os.path.join(
         config.INPUT.TRAIN_VAL_SPLIT_DIR,
-        f'val_{split_id}.json'
+        val_list_filename(split_id)
     )
 
     preprocessing = get_preprocess(config, is_test=False)
@@ -57,8 +61,29 @@ def get_test_dataloader(config):
     preprocessing = get_preprocess(config, is_test=True)
     augmentation = get_augmentation(config, is_train=False)
 
+    # get full paths to SAR-Intensity image files
+    if config.TEST_TO_VAL:
+        # use val split for test.
+        val_list_path = os.path.join(
+            config.INPUT.TRAIN_VAL_SPLIT_DIR,
+            val_list_filename(config.INPUT.TRAIN_VAL_SPLIT_ID)
+        )
+        with open(val_list_path) as f:
+            val_list = json.load(f)
+        image_paths = [
+            os.path.join(
+                config.INPUT.IMAGE_DIR,
+                'SAR-Intensity',
+                data['SAR-Intensity']
+            ) for data in val_list
+        ]
+    else:
+        # use test data for test (default).
+        image_paths = glob(os.path.join(config.INPUT.TEST_IMAGE_DIR, '*.tif'))
+
     dataset = SpaceNet6TestDataset(
         config,
+        image_paths,
         augmentation=augmentation,
         preprocessing=preprocessing
     )

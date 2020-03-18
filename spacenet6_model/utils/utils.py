@@ -52,6 +52,18 @@ def poly_filename():
     return 'solution.csv'
 
 
+def train_list_filename(split_id):
+    """
+    """
+    return f'train_{split_id}.json'
+
+
+def val_list_filename(split_id):
+    """
+    """
+    return f'val_{split_id}.json'
+
+
 def dump_git_info(path):
     repo = git.Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha

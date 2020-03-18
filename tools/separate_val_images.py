@@ -73,7 +73,6 @@ if __name__ == '__main__':
         os.path.join(args.split_dir, 'val_*.json')
     )
     assert len(val_split_paths) == args.split_num
-
     val_split_paths.sort()
 
     for image_type in args.image_types:

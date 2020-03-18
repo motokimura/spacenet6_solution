@@ -1,11 +1,25 @@
 #!/bin/bash
 
-# set jupyter port
-JUPYTER_PORT=8889
+ENV=desktop  # "desktop" or "mac"
 if [ $# -eq 1 ]; then
-    JUPYTER_PORT=$1
+    ENV=$1
 fi
 
+# set environment specific parameters
+if [ $ENV = desktop ]; then
+	RUNTIME="--runtime nvidia"
+	FEATURE_ROOT=/mnt/sdb1/spacenet6/
+elif [ $ENV = mac ]; then
+	RUNTIME=""
+	FEATURE_ROOT=${HOME}/features/spacenet6/
+else
+	echo 'Usage: ./run.sh $ENV'
+	echo '(ENV must be "desktop" or "mac")'
+	exit 1
+fi
+
+# set jupyter port
+JUPYTER_PORT=8889
 echo "mapping port docker:${JUPYTER_PORT} --> host:${JUPYTER_PORT}"
 
 # set image name
@@ -17,18 +31,18 @@ PROJ_DIR=`dirname ${THIS_DIR}`
 
 # set path to directories to map to docker
 DATA_DIR=${HOME}/data
-WEIGHTS_DIR=/mnt/sdb1/spacenet6/weights
-LOG_DIR=/mnt/sdb1/spacenet6/logs
-PREDICTION_DIR=/mnt/sdb1/spacenet6/predictions
-ENSEMBLED_PREDICTION_DIR=/mnt/sdb1/spacenet6/ensembled_predictions
-POLY_CSV_DIR=/mnt/sdb1/spacenet6/polygons
-VAL_PREDICTION_DIR=/mnt/sdb1/spacenet6/val_predictions
-VAL_POLY_CSV_DIR=/mnt/sdb1/spacenet6/val_polygons
+WEIGHTS_DIR=${FEATURE_ROOT}/weights
+LOG_DIR=${FEATURE_ROOT}/logs
+PREDICTION_DIR=${FEATURE_ROOT}/predictions
+ENSEMBLED_PREDICTION_DIR=${FEATURE_ROOT}/ensembled_predictions
+POLY_CSV_DIR=${FEATURE_ROOT}/polygons
+VAL_PREDICTION_DIR=${FEATURE_ROOT}/val_predictions
+VAL_POLY_CSV_DIR=${FEATURE_ROOT}/val_polygons
 
 # run container
 CONTAINER="spacenet6_dev"
 
-docker run --runtime=nvidia -it --rm --ipc=host \
+docker run ${RUNTIME} -it --rm --ipc=host \
 	-p ${JUPYTER_PORT}:${JUPYTER_PORT} \
 	-p 6006:6006 \
 	-v ${PROJ_DIR}:/work \

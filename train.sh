@@ -39,32 +39,64 @@ TRAIN_ARGS="\
     WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
 "
 
+## model-A
 ./tools/train_spacenet6_model.py \
-    --config ${MODEL_CONFIG} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
 ./tools/train_spacenet6_model.py \
-    --config ${MODEL_CONFIG} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
 ./tools/train_spacenet6_model.py \
-    --config ${MODEL_CONFIG} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
 ./tools/train_spacenet6_model.py \
-    --config ${MODEL_CONFIG} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
 ./tools/train_spacenet6_model.py \
-    --config ${MODEL_CONFIG} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4
+
+## model-B
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_B} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 5
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_B} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 1 \
+    EXP_ID 6
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_B} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 2 \
+    EXP_ID 7
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_B} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 3 \
+    EXP_ID 8
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_B} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 4 \
+    EXP_ID 9

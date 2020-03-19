@@ -40,31 +40,31 @@ TRAIN_ARGS="\
 "
 
 ./tools/train_spacenet6_model.py \
-    --config ${TRAIN_CONFIG} \
+    --config ${MODEL_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
 ./tools/train_spacenet6_model.py \
-    --config ${TRAIN_CONFIG} \
+    --config ${MODEL_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
 ./tools/train_spacenet6_model.py \
-    --config ${TRAIN_CONFIG} \
+    --config ${MODEL_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
 ./tools/train_spacenet6_model.py \
-    --config ${TRAIN_CONFIG} \
+    --config ${MODEL_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
 ./tools/train_spacenet6_model.py \
-    --config ${TRAIN_CONFIG} \
+    --config ${MODEL_CONFIG} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4

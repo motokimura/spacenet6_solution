@@ -19,22 +19,27 @@ TEST_ARGS="\
 
 ./tools/test_spacenet6_model.py \
     --exp_id 0 \
+    --config ${MODEL_CONFIG} \
     ${TEST_ARGS}
 
 ./tools/test_spacenet6_model.py \
     --exp_id 1 \
+    --config ${MODEL_CONFIG} \
     ${TEST_ARGS}
 
 ./tools/test_spacenet6_model.py \
     --exp_id 2 \
+    --config ${MODEL_CONFIG} \
     ${TEST_ARGS}
 
 ./tools/test_spacenet6_model.py \
     --exp_id 3 \
+    --config ${MODEL_CONFIG} \
     ${TEST_ARGS}
 
 ./tools/test_spacenet6_model.py \
     --exp_id 4 \
+    --config ${MODEL_CONFIG} \
     ${TEST_ARGS}
 
 # ensemble

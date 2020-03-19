@@ -22,7 +22,6 @@ MODEL:
     ACTIVATION: sigmoid
     DEVICE: cuda
     IN_CHANNELS: 4
-    WEIGHT: none
 SOLVER:
     EPOCHS: 260
     OPTIMIZER: adam

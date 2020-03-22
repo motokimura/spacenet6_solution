@@ -40,7 +40,7 @@ _C.DATALOADER.TRAIN_SHUFFLE = True
 
 # Model
 _C.MODEL = CN()
-_C.MODEL.ARCHITECTURE = 'unet'
+_C.MODEL.ARCHITECTURE = 'unet'  # ['unet', 'fpn', 'pan', 'pspnet', 'deeplabv3', 'linknet']
 _C.MODEL.BACKBONE = 'efficientnet-b5'
 _C.MODEL.ENCODER_PRETRAINED_FROM = 'imagenet'
 _C.MODEL.ACTIVATION = 'sigmoid'

@@ -100,34 +100,3 @@ TRAIN_ARGS="\
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 9
-
-## model-C
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 0 \
-    EXP_ID 10
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 1 \
-    EXP_ID 11
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 2 \
-    EXP_ID 12
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 3 \
-    EXP_ID 13
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 4 \
-    EXP_ID 14

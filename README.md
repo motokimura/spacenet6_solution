@@ -7,7 +7,7 @@ a solution to spacenet6 challenge
 
 ```
 # prepare data directory
-DATA_DIR=${HOME}/data/spacenet6
+DATA_DIR=${HOME}/data/spacenet6/spacenet6
 mkdir -p ${DATA_DIR}
 cd ${DATA_DIR}
 

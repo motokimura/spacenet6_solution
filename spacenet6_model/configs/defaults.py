@@ -71,6 +71,7 @@ _C.EVAL.METRICS = ['iou',]  # ['iou']
 _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 
 # Misc
+_C.CUDA_VISIBLE_DEVICES=''
 _C.LOG_ROOT = '/logs'
 _C.WEIGHT_ROOT = '/weights'
 _C.PREDICTION_ROOT = '/predictions'

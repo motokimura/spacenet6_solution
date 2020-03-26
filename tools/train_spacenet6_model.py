@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os.path
+import os
 import segmentation_models_pytorch as smp
 import torch
 
@@ -16,18 +16,21 @@ from spacenet6_model.solvers import (
     get_loss, get_lr_scheduler, get_optimizer
 )
 from spacenet6_model.utils import (
-    config_filename, experiment_subdir, git_filename,
-    weight_best_filename, weight_epoch_filename,
-    dump_git_info
+    config_filename, dump_git_info, experiment_subdir, git_filename,
+    set_cuda_variables, weight_best_filename, weight_epoch_filename,
+    
 )
 
 
 def main():
     """
     """
+
     config = load_config()
     print('successfully loaded config:')
     print(config)
+
+    set_cuda_variables(config.CUDA_VISIBLE_DEVICES)
 
     # prepare dataloaders
     train_dataloader = get_dataloader(config, is_train=True)

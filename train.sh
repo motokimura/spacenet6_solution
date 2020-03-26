@@ -2,7 +2,7 @@
 
 source activate solaris
 
-TRAIN_DIR=$1  # path/to/spacenet6/train/
+TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
 source settings.sh
 
 # prepare directory to output intermediate products

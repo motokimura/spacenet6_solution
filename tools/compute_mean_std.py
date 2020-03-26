@@ -14,12 +14,12 @@ def parse_args():
     parser.add_argument(
         '--data_dir',
         help='directory containing spacenet6 train dataset',
-        default='/data/spacenet6/spacenet6/train/'
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam'
     )
     parser.add_argument(
         '--image_subdir',
         help='sub directory containing images under data_dir',
-        choices=['SAR-Intensity', 'PS-MS', 'PAN'],
+        choices=['SAR-Intensity', 'PS-RGBNIR', 'PAN'],
         default='SAR-Intensity'
     )
     parser.add_argument(
@@ -33,7 +33,7 @@ def parse_args():
 def get_image_shape(image_subdir):
     if image_subdir == 'SAR-Intensity':
         image_width, image_height, image_channel = 900, 900, 4
-    elif image_subdir == 'PS-MS':
+    elif image_subdir == 'PS-RGBNIR':
         image_width, image_height, image_channel = 900, 900, 4
     elif image_subdir == 'PAN':
         image_width, image_height, image_channel = 900, 900, 1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV=desktop  # "desktop" or "mac"
+ENV=desktop  # "desktop", "mac", or "aws_ai"
 if [ $# -eq 1 ]; then
     ENV=$1
 fi
@@ -12,9 +12,12 @@ if [ $ENV = desktop ]; then
 elif [ $ENV = mac ]; then
 	RUNTIME=""
 	FEATURE_ROOT=${HOME}/features/spacenet6/
+elif [ $ENV = aws_ai ]; then
+	RUNTIME="--runtime nvidia"
+	FEATURE_ROOT=/mnt/nfs/kimura/spacenet6/
 else
 	echo 'Usage: ./run.sh $ENV'
-	echo '(ENV must be "desktop" or "mac")'
+	echo '(ENV must be "desktop", "mac" or "aws_ai")'
 	exit 1
 fi
 

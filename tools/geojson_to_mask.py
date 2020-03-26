@@ -10,6 +10,7 @@ import numpy as np
 import os
 import solaris as sol
 
+from glob import glob
 from skimage import io
 from tqdm import tqdm
 
@@ -24,7 +25,7 @@ def parse_args():
     parser.add_argument(
         '--data_dir',
         help='directory containing spacenet6 train dataset',
-        default='/data/spacenet6/spacenet6/train/'
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/'
     )
     parser.add_argument(
         '--out_dir',
@@ -128,30 +129,29 @@ if __name__ == '__main__':
 
     # SAR intensity
     sar_image_dir = os.path.join(args.data_dir, 'SAR-Intensity')
-    sar_image_filenames = os.listdir(sar_image_dir)
-    sar_image_filenames.sort()
+    sar_image_paths = glob(os.path.join(sar_image_dir, '*.tif'))
+    sar_image_paths.sort()
 
     # building label
-    building_label_dir = os.path.join(args.data_dir, 'Buildings')
-    building_label_filenames = os.listdir(building_label_dir)
-    building_label_filenames.sort()
+    building_label_dir = os.path.join(args.data_dir, 'geojson_buildings')
+    building_label_paths = glob(os.path.join(building_label_dir, '*.geojson'))
+    building_label_paths.sort()
 
     N = 3401
-    assert len(building_label_filenames) == N
-    assert len(sar_image_filenames) == N
+    assert len(building_label_paths) == N
+    assert len(sar_image_paths) == N
 
     for i in tqdm(range(N)):
-        sar_image_filename = sar_image_filenames[i]
-        building_label_filename = building_label_filenames[i]
+        sar_image_path = sar_image_paths[i]
+        building_label_path = building_label_paths[i]
+
+        sar_image_filename = os.path.basename(sar_image_path)
+        building_label_filename = os.path.basename(building_label_path)
         check_filenames_validity(sar_image_filename, building_label_filename)
 
         # load sar image and compute roi mask from sar intensity values
-        sar_image_path = os.path.join(sar_image_dir, sar_image_filename)
         sar_image = io.imread(sar_image_path)
         roi_mask = get_roi_mask(sar_image)
-
-        # load building label
-        building_label_path = os.path.join(building_label_dir, building_label_filename)
 
         # gen building instance mask /w shape of [h, w, n_building]
         instance_mask = sol.vector.mask.instance_mask(

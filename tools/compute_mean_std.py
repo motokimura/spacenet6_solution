@@ -5,6 +5,7 @@
 import argparse
 import numpy as np
 import os
+from glob import glob
 from skimage import io
 from tqdm import tqdm
 
@@ -60,13 +61,13 @@ if __name__ == '__main__':
         mean = np.zeros(shape=(image_height, image_width, image_channel))
         std = np.zeros(shape=(image_height, image_width, image_channel))
 
-    image_filenames = os.listdir(image_dir)
-    N = len(image_filenames)
+    image_paths = glob(os.path.join(image_dir, '*.tif'))
+    N = len(image_paths)
     assert N == 3401
 
     print('computing mean...')
-    for image_filename in tqdm(image_filenames):
-        image = io.imread(os.path.join(image_dir, image_filename))
+    for path in tqdm(image_paths):
+        image = io.imread(path)
         mean += image / N
     mean = np.mean(mean, axis=(0, 1))  # [image_channel,] or scaler if image_channel==1
 
@@ -76,8 +77,8 @@ if __name__ == '__main__':
         mean_ = mean[None, None, :]  # [1, 1, image_channel]
 
     print('computing std...')
-    for image_filename in tqdm(image_filenames):
-        image = io.imread(os.path.join(image_dir, image_filename))
+    for path in tqdm(image_paths):
+        image = io.imread(path)
         std += (image - mean_) ** 2.0 / N
     std = np.mean(std, axis=(0, 1))  # [image_channel,] or scaler if image_channel==1
     std = np.sqrt(std)

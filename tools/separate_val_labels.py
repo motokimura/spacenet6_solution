@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument(
         '--label_csv',
         help='path to building label csv file',
-        default='/data/spacenet6/spacenet6/train/SummaryData/SN6_Train_AOI_11_Rotterdam_Buildings.csv'
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/SummaryData/SN6_Train_AOI_11_Rotterdam_Buildings.csv'
     )
     parser.add_argument(
         '--split_dir',

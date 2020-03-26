@@ -1,7 +1,6 @@
 import git
 import json
 import numpy as np
-import os
 
 
 def config_filename():
@@ -120,11 +119,3 @@ def score_to_mask(building_score, thresh=0.5):
     building_mask = (building_score > 0.5).astype(np.uint8)
     building_mask *= 255
     return building_mask
-
-
-def set_cuda_variables(cuda_visible_devices):
-    """
-    """
-    os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-    if cuda_visible_devices:
-        os.environ['CUDA_VISIBLE_DEVICES'] = cuda_visible_devices

@@ -10,7 +10,7 @@ init_path()
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_test_dataloader
 from spacenet6_model.models import get_model
-from spacenet6_model.utils import crop_center, experiment_subdir, set_cuda_variables
+from spacenet6_model.utils import crop_center, experiment_subdir
 
 
 def main():
@@ -19,8 +19,6 @@ def main():
     config = load_config()
     print('successfully loaded config:')
     print(config)
-
-    set_cuda_variables(config.CUDA_VISIBLE_DEVICES)
 
     # prepare dataloader
     test_dataloader = get_test_dataloader(config)

@@ -5,6 +5,7 @@
 import argparse
 import numpy as np
 import os
+from glob import glob
 from skimage import io
 from tqdm import tqdm
 
@@ -14,12 +15,12 @@ def parse_args():
     parser.add_argument(
         '--data_dir',
         help='directory containing spacenet6 train dataset',
-        default='/data/spacenet6/spacenet6/train/'
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/'
     )
     parser.add_argument(
         '--image_subdir',
         help='sub directory containing images under data_dir',
-        choices=['SAR-Intensity', 'PS-MS', 'PAN'],
+        choices=['SAR-Intensity', 'PS-RGBNIR', 'PAN'],
         default='SAR-Intensity'
     )
     parser.add_argument(
@@ -33,7 +34,7 @@ def parse_args():
 def get_image_shape(image_subdir):
     if image_subdir == 'SAR-Intensity':
         image_width, image_height, image_channel = 900, 900, 4
-    elif image_subdir == 'PS-MS':
+    elif image_subdir == 'PS-RGBNIR':
         image_width, image_height, image_channel = 900, 900, 4
     elif image_subdir == 'PAN':
         image_width, image_height, image_channel = 900, 900, 1
@@ -60,13 +61,13 @@ if __name__ == '__main__':
         mean = np.zeros(shape=(image_height, image_width, image_channel))
         std = np.zeros(shape=(image_height, image_width, image_channel))
 
-    image_filenames = os.listdir(image_dir)
-    N = len(image_filenames)
+    image_paths = glob(os.path.join(image_dir, '*.tif'))
+    N = len(image_paths)
     assert N == 3401
 
     print('computing mean...')
-    for image_filename in tqdm(image_filenames):
-        image = io.imread(os.path.join(image_dir, image_filename))
+    for path in tqdm(image_paths):
+        image = io.imread(path)
         mean += image / N
     mean = np.mean(mean, axis=(0, 1))  # [image_channel,] or scaler if image_channel==1
 
@@ -76,8 +77,8 @@ if __name__ == '__main__':
         mean_ = mean[None, None, :]  # [1, 1, image_channel]
 
     print('computing std...')
-    for image_filename in tqdm(image_filenames):
-        image = io.imread(os.path.join(image_dir, image_filename))
+    for path in tqdm(image_paths):
+        image = io.imread(path)
         std += (image - mean_) ** 2.0 / N
     std = np.mean(std, axis=(0, 1))  # [image_channel,] or scaler if image_channel==1
     std = np.sqrt(std)

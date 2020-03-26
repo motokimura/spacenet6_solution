@@ -7,13 +7,13 @@ _C = CN()
 _C.INPUT = CN()
 _C.INPUT.TRAIN_VAL_SPLIT_DIR = '/data/spacenet6/split'
 _C.INPUT.TRAIN_VAL_SPLIT_ID = 0
-_C.INPUT.IMAGE_DIR = '/data/spacenet6/spacenet6/train'
+_C.INPUT.IMAGE_DIR = '/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/'
 _C.INPUT.IMAGE_TYPE = 'SAR-Intensity'
 _C.INPUT.BUILDING_DIR = '/data/spacenet6/footprint_boundary_mask/v_01/labels'
-_C.INPUT.SAR_ORIENTATION = '/data/spacenet6/spacenet6/train/SummaryData/SAR_orientations.txt'
+_C.INPUT.SAR_ORIENTATION = '/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/SummaryData/SAR_orientations.txt'
 _C.INPUT.CLASSES = ['building_footprint', 'building_boundary']
 _C.INPUT.MEAN_STD_DIR = '/data/spacenet6/image_mean_std/'
-_C.INPUT.TEST_IMAGE_DIR = '/data/spacenet6/spacenet6/test_public/SAR-Intensity'
+_C.INPUT.TEST_IMAGE_DIR = '/data/spacenet6/spacenet6/test_public/AOI_11_Rotterdam/SAR-Intensity'
 
 # Transforms
 _C.TRANSFORM = CN()

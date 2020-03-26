@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument(
         '--data_dir',
         help='directory containing spacenet6 train dataset',
-        default='/data/spacenet6/spacenet6/train/'
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/'
     )
     parser.add_argument(
         '--split_dir',

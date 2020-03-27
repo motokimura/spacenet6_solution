@@ -37,7 +37,7 @@ TRAIN_ARGS="\
     INPUT.SAR_ORIEENTATION ${SAR_ORIENTATION_PATH} \
     LOG_ROOT ${TRAIN_LOG_DIR} \
     WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
-    CHECKPOINT_ROOT ${} \
+    CHECKPOINT_ROOT ${CHECKPOINT_DIR} \
 "
 
 ## model-A
@@ -70,34 +70,3 @@ TRAIN_ARGS="\
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4
-
-## model-B
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 0 \
-    EXP_ID 5
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 1 \
-    EXP_ID 6
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 2 \
-    EXP_ID 7
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 3 \
-    EXP_ID 8
-
-./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
-    ${TRAIN_ARGS} \
-    INPUT.TRAIN_VAL_SPLIT_ID 4 \
-    EXP_ID 9

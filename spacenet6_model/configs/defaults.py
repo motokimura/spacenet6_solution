@@ -73,6 +73,7 @@ _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
 # Misc
 _C.LOG_ROOT = '/logs'
 _C.WEIGHT_ROOT = '/weights'
+_C.CHECKPOINT_ROOT = '/checkpoints'
 _C.PREDICTION_ROOT = '/predictions'
 _C.ENSEMBLED_PREDICTION_ROOT = '/ensembled_predictions'
 _C.POLY_CSV_ROOT = '/polygons'

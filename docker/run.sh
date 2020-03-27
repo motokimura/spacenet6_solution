@@ -36,6 +36,7 @@ PROJ_DIR=`dirname ${THIS_DIR}`
 DATA_DIR=${HOME}/data
 WEIGHTS_DIR=${FEATURE_ROOT}/weights
 LOG_DIR=${FEATURE_ROOT}/logs
+CHECKPOINT_DIR=${FEATURE_ROOT}/checkpoints
 PREDICTION_DIR=${FEATURE_ROOT}/predictions
 ENSEMBLED_PREDICTION_DIR=${FEATURE_ROOT}/ensembled_predictions
 POLY_CSV_DIR=${FEATURE_ROOT}/polygons
@@ -52,6 +53,7 @@ docker run ${RUNTIME} -it --rm --ipc=host \
 	-v ${DATA_DIR}:/data \
 	-v ${WEIGHTS_DIR}:/weights \
 	-v ${LOG_DIR}:/logs \
+	-v ${CHECKPOINT_DIR}:/checkpoints \
 	-v ${PREDICTION_DIR}:/predictions \
 	-v ${ENSEMBLED_PREDICTION_DIR}:/ensembled_predictions \
 	-v ${POLY_CSV_DIR}:/polygons \

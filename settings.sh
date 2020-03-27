@@ -22,6 +22,7 @@ CONFIG_MODEL_A=/work/configs/efficientnet-b6_v_01.yml
 CONFIG_MODEL_B=/work/configs/efficientnet-b7_v_01.yml
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
+CHECKPOINT_DIR=${FEATURE_DIR}/checkpoints
 
 # test_spacenet6_model.py
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions

@@ -30,6 +30,7 @@ def main():
     config = load_config()
     print('successfully loaded config:')
     print(config)
+    print('')
 
     # prepare directories to output log/weight files
     exp_subdir = experiment_subdir(config.EXP_ID)

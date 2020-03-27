@@ -56,15 +56,15 @@ def main():
     best_score = 0
 
     # load checkpoint if exists
-    if load_latest_checkpoint(
+    model, optimizer, lr_scheduler, start_epoch, best_score = \
+    load_latest_checkpoint(
         checkpoint_dir,
         model,
         optimizer,
         lr_scheduler,
         start_epoch,
         best_score
-    ):
-        print('resume training from the latest checkpoint...')
+    )
 
     # prepare metrics and loss
     metrics = get_metrics(config)

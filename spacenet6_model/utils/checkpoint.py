@@ -19,11 +19,11 @@ def save_checkpoint(checkpoint_path, model, optimizer, lr_scheduler, epoch, best
     """
     """
     checkpoint = {
-        'epoch': epoch,
-        'best_score': best_score,
         'model': model.state_dict(),
         'optimizer': optimizer.state_dict(),
-        'lr_scheduler': lr_scheduler.state_dict()
+        'lr_scheduler': lr_scheduler.state_dict(),
+        'epoch': epoch,
+        'best_score': best_score
     }
     torch.save(checkpoint, checkpoint_path)
 
@@ -37,6 +37,8 @@ def load_checkpoint(checkpoint_path, model, optimizer, lr_scheduler, epoch, best
     lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
     epoch = checkpoint['epoch']
     best_score = checkpoint['best_score']
+
+    return model, optimizer, lr_scheduler, epoch, best_score
 
 
 def checkpoint_exists(checkpoint_dir):
@@ -53,10 +55,14 @@ def load_latest_checkpoint(checkpoint_dir, model, optimizer, lr_scheduler, epoch
     """
     """
     if checkpoint_exists(checkpoint_dir):
-        load_checkpoint(
+        print('resume training from the last checkpoint!')
+        model, optimizer, lr_scheduler, epoch, best_score = load_checkpoint(
             os.path.join(checkpoint_dir, checkpoint_latest_filename()),
-            model, optimizer, lr_scheduler, epoch, best_score
+            model,
+            optimizer,
+            lr_scheduler,
+            epoch,
+            best_score
         )
-        return True
 
-    return False
+    return model, optimizer, lr_scheduler, epoch, best_score

@@ -20,7 +20,6 @@ DATA_SPLIT_NUM=5
 # train_spacenet6_model.py
 CONFIG_MODEL_A=/work/configs/unet_efficientnet-b6_v_01.yml
 CONFIG_MODEL_B=/work/configs/unet_efficientnet-b7_v_01.yml
-CONFIG_MODEL_C=/work/configs/fpn_efficientnet-b7_v_01.yml
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 CHECKPOINT_DIR=${FEATURE_DIR}/checkpoints

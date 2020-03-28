@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV=desktop  # "desktop", "mac", or "aws_ai"
+ENV=aws_ai  # "desktop", "mac", or "aws_ai"
 if [ $# -eq 1 ]; then
     ENV=$1
 fi

@@ -17,6 +17,11 @@ cp ${TRAIN_DIR}/SummaryData/SAR_orientations.txt ${SAR_ORIENTATION_PATH}
     --image_subdir SAR-Intensity \
     --out_dir ${IMAGE_MEAN_STD_DIR}
 
+./tools/compute_mean_std.py \
+    --data_dir ${TRAIN_DIR} \
+    --image_subdir PS-RGBNIR \
+    --out_dir ${IMAGE_MEAN_STD_DIR}
+
 ./tools/geojson_to_mask.py \
     --data_dir ${TRAIN_DIR} \
     --out_dir ${BUILDING_MASK_DIR} \
@@ -40,64 +45,74 @@ TRAIN_ARGS="\
     CHECKPOINT_ROOT ${CHECKPOINT_DIR} \
 "
 
-## model-A
+## model-A (pretrain)
 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    INPUT.IMAGE_TYPE PS-RGBNIR \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    INPUT.IMAGE_TYPE PS-RGBNIR \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    INPUT.IMAGE_TYPE PS-RGBNIR \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    INPUT.IMAGE_TYPE PS-RGBNIR \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    INPUT.IMAGE_TYPE PS-RGBNIR \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4
 
-## model-B
+## model-A (finetune)
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0000/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 5
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0001/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 6
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0002/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 7
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0003/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 8
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
+    MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0004/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 9

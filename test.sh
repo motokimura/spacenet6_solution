@@ -38,13 +38,33 @@ TEST_ARGS="\
     --exp_id 9 \
     ${TEST_ARGS}
 
+./tools/test_spacenet6_model.py \
+    --exp_id 10 \
+    ${TEST_ARGS}
+
+./tools/test_spacenet6_model.py \
+    --exp_id 11 \
+    ${TEST_ARGS}
+
+./tools/test_spacenet6_model.py \
+    --exp_id 12 \
+    ${TEST_ARGS}
+
+./tools/test_spacenet6_model.py \
+    --exp_id 13 \
+    ${TEST_ARGS}
+
+./tools/test_spacenet6_model.py \
+    --exp_id 14 \
+    ${TEST_ARGS}
+
 # ensemble
 ./tools/ensemble_models.py \
     INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
     INPUT.CLASSES ${CLASSES} \
     PREDICTION_ROOT ${MODEL_PREDICTION_DIR} \
     ENSEMBLED_PREDICTION_ROOT ${ENSEMBLED_PREDICTION_DIR} \
-    ENSEMBLE_EXP_IDS "[5, 6, 7, 8, 9]"
+    ENSEMBLE_EXP_IDS "[5, 6, 7, 8, 9, 10, 11, 12, 13, 14]"
 
 # prediction to poly
 ./tools/pred_array_to_poly.py \
@@ -54,4 +74,4 @@ TEST_ARGS="\
     BOUNDARY_SUBSTRACT_COEFF ${BOUNDARY_SUBSTRACT_COEFF} \
     BUILDING_MIM_AREA_PIXEL ${BUILDING_MIM_AREA_PIXEL} \
     BUILDING_SCORE_THRESH ${BUILDING_SCORE_THRESH} \
-    ENSEMBLE_EXP_IDS "[5, 6, 7, 8, 9]"
+    ENSEMBLE_EXP_IDS "[5, 6, 7, 8, 9, 10, 11, 12, 13, 14]"

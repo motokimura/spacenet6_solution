@@ -116,3 +116,34 @@ TRAIN_ARGS="\
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0004/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 9
+
+## model-A
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_A} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 10
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_A} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 11
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_A} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 12
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_A} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 13
+
+./tools/train_spacenet6_model.py \
+    --config ${CONFIG_MODEL_A} \
+    ${TRAIN_ARGS} \
+    INPUT.TRAIN_VAL_SPLIT_ID 0 \
+    EXP_ID 14

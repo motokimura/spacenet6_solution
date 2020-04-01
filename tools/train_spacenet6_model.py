@@ -19,7 +19,7 @@ from spacenet6_model.utils import (
     checkpoint_epoch_filename, checkpoint_latest_filename,
     config_filename, dump_git_info, experiment_subdir, git_filename,
     load_latest_checkpoint, save_checkpoint,
-    weight_best_filename, weight_epoch_filename
+    weight_best_filename
 )
 
 
@@ -109,12 +109,6 @@ def main():
         # run train/val for 1 epoch
         train_logs = train_epoch.run(train_dataloader)
         val_logs = val_epoch.run(val_dataloader)
-
-        # save model weight every epoch
-        torch.save(
-            model.state_dict(),
-            os.path.join(weight_dir, weight_epoch_filename(epoch))
-        )
 
         # save model weight if score updated
         if best_score < val_logs[metric_name]:

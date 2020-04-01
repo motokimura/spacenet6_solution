@@ -39,13 +39,6 @@ def weight_best_filename():
     return 'model_best.pth'
 
 
-def weight_epoch_filename(epoch):
-    """
-    """
-    assert 0 <= epoch <= 9999
-    return f'model_{epoch:04d}.pth'
-
-
 def poly_filename():
     """
     """

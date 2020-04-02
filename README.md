@@ -41,7 +41,9 @@ ENV=desktop  # or "mac"
 All commands below have to be executed inside the container.
 
 ```
-./tools/compute_mean_std.py
+./tools/compute_mean_std.py --image_subdir SAR-Intensity
+
+./tools/compute_mean_std.py --image_subdir PS-RGBNIR
 
 ./tools/geojson_to_mask.py
 

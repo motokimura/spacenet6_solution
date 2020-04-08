@@ -1,4 +1,5 @@
 *
+!/configs
 !/spacenet6_model
 !/tools
 !/*.sh

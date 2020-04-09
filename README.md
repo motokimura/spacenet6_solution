@@ -106,7 +106,7 @@ aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AO
 tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
 ```
 
-### Setup container
+### Build image
 
 ```
 git clone git@github.com:motokimura/spacenet6_solution.git
@@ -116,16 +116,16 @@ docker build -t spacenet6 .
 cd ..
 rm -rf spacenet6_solution
 
+# optionally you can create AMI here
+```
+
+### Setup container
+
+```
 docker run --runtime nvidia -d -it --name spacenet6 spacenet6 /bin/bash
-```
 
-### Copy data into container
-
-```
 docker cp train spacenet6:/work/
 docker cp test_public spacenet6:/work/
-
-# optionally you can create AMI here
 ```
 
 ### Train

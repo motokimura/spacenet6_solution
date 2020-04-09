@@ -6,7 +6,7 @@ TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
 source settings.sh
 
 # prepare directory to output intermediate products
-mkdir -p ${FEATUREE_DIR}
+mkdir -p ${FEATURE_DIR}
 
 # copy SAR_orientations.txt for test.sh
 cp ${TRAIN_DIR}/SummaryData/SAR_orientations.txt ${SAR_ORIENTATION_PATH}
@@ -39,7 +39,7 @@ TRAIN_ARGS="\
     INPUT.TRAIN_VAL_SPLIT_DIR ${DATA_SPLIT_DIR} \
     INPUT.IMAGE_DIR ${TRAIN_DIR} \
     INPUT.BUILDING_DIR ${BUILDING_MASK_DIR} \
-    INPUT.SAR_ORIEENTATION ${SAR_ORIENTATION_PATH} \
+    INPUT.SAR_ORIENTATION ${SAR_ORIENTATION_PATH} \
     LOG_ROOT ${TRAIN_LOG_DIR} \
     WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
     CHECKPOINT_ROOT ${CHECKPOINT_DIR} \

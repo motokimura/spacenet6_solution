@@ -119,7 +119,7 @@ rm -rf spacenet6_solution
 # optionally you can create AMI here
 ```
 
-### Setup container
+### Start container
 
 ```
 docker run --runtime nvidia -d -it --name spacenet6 spacenet6 /bin/bash

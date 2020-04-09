@@ -98,7 +98,7 @@ def crop_center(array, crop_wh):
     return array[:, top:bottom, left:right]
 
 
-def compute_building_score(pr_score_footprint, pr_score_boundary, alpha=1.0):
+def compute_building_score(pr_score_footprint, pr_score_boundary, alpha=0.0):
     """
     """
     pr_score_building = pr_score_footprint * (1.0 - alpha * pr_score_boundary)

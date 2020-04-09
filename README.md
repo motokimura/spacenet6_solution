@@ -134,6 +134,7 @@ docker cp test_public spacenet6:/work/
 ### Train
 
 ```
+docker start spacenet6
 docker exec -it spacenet6 /bin/bash
 
 ./train.sh train/AOI_11_Rotterdam
@@ -142,6 +143,7 @@ docker exec -it spacenet6 /bin/bash
 ### Test
 
 ```
+docker start spacenet6
 docker exec -it spacenet6 /bin/bash
 
 ./test.sh test_public/AOI_11_Rotterdam solution.csv

@@ -8,9 +8,6 @@ source settings.sh
 # prepare directory to output intermediate products
 mkdir -p ${FEATURE_DIR}
 
-# copy SAR_orientations.txt for test.sh
-cp ${TRAIN_DIR}/SummaryData/SAR_orientations.txt ${SAR_ORIENTATION_PATH}
-
 # prepare dataset
 ./tools/compute_mean_std.py \
     --data_dir ${TRAIN_DIR} \

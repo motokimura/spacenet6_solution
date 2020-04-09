@@ -94,6 +94,7 @@ RUN echo "conda activate solaris" >> ~/.bashrc
 # copy files
 COPY configs /work/configs
 COPY spacenet6_model /work/spacenet6_model
+COPY static /work/static
 COPY tools /work/tools
 COPY *.sh /work/
 

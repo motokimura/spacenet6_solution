@@ -122,10 +122,7 @@ docker run --runtime nvidia -d -it --name spacenet6 spacenet6 /bin/bash
 ### Copy data into container
 
 ```
-echo 'Copying train dataset...'
 docker cp train spacenet6:/work/
-
-echo 'Copying test dataset...'
 docker cp test_public spacenet6:/work/
 
 # optionally you can create AMI here
@@ -134,7 +131,6 @@ docker cp test_public spacenet6:/work/
 ### Train
 
 ```
-docker start spacenet6
 docker exec -it spacenet6 /bin/bash
 
 ./train.sh train/AOI_11_Rotterdam
@@ -143,7 +139,6 @@ docker exec -it spacenet6 /bin/bash
 ### Test
 
 ```
-docker start spacenet6
 docker exec -it spacenet6 /bin/bash
 
 ./test.sh test_public/AOI_11_Rotterdam solution.csv

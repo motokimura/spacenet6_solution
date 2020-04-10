@@ -1,6 +1,13 @@
 import git
 import json
 import numpy as np
+import pandas as pd
+import rasterio
+import shapely
+import solaris as sol
+
+from skimage import measure
+from skimage.morphology import watershed
 
 
 def config_filename():
@@ -112,3 +119,77 @@ def score_to_mask(building_score, thresh=0.5):
     building_mask = (building_score > 0.5).astype(np.uint8)
     building_mask *= 255
     return building_mask
+
+
+def gen_building_polys_using_contours(
+        building_score,
+        min_area_pix,
+        score_thresh,
+    ):
+    """
+    """
+    df = sol.vector.mask.mask_to_poly_geojson(
+        building_score,
+        output_path=None,
+        output_type='csv',
+        min_area=min_area_pix,
+        bg_threshold=score_thresh,
+        do_transform=False,
+        simplify=True
+    )
+    return df['geometry']
+
+
+def gen_building_polys_using_watershed(
+        building_score,
+        seed_min_area_pix,
+        min_area_pix,
+        seed_score_thresh,
+        main_score_thresh
+    ):
+    """
+    """
+    def remove_small_regions(pred, min_area):
+        """
+        """
+        props = measure.regionprops(pred)
+        for i in range(len(props)):
+            if props[i].area < min_area:
+                pred[pred == i + 1] = 0
+        return measure.label(pred, connectivity=2, background=0)
+
+    def mask_to_polys(mask):
+        """
+        """
+        shapes = rasterio.features.shapes(y_pred.astype(np.int16), mask > 0)
+        mp = shapely.ops.cascaded_union(
+            shapely.geometry.MultiPolygon([
+            shapely.geometry.shape(shape)
+            for shape, value in shapes
+        ]))
+
+        if isinstance(mp, shapely.geometry.Polygon):
+            df = pd.DataFrame({
+                'geometry': [mp],
+            })
+        else:
+            df = pd.DataFrame({
+                'geometry': [p for p in mp],
+            })
+        return df['geometry']
+
+    av_pred = (building_score > seed_score_thresh).astype(np.uint8)
+    y_pred = measure.label(av_pred, connectivity=2, background=0)
+    y_pred = remove_small_regions(y_pred, seed_min_area_pix)
+
+    nucl_msk = 1 - building_score
+    nucl_msk = (nucl_msk * 65535).astype('uint16')
+    y_pred = watershed(
+        nucl_msk,
+        y_pred,
+        mask=(building_score > main_score_thresh),
+        watershed_line=True
+    )
+    y_pred = remove_small_regions(y_pred, min_area_pix)
+
+    return mask_to_polys(y_pred)

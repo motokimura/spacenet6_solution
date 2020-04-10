@@ -15,7 +15,9 @@ init_path()
 
 from spacenet6_model.configs import load_config
 from spacenet6_model.utils import (
-    compute_building_score, ensemble_subdir, poly_filename, score_to_mask
+    compute_building_score, ensemble_subdir,
+    gen_building_polys_using_contours, gen_building_polys_using_watershed,
+    poly_filename
 )
 
 
@@ -57,23 +59,29 @@ if __name__ == '__main__':
         h, w = building_score.shape
         assert h == 900 and w == 900
 
-        vectordata = sol.vector.mask.mask_to_poly_geojson(
-            building_score,
-            output_path=None,
-            output_type='csv',
-            min_area=config.BUILDING_MIM_AREA_PIXEL,
-            bg_threshold=config.BUILDING_SCORE_THRESH,
-            do_transform=False,
-            simplify=True
-        )
+        if config.METHOD_TO_MAKE_POLYGONS == 'contours':
+            polys = gen_building_polys_using_contours(
+                building_score,
+                config.BUILDING_MIM_AREA_PIXEL,
+                config.BUILDING_SCORE_THRESH
+            )
+        elif config.METHOD_TO_MAKE_POLYGONS == 'watershed':
+            polys = gen_building_polys_using_watershed(
+                building_score,
+                config.WATERSHED_SEED_MIN_AREA_PIXEL,
+                config.WATERSHED_MIN_AREA_PIXEL,
+                config.WATERSHED_SEED_THRESH,
+                config.WATERSHED_MAIN_THRESH
+            )
+        else:
+            raise ValueError()
+
+        if len(polys) == 0:
+            polys = ["POLYGON EMPTY",]
 
         # add to the cumulative inference to dataframe
         filename = os.path.basename(array_path)
         tilename = '_'.join(os.path.splitext(filename)[0].split('_')[-4:])
-
-        polys = vectordata['geometry']
-        if len(polys) == 0:
-            polys = ["POLYGON EMPTY",]
 
         df = pd.DataFrame(
             {

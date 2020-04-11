@@ -69,6 +69,7 @@ _C.SOLVER.FOCAL_LOSS_GAMMA = 2.0
 _C.EVAL = CN()
 _C.EVAL.METRICS = ['iou',]  # ['iou']
 _C.EVAL.MAIN_METRIC = 'iou/building_footprint'
+_C.EVAL.EPOCH_TO_START_VAL = 0
 
 # Misc
 _C.LOG_ROOT = '/logs'

@@ -32,6 +32,9 @@ def main():
     print(config)
     print('')
 
+    epoch_to_start_val = config.EVAL.EPOCH_TO_START_VAL
+    assert config.SOLVRE.EPOCHS > epoch_to_start_val
+
     # prepare directories to output log/weight files
     exp_subdir = experiment_subdir(config.EXP_ID)
     log_dir = os.path.join(config.LOG_ROOT, exp_subdir)
@@ -106,27 +109,33 @@ def main():
         lr = optimizer.param_groups[0]['lr']
         print(f'\nEpoch: {epoch}, lr: {lr}')
 
-        # run train/val for 1 epoch
+        # run train for 1 epoch
         train_logs = train_epoch.run(train_dataloader)
-        val_logs = val_epoch.run(val_dataloader)
-
-        # save model weight if score updated
-        if best_score < val_logs[metric_name]:
-            best_score = val_logs[metric_name]
-            torch.save(
-                model.state_dict(),
-                os.path.join(weight_dir, weight_best_filename())
-            )
-            print('Best val score updated!')
 
         # log lr to tensorboard
         tblogger.add_scalar('lr', lr, epoch)
         # log train losses and scores
         for k, v in train_logs.items():
             tblogger.add_scalar(f'split_{split_id}/train/{k}', v, epoch)
-        # log val losses and scores
-        for k, v in val_logs.items():
-            tblogger.add_scalar(f'split_{split_id}/val/{k}', v, epoch)
+
+        if epoch >= config.EVAL.EPOCH_TO_START_VAL:
+            # run val for 1 epoch
+            val_logs = val_epoch.run(val_dataloader)
+
+            # log val losses and scores
+            for k, v in val_logs.items():
+                tblogger.add_scalar(f'split_{split_id}/val/{k}', v, epoch)
+
+            # save model weight if score updated
+            if best_score < val_logs[metric_name]:
+                best_score = val_logs[metric_name]
+                torch.save(
+                    model.state_dict(),
+                    os.path.join(weight_dir, weight_best_filename())
+                )
+                print('Best val score updated!')
+        else:
+            print(f'Skip val until epoch {epoch_to_start_val}')
 
         # update lr for the next epoch
         lr_scheduler.step()

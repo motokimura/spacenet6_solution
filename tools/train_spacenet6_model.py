@@ -33,7 +33,7 @@ def main():
     print('')
 
     epoch_to_start_val = config.EVAL.EPOCH_TO_START_VAL
-    assert config.SOLVRE.EPOCHS > epoch_to_start_val
+    assert config.SOLVER.EPOCHS > epoch_to_start_val
 
     # prepare directories to output log/weight files
     exp_subdir = experiment_subdir(config.EXP_ID)

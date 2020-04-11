@@ -23,6 +23,7 @@ MODEL:
     ACTIVATION: sigmoid
     DEVICE: cuda
     IN_CHANNELS: 4
+    UNET_ENABLE_DECODER_SCSE: False
 SOLVER:
     EPOCHS: 260
     OPTIMIZER: adam

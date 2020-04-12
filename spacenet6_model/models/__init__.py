@@ -12,10 +12,14 @@ def get_model(config):
     n_classes = len(config.INPUT.CLASSES)
     activation = config.MODEL.ACTIVATION
 
+    # unet specific
+    decoder_attention_type = 'scse' if config.MODEL.UNET_ENABLE_DECODER_SCSE else None
+
     if arch == 'unet':
         model = smp.Unet(
             encoder_name=backbone,
             encoder_weights=encoder_weights,
+            decoder_attention_type=decoder_attention_type,
             in_channels=in_channels,
             classes=n_classes,
             activation=activation

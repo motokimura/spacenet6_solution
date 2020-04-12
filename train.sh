@@ -47,6 +47,7 @@ TRAIN_ARGS="\
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.IMAGE_TYPE PS-RGBNIR \
+    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
@@ -54,6 +55,7 @@ TRAIN_ARGS="\
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.IMAGE_TYPE PS-RGBNIR \
+    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
@@ -61,6 +63,7 @@ TRAIN_ARGS="\
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.IMAGE_TYPE PS-RGBNIR \
+    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
@@ -68,6 +71,7 @@ TRAIN_ARGS="\
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.IMAGE_TYPE PS-RGBNIR \
+    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
@@ -75,6 +79,7 @@ TRAIN_ARGS="\
     --config ${CONFIG_MODEL_A} \
     ${TRAIN_ARGS} \
     INPUT.IMAGE_TYPE PS-RGBNIR \
+    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4
 
@@ -116,31 +121,31 @@ TRAIN_ARGS="\
 
 ## model-A
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_MODEL_C} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 10
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_MODEL_C} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 11
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_MODEL_C} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 12
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_MODEL_C} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 13
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_MODEL_C} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 14

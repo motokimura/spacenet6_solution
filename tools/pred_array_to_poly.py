@@ -102,3 +102,11 @@ if __name__ == '__main__':
         os.path.join(out_dir, poly_filename()),
         index=False
     )
+
+    # only for deployment phase
+    output_path = config.POLY_OUTPUT_PATH
+    if output_path and output_path != 'none':
+        building_poly_df.to_csv(
+            output_path,
+            index=False
+        )

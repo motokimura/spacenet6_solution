@@ -36,10 +36,12 @@ def main():
     exp_subdir = experiment_subdir(config.EXP_ID)
     log_dir = os.path.join(config.LOG_ROOT, exp_subdir)
     weight_dir = os.path.join(config.WEIGHT_ROOT, exp_subdir)
-    checkpoint_dir = os.path.join(config.CHECKPOINT_ROOT, exp_subdir)
     os.makedirs(log_dir, exist_ok=True)
     os.makedirs(weight_dir, exist_ok=True)
-    os.makedirs(checkpoint_dir, exist_ok=True)
+
+    checkpoint_dir = os.path.join(config.CHECKPOINT_ROOT, exp_subdir)
+    if config.SAVE_CHECKPOINTS:
+        os.makedirs(checkpoint_dir, exist_ok=True)
 
     # prepare dataloaders
     train_dataloader = get_dataloader(config, is_train=True)
@@ -131,13 +133,14 @@ def main():
         # update lr for the next epoch
         lr_scheduler.step()
 
-        # save checkpoint every epoch
-        save_checkpoint(
-            os.path.join(checkpoint_dir, checkpoint_epoch_filename(epoch)),
-            model, optimizer, lr_scheduler, epoch + 1, best_score)
-        save_checkpoint(
-            os.path.join(checkpoint_dir, checkpoint_latest_filename()),
-            model, optimizer, lr_scheduler, epoch + 1, best_score)
+        if config.SAVE_CHECKPOINTS:
+            # save checkpoint every epoch
+            save_checkpoint(
+                os.path.join(checkpoint_dir, checkpoint_epoch_filename(epoch)),
+                model, optimizer, lr_scheduler, epoch + 1, best_score)
+            save_checkpoint(
+                os.path.join(checkpoint_dir, checkpoint_latest_filename()),
+                model, optimizer, lr_scheduler, epoch + 1, best_score)
 
     tblogger.close()
 

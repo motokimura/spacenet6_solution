@@ -124,8 +124,7 @@ rm -rf spacenet6_solution
 ```
 docker run --runtime nvidia -d -it --name spacenet6 spacenet6 /bin/bash
 
-docker cp train spacenet6:/work/
-docker cp test_public spacenet6:/work/
+docker cp train spacenet6:/work/ && docker cp test_public spacenet6:/work/
 ```
 
 ### Train

@@ -18,9 +18,11 @@ DATA_SPLIT_DIR=${FEATURE_DIR}/split
 DATA_SPLIT_NUM=5
 
 # train_spacenet6_model.py
-CONFIG_MODEL_A=/work/configs/unet_efficientnet-b7_v_01.yml
-CONFIG_MODEL_B=/work/configs/unet_efficientnet-b6_v_01.yml
-CONFIG_MODEL_C=/work/configs/unet-scse_efficientnet-b7_v_01.yml
+CONFIG_A_1=/work/configs/unet-scse_efficientnet-b7_ps-rgbnir_v_01.yml
+CONFIG_A_2=/work/configs/unet-scse_efficientnet-b7_v_01.yml
+CONFIG_B_1=/work/configs/unet-scse_efficientnet-b7_v_01.yml
+CONFIG_C_1=/work/configs/unet-scse_efficientnet-b6_v_01.yml
+
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 CHECKPOINT_DIR=${FEATURE_DIR}/checkpoints
@@ -35,10 +37,10 @@ ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled
 # pred_array_to_poly.py
 POLY_CSV_DIR=${FEATURE_DIR}/polygons
 BOUNDARY_SUBSTRACT_COEFF=0.2
-METHOD_TO_MAKE_POLYGONS='watershed'
-BUILDING_MIM_AREA_PIXEL=0
-BUILDING_SCORE_THRESH=0.5
-WATERSHED_MAIN_THRESH=0.3
-WATERSHED_SEED_THRESH=0.7
-WATERSHED_MIN_AREA_PIXEL=80
-WATERSHED_SEED_MIN_AREA_PIXEL=20
+METHOD_TO_MAKE_POLYGONS='watershed'  # ['contours', 'watershed']
+BUILDING_MIM_AREA_PIXEL=0  # for 'contours'
+BUILDING_SCORE_THRESH=0.5  # for 'contours'
+WATERSHED_MAIN_THRESH=0.3  # for 'watershed'
+WATERSHED_SEED_THRESH=0.7  # for 'watershed'
+WATERSHED_MIN_AREA_PIXEL=80  # for 'watershed'
+WATERSHED_SEED_MIN_AREA_PIXEL=20  # for 'watershed'

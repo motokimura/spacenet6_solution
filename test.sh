@@ -17,7 +17,7 @@ TEST_ARGS="\
     PREDICTION_ROOT ${MODEL_PREDICTION_DIR} \
 "
 
-## model-A
+## CONFIG_A_2
 ./tools/test_spacenet6_model.py \
     --exp_id 5 \
     ${TEST_ARGS}
@@ -38,6 +38,7 @@ TEST_ARGS="\
     --exp_id 9 \
     ${TEST_ARGS}
 
+## CONFIG_B_1
 ./tools/test_spacenet6_model.py \
     --exp_id 10 \
     ${TEST_ARGS}
@@ -58,7 +59,7 @@ TEST_ARGS="\
     --exp_id 14 \
     ${TEST_ARGS}
 
-## model-B
+## CONFIG_C_1
 ./tools/test_spacenet6_model.py \
     --exp_id 15 \
     ${TEST_ARGS}

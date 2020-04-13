@@ -42,141 +42,131 @@ TRAIN_ARGS="\
     CHECKPOINT_ROOT ${CHECKPOINT_DIR} \
 "
 
-## model-A (pretrain)
+## CONFIG_A_1
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
-    INPUT.IMAGE_TYPE PS-RGBNIR \
-    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
-    INPUT.IMAGE_TYPE PS-RGBNIR \
-    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
-    INPUT.IMAGE_TYPE PS-RGBNIR \
-    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
-    INPUT.IMAGE_TYPE PS-RGBNIR \
-    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 3
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
-    INPUT.IMAGE_TYPE PS-RGBNIR \
-    SOLVER.EPOCHS 140 \  # TODO: inclide this in config
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 4
 
-## model-A (finetune)
+## CONFIG_A_2
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0000/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 5
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0001/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 6
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0002/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 7
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0003/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 8
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_A} \
+    --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0004/model_best.pth \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
     EXP_ID 9
 
-## model-A
+## CONFIG_B_1
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
+    --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 10
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
+    --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 11
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
+    --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 12
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
+    --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 13
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_C} \
+    --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 14
 
-## model-B
+## CONFIG_C_1
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 15
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 16
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 17
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 18
 
 ./tools/train_spacenet6_model.py \
-    --config ${CONFIG_MODEL_B} \
+    --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 19

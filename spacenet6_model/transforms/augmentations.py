@@ -20,7 +20,7 @@ def get_spacenet6_augmentation(config, is_train):
                 scale_limit=0.0,
                 rotate_limit=config.TRANSFORM.TRAIN_RANDOM_ROTATE_DEG,
                 shift_limit=0.0,
-                p=1,
+                p=config.TRANSFORM.TRAIN_RANDOM_ROTATE_PROB,
                 border_mode=0),
             # random crop
             albu.RandomCrop(

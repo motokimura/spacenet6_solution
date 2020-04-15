@@ -18,10 +18,10 @@ DATA_SPLIT_DIR=${FEATURE_DIR}/split
 DATA_SPLIT_NUM=5
 
 # train_spacenet6_model.py
-CONFIG_A_1=/work/configs/unet-scse_efficientnet-b7_ps-rgbnir_v_02.yml
-CONFIG_A_2=/work/configs/unet-scse_efficientnet-b7_v_02.yml
-CONFIG_B_1=/work/configs/unet-scse_efficientnet-b7_v_02.yml
-CONFIG_C_1=/work/configs/unet-scse_efficientnet-b6_v_02.yml
+CONFIG_A_1=/work/configs/unet-scse_efficientnet-b7_ps-rgbnir_v_01.yml
+CONFIG_A_2=/work/configs/unet-scse_efficientnet-b7_v_01.yml
+CONFIG_B_1=/work/configs/unet-scse_efficientnet-b7_v_01.yml
+CONFIG_C_1=/work/configs/unet-scse_efficientnet-b6_v_01.yml
 
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights

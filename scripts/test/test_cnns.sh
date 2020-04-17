@@ -9,9 +9,9 @@ source settings.sh
 
 # predict with trained models
 TEST_ARGS="\
+    --exp_log_dir ${TRAIN_LOG_DIR} \
     INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
     INPUT.SAR_ORIENTATION ${SAR_ORIENTATION_PATH} \
-    LOG_ROOT ${TRAIN_LOG_DIR} \
     WEIGHT_ROOT ${MODEL_WEIGHT_DIR} \
     PREDICTION_ROOT ${MODEL_PREDICTION_DIR} \
 "

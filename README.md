@@ -115,8 +115,6 @@ docker build -t spacenet6 .
 
 cd ..
 rm -rf spacenet6_solution
-
-# optionally you can create AMI here
 ```
 
 ### Start container

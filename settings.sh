@@ -2,7 +2,7 @@
 
 FEATURE_DIR=/work/features
 
-# copy SAR_orientations.txt
+# path to SAR_orientations.txt
 SAR_ORIENTATION_PATH=/work/static/SAR_orientations.txt
 
 # compute_mean_std.py
@@ -28,11 +28,15 @@ MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 SAVE_CHECKPOINTS='False'
 DUMP_GIT_INFO='False'
 
+TRAIN_STDOUT_DIR=/work/stdout/train
+
 # test_spacenet6_model.py
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
 
+TEST_STDOUT_DIR=/work/stdout/test
+
 # ensemble_models.py
-CLASSES='["building_footprint", "building_boundary"]'
+CLASSES='["building_footprint","building_boundary"]'
 ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled
 
 # pred_array_to_poly.py

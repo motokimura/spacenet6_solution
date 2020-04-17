@@ -15,5 +15,4 @@ mkdir -p ${FEATURE_DIR}
 ./scripts/train/train_cnns.sh ${TRAIN_DIR}
 
 # TODO:
-# - CUDA_VISIBLE_DEVICES と nohup & wait による制御
 # - 学習時間短縮のためvalを行うepochを後半のみに設定

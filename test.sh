@@ -14,5 +14,4 @@ source settings.sh
 ./scripts/test/postprocess.sh ${TEST_DIR} ${OUTPUT_CSV_PATH}
 
 # TODO:
-# - CUDA_VISIBLE_DEVICES と nohup & wait による制御
 # - 推論時間短縮のため.npyを.pngに変更（必要なら）

@@ -9,6 +9,7 @@ import geopandas as gpd
 import numpy as np
 import os
 import solaris as sol
+import timeit
 
 from glob import glob
 from skimage import io
@@ -121,6 +122,8 @@ def combine_masks(footprint_mask, boundary_mask):
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     args = parse_args()
 
     os.makedirs(os.path.join(args.out_dir), exist_ok=True)
@@ -187,3 +190,6 @@ if __name__ == '__main__':
         io.imsave(os.path.join(args.out_dir, out_filename), combined_mask)
         if args.vis_dir:
             io.imsave(os.path.join(args.vis_dir, out_filename), combined_mask_color)
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

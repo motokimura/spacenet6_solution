@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import segmentation_models_pytorch as smp
+import timeit
 import torch
 
 from tensorboardX import SummaryWriter
@@ -146,4 +147,9 @@ def main():
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     main()
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

@@ -4,6 +4,7 @@
 
 import numpy as np
 import os.path
+import timeit
 
 from glob import glob
 from skimage import io
@@ -19,6 +20,8 @@ from spacenet6_model.utils import (
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     config = load_config()
 
     assert len(config.ENSEMBLE_EXP_IDS) >= 1
@@ -61,3 +64,6 @@ if __name__ == '__main__':
         ensembled_score = ensembled_score / N
         assert ensembled_score.min() >= 0 and ensembled_score.max() <= 1
         np.save(os.path.join(out_dir, array_filename), ensembled_score)
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

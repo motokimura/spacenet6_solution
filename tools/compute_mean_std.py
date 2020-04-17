@@ -5,6 +5,7 @@
 import argparse
 import numpy as np
 import os
+import timeit
 from glob import glob
 from skimage import io
 from tqdm import tqdm
@@ -44,6 +45,8 @@ def get_image_shape(image_subdir):
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     args = parse_args()
 
     image_dir = os.path.join(args.data_dir, args.image_subdir)
@@ -88,3 +91,6 @@ if __name__ == '__main__':
 
     np.save(os.path.join(out_dir, 'mean.npy'), mean)
     np.save(os.path.join(out_dir, 'std.npy'), std)
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

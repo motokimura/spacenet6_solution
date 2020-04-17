@@ -15,5 +15,4 @@ source settings.sh
 
 # TODO:
 # - CUDA_VISIBLE_DEVICES と nohup & wait による制御
-# - 各スクリプト内での時間計測
-# - 推論時間短縮のため.npyを.pngに変更
+# - 推論時間短縮のため.npyを.pngに変更（必要なら）

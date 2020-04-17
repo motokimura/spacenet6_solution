@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import shutil
+import timeit
 
 from glob import glob
 from tqdm import tqdm
@@ -67,6 +68,8 @@ def copy_images(val_list_path, data_dir, out_dir, image_type):
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     args = parse_args()
 
     val_split_paths = glob(
@@ -80,3 +83,6 @@ if __name__ == '__main__':
             val_split_filename = os.path.basename(val_split_path)
             print(f'copying {image_type} files listed by {val_split_filename}...')
             copy_images(val_split_path, args.data_dir, args.out_dir, image_type)
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

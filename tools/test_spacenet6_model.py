@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 import os.path
+import timeit
 
 from tqdm import tqdm
 
@@ -80,4 +81,9 @@ def main():
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     main()
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

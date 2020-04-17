@@ -16,5 +16,4 @@ mkdir -p ${FEATURE_DIR}
 
 # TODO:
 # - CUDA_VISIBLE_DEVICES と nohup & wait による制御
-# - 各スクリプト内での時間計測
 # - 学習時間短縮のためvalを行うepochを後半のみに設定

@@ -36,7 +36,7 @@ MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
 TEST_STDOUT_DIR=/work/stdout/test
 
 # ensemble_models.py
-CLASSES='["building_footprint", "building_boundary"]'
+CLASSES='["building_footprint","building_boundary"]'
 ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled
 
 # pred_array_to_poly.py

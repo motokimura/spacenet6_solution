@@ -1,6 +1,7 @@
 import albumentations as albu
 import functools
 import numpy as np
+import random
 
 
 def get_spacenet6_augmentation(config, is_train):
@@ -20,7 +21,7 @@ def get_spacenet6_augmentation(config, is_train):
                 scale_limit=0.0,
                 rotate_limit=config.TRANSFORM.TRAIN_RANDOM_ROTATE_DEG,
                 shift_limit=0.0,
-                p=1,
+                p=config.TRANSFORM.TRAIN_RANDOM_ROTATE_PROB,
                 border_mode=0),
             # random crop
             albu.RandomCrop(
@@ -32,14 +33,16 @@ def get_spacenet6_augmentation(config, is_train):
             albu.Lambda(
                 image=functools.partial(
                     _random_speckle_noise,
-                    speckle_std=config.TRANSFORM.TRAIN_SPECKLE_NOISE_STD
+                    speckle_std=config.TRANSFORM.TRAIN_SPECKLE_NOISE_STD,
+                    p=config.TRANSFORM.TRAIN_SPECKLE_NOISE_PROB
                 )
             ),
             # random brightness
             albu.Lambda(
                 image=functools.partial(
                     _random_brightness,
-                    brightness_std=config.TRANSFORM.TRAIN_RANDOM_BRIGHTNESS_STD
+                    brightness_std=config.TRANSFORM.TRAIN_RANDOM_BRIGHTNESS_STD,
+                    p=config.TRANSFORM.TRAIN_RANDOM_BRIGHTNESS_PROB
                 )
             ),
         ]
@@ -55,10 +58,13 @@ def get_spacenet6_augmentation(config, is_train):
     return albu.Compose(augmentation)
 
 
-def _random_speckle_noise(image, speckle_std, **kwargs):
+def _random_speckle_noise(image, speckle_std, p=1.0, **kwargs):
     """
     """
     if speckle_std <= 0:
+        return image
+
+    if random.random() >= p:
         return image
 
     im_shape = image.shape
@@ -70,10 +76,13 @@ def _random_speckle_noise(image, speckle_std, **kwargs):
     return noised
 
 
-def _random_brightness(image, brightness_std, **kwargs):
+def _random_brightness(image, brightness_std, p=1.0, **kwargs):
     """
     """
     if brightness_std <= 0:
+        return image
+
+    if random.random() >= p:
         return image
 
     gauss = np.random.normal(0, brightness_std)

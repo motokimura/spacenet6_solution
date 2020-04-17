@@ -21,6 +21,8 @@ TRAIN_ARGS="\
 
 mkdir -p ${TRAIN_STDOUT_DIR}
 
+echo 'training... (1/5)'
+
 ## CONFIG_A_1
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
@@ -51,6 +53,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     > ${TRAIN_STDOUT_DIR}/exp_0003.out &
 
 wait
+
+echo 'training... (2/5)'
 
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
@@ -86,6 +90,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
 
 wait
 
+echo 'training... (3/5)'
+
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
@@ -119,6 +125,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
 
 wait
 
+echo 'training... (4/5)'
+
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
@@ -150,6 +158,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
 
 wait
 
+echo 'training... (5/5)'
+
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
@@ -179,3 +189,5 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     > ${TRAIN_STDOUT_DIR}/exp_0019.out &
 
 wait
+
+echo 'done training all models!'

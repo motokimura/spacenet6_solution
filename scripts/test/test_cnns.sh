@@ -18,6 +18,8 @@ TEST_ARGS="\
 
 mkdir -p ${TEST_STDOUT_DIR}
 
+echo 'testing... (1/4)'
+
 ## CONFIG_A_2
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 5 \
@@ -40,6 +42,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
     > ${TEST_STDOUT_DIR}/exp_0008.out &
 
 wait
+
+echo 'testing... (2/4)'
 
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 9 \
@@ -64,6 +68,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
 
 wait
 
+echo 'testing... (3/4)'
+
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 13 \
     ${TEST_ARGS} \
@@ -87,6 +93,8 @@ nohup CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
 
 wait
 
+echo 'testing... (4/4)'
+
 nohup CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 17 \
     ${TEST_ARGS} \
@@ -103,3 +111,5 @@ nohup CUDA_VISIBLE_DEVICES=2 ./tools/test_spacenet6_model.py \
     > ${TEST_STDOUT_DIR}/exp_0019.out &
 
 wait
+
+echo 'done tesging all models!'

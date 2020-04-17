@@ -80,6 +80,7 @@ _C.ENSEMBLED_PREDICTION_ROOT = '/ensembled_predictions'
 _C.POLY_CSV_ROOT = '/polygons'
 _C.POLY_OUTPUT_PATH = 'none'
 _C.SAVE_CHECKPOINTS = True
+_C.DUMP_GIT_INFO = True
 _C.TEST_TO_VAL = False
 _C.BOUNDARY_SUBSTRACT_COEFF = 0.2
 _C.METHOD_TO_MAKE_POLYGONS = 'watershed'  # ['contours', 'watershed']

@@ -94,8 +94,9 @@ def main():
     # prepare tensorboard
     tblogger = SummaryWriter(log_dir)
 
-    # save git hash
-    dump_git_info(os.path.join(log_dir, git_filename()))
+    if config.DUMP_GIT_INFO:
+        # save git hash
+        dump_git_info(os.path.join(log_dir, git_filename()))
 
     # dump config to a file
     with open(os.path.join(log_dir, config_filename()), 'w') as f:

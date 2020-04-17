@@ -24,28 +24,28 @@ mkdir -p ${TRAIN_STDOUT_DIR}
 echo 'training... (1/5)'
 
 ## CONFIG_A_1
-CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 0 \
     > ${TRAIN_STDOUT_DIR}/exp_0000.out &
 
-CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 1 \
     > ${TRAIN_STDOUT_DIR}/exp_0001.out &
 
-CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 2 \
     > ${TRAIN_STDOUT_DIR}/exp_0002.out &
 
-CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
@@ -56,7 +56,7 @@ wait
 
 echo 'training... (2/5)'
 
-CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
@@ -64,7 +64,7 @@ CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     > ${TRAIN_STDOUT_DIR}/exp_0004.out &
 
 ## CONFIG_A_2 (finetune CONFIG_A_1 models)
-CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0000/model_best.pth \
@@ -72,7 +72,7 @@ CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     EXP_ID 5 \
     > ${TRAIN_STDOUT_DIR}/exp_0005.out &
 
-CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0001/model_best.pth \
@@ -80,7 +80,7 @@ CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     EXP_ID 6 \
     > ${TRAIN_STDOUT_DIR}/exp_0006.out &
 
-CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0002/model_best.pth \
@@ -92,7 +92,7 @@ wait
 
 echo 'training... (3/5)'
 
-CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0003/model_best.pth \
@@ -100,7 +100,7 @@ CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     EXP_ID 8 \
     > ${TRAIN_STDOUT_DIR}/exp_0008.out &
 
-CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_A_2} \
     ${TRAIN_ARGS} \
     MODEL.WEIGHT ${MODEL_WEIGHT_DIR}/exp_0004/model_best.pth \
@@ -109,14 +109,14 @@ CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     > ${TRAIN_STDOUT_DIR}/exp_0009.out &
 
 ## CONFIG_B_1
-CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
     EXP_ID 10 \
     > ${TRAIN_STDOUT_DIR}/exp_0010.out &
 
-CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
@@ -127,21 +127,21 @@ wait
 
 echo 'training... (4/5)'
 
-CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 12 \
     > ${TRAIN_STDOUT_DIR}/exp_0012.out &
 
-CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 13 \
     > ${TRAIN_STDOUT_DIR}/exp_0013.out &
 
-CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_B_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \
@@ -149,7 +149,7 @@ CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     > ${TRAIN_STDOUT_DIR}/exp_0014.out &
 
 ## CONFIG_C_1
-CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 0 \
@@ -160,28 +160,28 @@ wait
 
 echo 'training... (5/5)'
 
-CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=0 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 1 \
     EXP_ID 16 \
     > ${TRAIN_STDOUT_DIR}/exp_0016.out &
 
-CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=1 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 2 \
     EXP_ID 17 \
     > ${TRAIN_STDOUT_DIR}/exp_0017.out &
 
-CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=2 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 3 \
     EXP_ID 18 \
     > ${TRAIN_STDOUT_DIR}/exp_0018.out &
 
-CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
+nohup env CUDA_VISIBLE_DEVICES=3 ./tools/train_spacenet6_model.py \
     --config ${CONFIG_C_1} \
     ${TRAIN_ARGS} \
     INPUT.TRAIN_VAL_SPLIT_ID 4 \

@@ -93,14 +93,17 @@ RUN echo "conda activate solaris" >> ~/.bashrc
 
 # copy files
 COPY configs /work/configs
+COPY scripts /work/scripts
 COPY spacenet6_model /work/spacenet6_model
 COPY static /work/static
 COPY tools /work/tools
 COPY *.sh /work/
 
 # set permissions for execution of shell/python scripts
+RUN chmod a+x /work/scripts/test/*.sh
+RUN chmod a+x /work/scripts/train/*.sh
 RUN chmod a+x /work/tools/*.py
-RUN chmod a+x /work/train.sh && chmod a+x /work/test.sh && chmod a+x /work/settings.sh
+RUN chmod a+x /work/*.sh
 ENV PATH $PATH:/work/
 
 WORKDIR /work

@@ -112,17 +112,12 @@ tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
 git clone git@github.com:motokimura/spacenet6_solution.git
 cd spacenet6_solution
 docker build -t spacenet6 .
-
-cd ..
-rm -rf spacenet6_solution
-
-# optionally you can create AMI here
 ```
 
 ### Start container
 
 ```
-docker run --runtime nvidia -d -it --name spacenet6 spacenet6 /bin/bash
+docker run --runtime nvidia -d -it --ipc=host --name spacenet6 spacenet6 /bin/bash
 
 docker cp train spacenet6:/work/ && docker cp test_public spacenet6:/work/
 ```

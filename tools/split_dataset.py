@@ -4,6 +4,7 @@
 import argparse
 import json
 import os
+import timeit
 
 from glob import glob
 from tqdm import tqdm
@@ -136,6 +137,8 @@ def dump_to_files(out_dir, data_list, split_ids, split_num):
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     args = parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
@@ -213,3 +216,6 @@ if __name__ == '__main__':
 
     # dump train/val filenames for each split 
     dump_to_files(args.out_dir, data_list, split_ids, args.split_num)
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

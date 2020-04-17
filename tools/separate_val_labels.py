@@ -8,6 +8,7 @@ import argparse
 import json
 import os
 import pandas as pd
+import timeit
 
 from glob import glob
 
@@ -39,6 +40,8 @@ def parse_args():
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     args = parse_args()
 
     val_split_paths = glob(
@@ -74,3 +77,6 @@ if __name__ == '__main__':
         df_.to_csv(out_csv_path, index=False)
 
         print(f'successfully saved to {out_csv_path}')
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

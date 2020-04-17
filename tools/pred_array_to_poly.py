@@ -6,6 +6,7 @@ import numpy as np
 import os.path
 import pandas as pd
 import solaris as sol
+import timeit
 
 from glob import glob
 from tqdm import tqdm
@@ -22,6 +23,8 @@ from spacenet6_model.utils import (
 
 
 if __name__ == '__main__':
+    t0 = timeit.default_timer()
+
     config = load_config()
 
     assert len(config.ENSEMBLE_EXP_IDS) >= 1
@@ -102,3 +105,14 @@ if __name__ == '__main__':
         os.path.join(out_dir, poly_filename()),
         index=False
     )
+
+    # only for deployment phase
+    output_path = config.POLY_OUTPUT_PATH
+    if output_path and output_path != 'none':
+        building_poly_df.to_csv(
+            output_path,
+            index=False
+        )
+
+    elapsed = timeit.default_timer() - t0
+    print('Time: {:.3f} min'.format(elapsed / 60.0))

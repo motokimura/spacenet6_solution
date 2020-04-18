@@ -19,6 +19,7 @@ def get_model(config):
         model = smp.Unet(
             encoder_name=backbone,
             encoder_weights=encoder_weights,
+            decoder_channels=config.MODEL.UNET_DECODER_CHANNELS,
             decoder_attention_type=decoder_attention_type,
             in_channels=in_channels,
             classes=n_classes,

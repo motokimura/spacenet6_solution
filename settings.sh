@@ -21,7 +21,7 @@ DATA_SPLIT_NUM=5
 CONFIG_A_1=/work/configs/unet-scse_efficientnet-b7_ps-rgbnir_v_01.yml
 CONFIG_A_2=/work/configs/unet-scse_efficientnet-b7_v_01.yml
 CONFIG_B_1=/work/configs/unet-scse_efficientnet-b7_v_01.yml
-CONFIG_C_1=/work/configs/unet-scse_efficientnet-b7_v_03.yml
+CONFIG_C_1=/work/configs/unet-scse_efficientnet-b7_v_06.yml
 
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights

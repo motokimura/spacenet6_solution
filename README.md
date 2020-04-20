@@ -127,7 +127,7 @@ docker cp train spacenet6:/work/ && docker cp test_public spacenet6:/work/
 ```
 docker exec -it spacenet6 /bin/bash
 
-./train.sh train/AOI_11_Rotterdam
+./train.sh train/AOI_11_Rotterdam 2>&1 | tee train.log
 ```
 
 ### Test
@@ -135,5 +135,5 @@ docker exec -it spacenet6 /bin/bash
 ```
 docker exec -it spacenet6 /bin/bash
 
-./test.sh test_public/AOI_11_Rotterdam solution.csv
+./test.sh test_public/AOI_11_Rotterdam solution.csv 2>&1 | tee test.log
 ```

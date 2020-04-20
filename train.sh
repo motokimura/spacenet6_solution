@@ -1,5 +1,7 @@
 #!/bin/bash
 
+START_TIME=$SECONDS
+
 source activate solaris
 
 TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
@@ -13,6 +15,9 @@ mkdir -p ${FEATURE_DIR}
 
 # train CNN models
 ./scripts/train/train_cnns.sh ${TRAIN_DIR}
+
+ELAPSED_TIME=$(($SECONDS - $START_TIME))
+echo 'Total time for training: ' $(($ELAPSED_TIME/60)) '[min]'
 
 # TODO:
 # - 学習時間短縮のためvalを行うepochを後半のみに設定

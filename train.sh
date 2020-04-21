@@ -11,10 +11,10 @@ source /work/settings.sh
 mkdir -p ${FEATURE_DIR}
 
 # preprocess dataset
-./work/scripts/train/preprocess.sh ${TRAIN_DIR}
+/work/scripts/train/preprocess.sh ${TRAIN_DIR}
 
 # train CNN models
-./work/scripts/train/train_cnns.sh ${TRAIN_DIR}
+/work/scripts/train/train_cnns.sh ${TRAIN_DIR}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
-echo 'Total time for training: ' $(($ELAPSED_TIME/60)) '[min]'
+echo 'Total time for training: ' $(($ELAPSED_TIME/60+1)) '[min]'

@@ -10,7 +10,7 @@ source /work/settings.sh
 
 echo ''
 echo 'ensembling model predictions...'
-./work/tools/ensemble_models.py \
+/work/tools/ensemble_models.py \
     INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
     INPUT.CLASSES ${CLASSES} \
     PREDICTION_ROOT ${MODEL_PREDICTION_DIR} \
@@ -19,7 +19,7 @@ echo 'ensembling model predictions...'
 
 echo ''
 echo 'generating polygon csv file...'
-./work/tools/pred_array_to_poly.py \
+/work/tools/pred_array_to_poly.py \
     INPUT.CLASSES ${CLASSES} \
     ENSEMBLED_PREDICTION_ROOT ${ENSEMBLED_PREDICTION_DIR} \
     POLY_CSV_ROOT ${POLY_CSV_DIR} \

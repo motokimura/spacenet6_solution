@@ -62,7 +62,7 @@ All commands below have to be executed inside the container.
 
 ```
 EXP_ID=9999  # new experiment id
-./tools/train.py [--config CONFIG_FILE] EXP_ID ${EXP_ID}
+./tools/train_spacenet6_model.py [--config CONFIG_FILE] EXP_ID ${EXP_ID}
 ```
 
 ### Test segmentation models
@@ -71,7 +71,7 @@ All commands below have to be executed inside the container.
 
 ```
 EXP_ID=9999  # previous experiment id from which config and weight are loaded
-./tools/test.py [--config CONFIG_FILE] --exp_id ${EXP_ID}
+./tools/test_spacenet6_model.py [--config CONFIG_FILE] --exp_id ${EXP_ID}
 ```
 
 ### Ensemble segmentation models
@@ -98,7 +98,7 @@ All commands below have to be executed inside the container.
 
 ```
 EXP_ID=9999  # previous experiment id from which config and weight are loaded
-./tools/test.py --config configs/test_to_val_images.yml --exp_id ${EXP_ID}
+./tools/test_spacenet6_model.py --config configs/test_to_val_images.yml --exp_id ${EXP_ID}
 ```
 
 ### Ensemble segmentation models (val images)

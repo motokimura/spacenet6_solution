@@ -8,7 +8,7 @@ TEST_IMAGE_DIR=${TEST_DIR}/SAR-Intensity
 
 source settings.sh
 
-# ensemble
+echo 'ensembling model predictions...'
 ./tools/ensemble_models.py \
     INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR} \
     INPUT.CLASSES ${CLASSES} \
@@ -16,7 +16,7 @@ source settings.sh
     ENSEMBLED_PREDICTION_ROOT ${ENSEMBLED_PREDICTION_DIR} \
     ENSEMBLE_EXP_IDS "[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
 
-# prediction to poly
+echo 'generating polygon csv file...'
 ./tools/pred_array_to_poly.py \
     INPUT.CLASSES ${CLASSES} \
     ENSEMBLED_PREDICTION_ROOT ${ENSEMBLED_PREDICTION_DIR} \

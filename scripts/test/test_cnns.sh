@@ -18,7 +18,7 @@ TEST_ARGS="\
 
 mkdir -p ${TEST_STDOUT_DIR}
 
-echo 'testing... (1/4)'
+echo 'predicting... (1/4)'
 
 ## CONFIG_A_2
 nohup env CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
@@ -43,7 +43,7 @@ nohup env CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
 
 wait
 
-echo 'testing... (2/4)'
+echo 'predicting... (2/4)'
 
 nohup env CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 9 \
@@ -68,7 +68,7 @@ nohup env CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
 
 wait
 
-echo 'testing... (3/4)'
+echo 'predicting... (3/4)'
 
 nohup env CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 13 \
@@ -93,7 +93,7 @@ nohup env CUDA_VISIBLE_DEVICES=3 ./tools/test_spacenet6_model.py \
 
 wait
 
-echo 'testing... (4/4)'
+echo 'predicting... (4/4)'
 
 nohup env CUDA_VISIBLE_DEVICES=0 ./tools/test_spacenet6_model.py \
     --exp_id 17 \
@@ -112,4 +112,4 @@ nohup env CUDA_VISIBLE_DEVICES=2 ./tools/test_spacenet6_model.py \
 
 wait
 
-echo 'done tesging all models!'
+echo 'done predicting all models!'

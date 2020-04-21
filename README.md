@@ -118,26 +118,32 @@ cd $HOME/spacenet6_solution
 docker build -t spacenet6 .
 ```
 
-### Start container
+### Prepare container
 
 ```
+# launch container
 docker run --runtime nvidia -d -it --ipc=host --name spacenet6 spacenet6 /bin/bash
 
+# copy SpaceNet6 data into the container (this may take twenty to thirty minutes)
 docker cp $HOME/train spacenet6:/work/ && docker cp $HOME/test_public spacenet6:/work/
 ```
 
 ### Train
 
 ```
+# enter the container
 docker exec -it spacenet6 /bin/bash
 
+# start training!
 ./train.sh train/AOI_11_Rotterdam 2>&1 | tee train.log
 ```
 
 ### Test
 
 ```
+# enter the container
 docker exec -it spacenet6 /bin/bash
 
+# start testing!
 ./test.sh test_public/AOI_11_Rotterdam solution.csv 2>&1 | tee test.log
 ```

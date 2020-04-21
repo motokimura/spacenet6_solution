@@ -18,6 +18,7 @@ TEST_ARGS="\
 
 mkdir -p ${TEST_STDOUT_DIR}
 
+echo ''
 echo 'predicting... (1/4)'
 
 ## CONFIG_A_2

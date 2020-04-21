@@ -21,6 +21,7 @@ TRAIN_ARGS="\
 
 mkdir -p ${TRAIN_STDOUT_DIR}
 
+echo ''
 echo 'training... (1/5)'
 
 ## CONFIG_A_1

@@ -5,18 +5,21 @@ source activate solaris
 TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
 source settings.sh
 
+echo ''
 echo 'computing mean and std of SAR-Intensity images...'
 ./tools/compute_mean_std.py \
     --data_dir ${TRAIN_DIR} \
     --image_subdir SAR-Intensity \
     --out_dir ${IMAGE_MEAN_STD_DIR}
 
+echo ''
 echo 'computing mean and std of PS-RGBNIR images...'
 ./tools/compute_mean_std.py \
     --data_dir ${TRAIN_DIR} \
     --image_subdir PS-RGBNIR \
     --out_dir ${IMAGE_MEAN_STD_DIR}
 
+echo ''
 echo 'generating building mask images...'
 ./tools/geojson_to_mask.py \
     --data_dir ${TRAIN_DIR} \
@@ -24,6 +27,7 @@ echo 'generating building mask images...'
     --boundary_width ${BUILDING_BOUNDARY_WIDTH} \
     --min_area ${BUILDING_MIN_AREA}
 
+echo ''
 echo 'splitting dataset...'
 ./tools/split_dataset.py \
     --data_dir ${TRAIN_DIR} \

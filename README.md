@@ -135,7 +135,10 @@ docker cp $HOME/train spacenet6:/work/ && docker cp $HOME/test_public spacenet6:
 docker exec -it spacenet6 /bin/bash
 
 # start training!
-./train.sh train/AOI_11_Rotterdam 2>&1 | tee train.log
+(in container) ./train.sh /work/train/AOI_11_Rotterdam
+
+# if you need logs:
+(in container) ./train.sh /work/train/AOI_11_Rotterdam 2>&1 | tee /work/train.log
 ```
 
 ### Test
@@ -145,5 +148,12 @@ docker exec -it spacenet6 /bin/bash
 docker exec -it spacenet6 /bin/bash
 
 # start testing!
-./test.sh test_public/AOI_11_Rotterdam solution.csv 2>&1 | tee test.log
+(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv
+
+# if you need logs:
+(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv 2>&1 | tee /work/test.log
 ```
+
+After running commands above, you will find `/work/solution.csv` in the container.
+
+You can specify the output path by the second argument of `test.sh`.

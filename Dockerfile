@@ -25,7 +25,7 @@ RUN apt-get update \
     libgdal-dev \
     libssl-dev \
     libffi-dev \
-		libncurses-dev \
+    libncurses-dev \
     libgl1 \
     jq \
     nfs-common \
@@ -35,7 +35,7 @@ RUN apt-get update \
     python-wheel \
     python-setuptools \
     unzip \
-		vim \
+    vim \
     wget \
     build-essential \
   && apt-get clean \

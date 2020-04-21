@@ -3,7 +3,7 @@
 source activate solaris
 
 TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
-source work/settings.sh
+source /work/settings.sh
 
 TRAIN_ARGS="\
     INPUT.TRAIN_VAL_SPLIT_DIR ${DATA_SPLIT_DIR} \

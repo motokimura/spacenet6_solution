@@ -97,6 +97,8 @@ ENSEMBLE_EXP_IDS='[9999, 9998, 9997, 9996, 9995]'  # previous experiments used f
 ### Download SpaceNet6 data
 
 ```
+cd $HOME
+
 # download and extract train data
 aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_train.tar.gz .
 tar -xvf SN6_buildings_AOI_11_Rotterdam_train.tar.gz
@@ -109,8 +111,10 @@ tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
 ### Build image
 
 ```
+cd $HOME
+
 git clone git@github.com:motokimura/spacenet6_solution.git
-cd spacenet6_solution
+cd $HOME/spacenet6_solution
 docker build -t spacenet6 .
 ```
 
@@ -119,7 +123,7 @@ docker build -t spacenet6 .
 ```
 docker run --runtime nvidia -d -it --ipc=host --name spacenet6 spacenet6 /bin/bash
 
-docker cp train spacenet6:/work/ && docker cp test_public spacenet6:/work/
+docker cp $HOME/train spacenet6:/work/ && docker cp $HOME/test_public spacenet6:/work/
 ```
 
 ### Train

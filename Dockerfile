@@ -90,7 +90,6 @@ RUN source activate solaris && python -m ipykernel.kernelspec \
 # activate conda environment immediately after entering container
 RUN echo "conda activate solaris" >> ~/.bashrc
 
-
 # copy files
 COPY configs /work/configs
 COPY scripts /work/scripts

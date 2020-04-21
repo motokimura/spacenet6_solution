@@ -17,6 +17,3 @@ source settings.sh
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo 'Total time for testing: ' $(($ELAPSED_TIME/60)) '[min]'
-
-# TODO:
-# - 推論時間短縮のため.npyを.pngに変更（必要なら）

@@ -18,6 +18,3 @@ mkdir -p ${FEATURE_DIR}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo 'Total time for training: ' $(($ELAPSED_TIME/60)) '[min]'
-
-# TODO:
-# - 学習時間短縮のためvalを行うepochを後半のみに設定

@@ -62,7 +62,7 @@ All commands below have to be executed inside the container.
 
 ```
 EXP_ID=9999  # new experiment id
-./tools/train.py [--config CONFIG_FILE] EXP_ID ${EXP_ID}
+./tools/train_spacenet6_model.py [--config CONFIG_FILE] EXP_ID ${EXP_ID}
 ```
 
 ### Test segmentation models
@@ -71,7 +71,7 @@ All commands below have to be executed inside the container.
 
 ```
 EXP_ID=9999  # previous experiment id from which config and weight are loaded
-./tools/test.py [--config CONFIG_FILE] --exp_id ${EXP_ID}
+./tools/test_spacenet6_model.py [--config CONFIG_FILE] --exp_id ${EXP_ID}
 ```
 
 ### Ensemble segmentation models
@@ -79,7 +79,7 @@ EXP_ID=9999  # previous experiment id from which config and weight are loaded
 All commands below have to be executed inside the container.
 
 ```
-ENSEMBLE_EXP_IDS='[9999, 9998, 9997, 9996, 9995]'  # previous experiments used for ensemble
+ENSEMBLE_EXP_IDS='[9999,9998,9997,9996,9995]'  # previous experiments used for ensemble
 ./tools/ensemble_models.py [--config CONFIG_FILE] ENSEMBLE_EXP_IDS ${ENSEMBLE_EXP_IDS}
 ```
 
@@ -88,8 +88,37 @@ ENSEMBLE_EXP_IDS='[9999, 9998, 9997, 9996, 9995]'  # previous experiments used f
 All commands below have to be executed inside the container.
 
 ```
-ENSEMBLE_EXP_IDS='[9999, 9998, 9997, 9996, 9995]'  # previous experiments used for ensemble
+ENSEMBLE_EXP_IDS='[9999,9998,9997,9996,9995]'  # previous experiments used for ensemble
 ./tools/pred_array_to_poly.py [--config CONFIG_FILE] ENSEMBLE_EXP_IDS ${ENSEMBLE_EXP_IDS}
+```
+
+### Test segmentation models (val images)
+
+All commands below have to be executed inside the container.
+
+```
+EXP_ID=9999  # previous experiment id from which config and weight are loaded
+./tools/test_spacenet6_model.py --config configs/test_to_val_images.yml --exp_id ${EXP_ID}
+```
+
+### Ensemble segmentation models (val images)
+
+All commands below have to be executed inside the container.
+
+```
+ENSEMBLE_EXP_IDS='[9999,9998,9997,9996,9995]'  # previous experiments used for ensemble
+SPLIT_ID=0  # split id of the models above
+TEST_IMAGE_DIR=/data/spacenet6/val_images/val_${SPLIT_ID}/SAR-Intensity
+./tools/ensemble_models.py --config configs/test_to_val_images.yml ENSEMBLE_EXP_IDS ${ENSEMBLE_EXP_IDS} INPUT.TEST_IMAGE_DIR ${TEST_IMAGE_DIR}
+```
+
+### Convert mask to polygon (val images)
+
+All commands below have to be executed inside the container.
+
+```
+ENSEMBLE_EXP_IDS='[9999,9998,9997,9996,9995]'  # previous experiments used for ensemble
+./tools/pred_array_to_poly.py --config configs/test_to_val_images.yml ENSEMBLE_EXP_IDS ${ENSEMBLE_EXP_IDS}
 ```
 
 ## Deployment

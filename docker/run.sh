@@ -41,6 +41,7 @@ PREDICTION_DIR=${FEATURE_ROOT}/predictions
 ENSEMBLED_PREDICTION_DIR=${FEATURE_ROOT}/ensembled_predictions
 POLY_CSV_DIR=${FEATURE_ROOT}/polygons
 VAL_PREDICTION_DIR=${FEATURE_ROOT}/val_predictions
+VAL_ENSEMBLED_PREDICTION_DIR=${FEATURE_ROOT}/val_ensembled_predictions
 VAL_POLY_CSV_DIR=${FEATURE_ROOT}/val_polygons
 
 # run container
@@ -58,6 +59,7 @@ docker run ${RUNTIME} -it --rm --ipc=host \
 	-v ${ENSEMBLED_PREDICTION_DIR}:/ensembled_predictions \
 	-v ${POLY_CSV_DIR}:/polygons \
 	-v ${VAL_PREDICTION_DIR}:/val_predictions \
+	-v ${VAL_ENSEMBLED_PREDICTION_DIR}:/val_ensembled_predictions \
 	-v ${VAL_POLY_CSV_DIR}:/val_polygons \
 	--name ${CONTAINER} \
 	${IMAGE} /bin/bash

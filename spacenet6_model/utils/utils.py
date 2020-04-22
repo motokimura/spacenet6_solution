@@ -113,7 +113,7 @@ def dump_prediction_to_png(path, pred):
     assert c <= 3
 
     array = np.zeros(shape=[h, w, 3], dtype=np.uint8)
-    array[:, :, :c] = (pred * 255).astype(np.uint8)
+    array[:, :, :c] = (pred * 255).astype(np.uint8).transpose((1, 2, 0))
     cv2.imwrite(path, array)
 
 

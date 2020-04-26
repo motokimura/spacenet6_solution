@@ -76,7 +76,7 @@ RUN conda install -n solaris \
 # install segmentation_models.pytorch
 RUN pip install git+https://github.com/motokimura/segmentation_models.pytorch  # install latest master
 RUN pip install yacs  # required to use spacenet6_model library
-RUN pip install gitpython tensorboard tensorboardX  # required to run scripts under tools/
+RUN pip install gitpython tensorboard tensorboardX lightgbm==2.3.1 geomet==0.2.1-1  # required to run scripts under tools/
 RUN pip install seaborn  # required to run notebooks under notebooks/
 
 # to show tqdm progress bar on jupyter lab nicely

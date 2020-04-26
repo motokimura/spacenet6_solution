@@ -74,7 +74,7 @@ RUN conda install -n solaris \
                      ipykernel
 
 # install segmentation_models.pytorch
-RUN pip install git+https://github.com/motokimura/segmentation_models.pytorch  # install latest master
+RUN pip install git+https://github.com/qubvel/segmentation_models.pytorch  # install latest master
 RUN pip install yacs  # required to use spacenet6_model library
 RUN pip install gitpython tensorboard tensorboardX  # required to run scripts under tools/
 RUN pip install seaborn  # required to run notebooks under notebooks/

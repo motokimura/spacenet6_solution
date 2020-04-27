@@ -76,7 +76,7 @@ if __name__ == '__main__':
             dfs.append(image_df.copy(deep=True))
             continue
 
-        x = compute_features(image_df, args.image_dir, rotation_df)
+        x = compute_features(image_df, args.image_dir, rotation_df, is_train=False)
         y = get_lgmb_prediction(gbm_models, x)
         assert len(image_df) == len(y)
 

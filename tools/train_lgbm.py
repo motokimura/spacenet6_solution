@@ -68,7 +68,7 @@ if __name__ == '__main__':
     features, labels = [], []
     for i, df in enumerate(solution_dfs):
         print(f'processing split #{i}...')
-        feature = compute_features(df, args.image_dir, rotation_df)
+        feature = compute_features(df, args.image_dir, rotation_df, is_train=True)
         label = get_labels(df)
         features.append(feature)
         labels.append(label)

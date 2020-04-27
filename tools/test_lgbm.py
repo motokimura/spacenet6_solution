@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import json
 import lightgbm as lgb
 import pandas as pd
 import timeit
@@ -19,6 +20,11 @@ def parse_args():
     parser.add_argument(
         '--solution_csv',
         help='path to solution csv',
+        required=True
+    )
+    parser.add_argument(
+        '--imageid',
+        help='path to json file to lookup image path from imageid',
         required=True
     )
     parser.add_argument(
@@ -56,8 +62,12 @@ if __name__ == '__main__':
 
     args = parse_args()
 
-    # road SAR_orientations.txt
+    # load SAR_orientations.txt
     rotation_df = read_orientation_file(args.sar_orientation)
+
+    # load imageid.json
+    with open(args.imageid) as f:
+        imageid_to_filename = json.load(f)
 
     # load models
     gbm_models = [
@@ -76,7 +86,7 @@ if __name__ == '__main__':
             dfs.append(image_df.copy(deep=True))
             continue
 
-        x = compute_features(image_df, args.image_dir, rotation_df, is_train=False)
+        x = compute_features(image_df, args.image_dir, rotation_df, imageid_to_filename)
         y = get_lgmb_prediction(gbm_models, x)
         assert len(image_df) == len(y)
 

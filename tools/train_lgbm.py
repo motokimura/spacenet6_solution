@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import json
 import lightgbm as lgb
 import os
 import timeit
@@ -26,6 +27,11 @@ def parse_args():
         '--solution_csvs',
         help='path to solution csv files',
         nargs='+',
+        required=True
+    )
+    parser.add_argument(
+        '--imageid',
+        help='path to json file to lookup image path from imageid',
         required=True
     )
     parser.add_argument(
@@ -55,8 +61,12 @@ if __name__ == '__main__':
 
     os.makedirs(args.out_dir, exist_ok=False)
 
-    # road SAR_orientations.txt
+    # load SAR_orientations.txt
     rotation_df = read_orientation_file(args.sar_orientation)
+
+    # load imageid.json
+    with open(args.imageid) as f:
+        imageid_to_filename = json.load(f)
 
     # evaluate iou_score of each polygon of solution csv file
     solution_dfs = []
@@ -68,7 +78,7 @@ if __name__ == '__main__':
     features, labels = [], []
     for i, df in enumerate(solution_dfs):
         print(f'processing split #{i}...')
-        feature = compute_features(df, args.image_dir, rotation_df, is_train=True)
+        feature = compute_features(df, args.image_dir, rotation_df, imageid_to_filename)
         label = get_labels(df)
         features.append(feature)
         labels.append(label)

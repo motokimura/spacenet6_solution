@@ -68,7 +68,7 @@ def extract_polygons_from_mask(mask):
     return polys
 
 
-def compute_features(df, image_dir, rotation_df, image_size=(900, 900), is_train=True):  # XXX: image size is hard coded
+def compute_features(df, image_dir, rotation_df, imageid_to_filename, image_size=(900, 900)):  # XXX: image size is hard coded
     """
     """
     xs = []  # features
@@ -84,14 +84,9 @@ def compute_features(df, image_dir, rotation_df, image_size=(900, 900), is_train
         # generate polygon mask image
         mask = generate_polygon_mask(image_df, image_size)
 
-        prefix = 'SN6_Train_AOI_11_Rotterdam_SAR-Intensity' if is_train \
-            else 'SN6_Test_Public_AOI_11_Rotterdam_SAR-Intensity'
-
         # load SAR image
-        image_path = os.path.join(
-            image_dir,
-            f'{prefix}_{image_id}.tif'
-        )
+        filename = imageid_to_filename[image_id]
+        image_path = os.path.join(image_dir, filename)
         image = io.imread(image_path)
         
         # align orientation of image/mask to north (=0)

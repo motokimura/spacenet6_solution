@@ -18,7 +18,7 @@ from spacenet6_model.configs import load_config
 from spacenet6_model.utils import (
     compute_building_score, ensemble_subdir,
     gen_building_polys_using_contours, gen_building_polys_using_watershed,
-    poly_filename
+    poly_filename, prefix_filename
 )
 
 
@@ -85,24 +85,44 @@ if __name__ == '__main__':
         # add to the cumulative inference to dataframe
         filename = os.path.basename(array_path)
         tilename = '_'.join(os.path.splitext(filename)[0].split('_')[-4:])
+        prefix = os.path.splitext(filename)[0].split('_')[1]
 
-        df = pd.DataFrame(
+        tmp_building_poly_df = pd.DataFrame(
             {
                 'ImageId': tilename,
                 #'BuildingId': 0,
                 'PolygonWKT_Pix': polys,
-                'Confidence': 1  # TODO: compute confidence appropriately
+                'Confidence': 1
             }
         )
-        #df['BuildingId'] = range(len(df))
+        #tmp_building_poly_df['BuildingId'] = range(len(tmp_building_poly_df))
+
+        tmp_prefix_df = pd.DataFrame(
+            {
+                'ImageId': tilename,
+                #'BuildingId': 0,
+                'PolygonWKT_Pix': polys,
+                'Confidence': 1,
+                'ImagePrefix': prefix  # with image prefix, this info is needed for LGBM train/test
+            }
+        )
+        #tmp_prefix_df['BuildingId'] = range(len(tmp_prefix_df))
+
         if firstfile:
-            building_poly_df = df
+            building_poly_df = tmp_building_poly_df
+            prefix_df = tmp_prefix_df
             firstfile = False
         else:
-            building_poly_df = building_poly_df.append(df)
+            building_poly_df = building_poly_df.append(tmp_building_poly_df)
+            prefix_df = prefix_df.append(tmp_prefix_df)
 
     building_poly_df.to_csv(
         os.path.join(out_dir, poly_filename()),
+        index=False
+    )
+
+    prefix_df.to_csv(
+        os.path.join(out_dir, prefix_filename()),
         index=False
     )
 

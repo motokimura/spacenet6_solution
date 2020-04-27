@@ -52,6 +52,12 @@ def poly_filename():
     return 'solution.csv'
 
 
+def prefix_filename():
+    """
+    """
+    return 'solution_w_prefix.csv'
+
+
 def train_list_filename(split_id):
     """
     """

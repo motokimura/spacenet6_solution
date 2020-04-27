@@ -9,6 +9,7 @@ from skimage import io, measure
 from tqdm import tqdm
 
 from ..datasets.utils import lookup_orientation
+from .utils import compute_building_score
 
 
 # evaluate solution csv to get labels (iou_score of each polygon) to train LGBM
@@ -68,7 +69,10 @@ def extract_polygons_from_mask(mask):
     return polys
 
 
-def compute_features(df, image_dir, rotation_df, imageid_to_filename, image_size=(900, 900)):  # XXX: image size is hard coded
+def compute_features(
+    df, image_dir, pred_dir, rotation_df, imageid_to_filename, 
+    classes=['building_footprint', 'building_boundary'], alpha=0.2, image_size=(900, 900)
+    ):  # XXX: class order, alpha (substract coeff), and image size are hard coded
     """
     """
     xs = []  # features
@@ -88,13 +92,25 @@ def compute_features(df, image_dir, rotation_df, imageid_to_filename, image_size
         filename = imageid_to_filename[image_id]
         image_path = os.path.join(image_dir, filename)
         image = io.imread(image_path)
-        
+
+        # load pred array
+        pred_filename, _ = os.path.splitext(filename)
+        pred_filename = f'{pred_filename}.npy'
+        pred_path = os.path.join(pred_dir, pred_filename)
+        pred = np.load(pred_path)
+        score = compute_building_score(
+            pred[classes.index('building_footprint')],
+            pred[classes.index('building_boundary')],
+            alpha=alpha
+        )
+
         # align orientation of image/mask to north (=0)
         rot = lookup_orientation(image_path, rotation_df)
         assert rot in [0, 1]
         if rot == 1:
             image = np.fliplr(np.flipud(image))
             mask = np.fliplr(np.flipud(mask))
+            score = np.fliplr(np.flipud(score))
         
         # compute raw features of each polygon
         polys = extract_polygons_from_mask(mask)
@@ -190,8 +206,15 @@ def compute_features(df, image_dir, rotation_df, imageid_to_filename, image_size
             x.append(area_ratio_600px)
             x.append(area_ratio_800px)
 
+            # predicted score feature
+            score_mean = score[mask_for_a_poly > 0].mean()
+            score_std = score[mask_for_a_poly > 0].std()
+            
+            x.append(score_mean)
+            x.append(score_std)
+
             # length check
-            assert len(x) == 37
+            assert len(x) == 39
             xs.append(x)
     
     return np.array(xs)

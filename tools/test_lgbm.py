@@ -28,6 +28,11 @@ def parse_args():
         required=True
     )
     parser.add_argument(
+        '--pred_dir',
+        help='path to directory containing score arrays',
+        required=True
+    )
+    parser.add_argument(
         '--models',
         help='path to LGBM model files',
         nargs='+',
@@ -86,7 +91,7 @@ if __name__ == '__main__':
             dfs.append(image_df.copy(deep=True))
             continue
 
-        x = compute_features(image_df, args.image_dir, rotation_df, imageid_to_filename)
+        x = compute_features(image_df, args.image_dir, args.pred_dir, rotation_df, imageid_to_filename)
         y = get_lgmb_prediction(gbm_models, x)
         assert len(image_df) == len(y)
 

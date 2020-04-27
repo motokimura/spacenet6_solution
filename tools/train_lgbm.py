@@ -30,8 +30,9 @@ def parse_args():
         required=True
     )
     parser.add_argument(
-        '--imageid',
-        help='path to json file to lookup image path from imageid',
+        '--imageids',
+        help='path to json files to lookup image path from imageid',
+        nargs='+',
         required=True
     )
     parser.add_argument(
@@ -65,8 +66,11 @@ if __name__ == '__main__':
     rotation_df = read_orientation_file(args.sar_orientation)
 
     # load imageid.json
-    with open(args.imageid) as f:
-        imageid_to_filename = json.load(f)
+    imageid_to_filename_dicts = []
+    for imageid_json in args.imageids:
+        with open(imageid_json) as f:
+            imageid_to_filename = json.load(f)
+        imageid_to_filename_dicts.append(imageid_to_filename)
 
     # evaluate iou_score of each polygon of solution csv file
     solution_dfs = []
@@ -76,7 +80,7 @@ if __name__ == '__main__':
 
     # get features and label (iou_score) of each polygon to train LGBM
     features, labels = [], []
-    for i, df in enumerate(solution_dfs):
+    for i, (df, imageid_to_filename) in enumerate(zip(solution_dfs, imageid_to_filename_dicts)):
         print(f'processing split #{i}...')
         feature = compute_features(df, args.image_dir, rotation_df, imageid_to_filename)
         label = get_labels(df)

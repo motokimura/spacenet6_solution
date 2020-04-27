@@ -52,10 +52,10 @@ def poly_filename():
     return 'solution.csv'
 
 
-def prefix_filename():
+def imageid_filename():
     """
     """
-    return 'solution_w_prefix.csv'
+    return 'imageid.json'
 
 
 def train_list_filename(split_id):

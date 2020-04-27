@@ -2,6 +2,7 @@
 # this script converts predicted arrays to building polygons
 # in spacenet6 solution csv format.
 
+import json
 import numpy as np
 import os.path
 import pandas as pd
@@ -18,7 +19,7 @@ from spacenet6_model.configs import load_config
 from spacenet6_model.utils import (
     compute_building_score, ensemble_subdir,
     gen_building_polys_using_contours, gen_building_polys_using_watershed,
-    poly_filename, prefix_filename
+    imageid_filename, poly_filename
 )
 
 
@@ -43,6 +44,7 @@ if __name__ == '__main__':
     )
     array_paths.sort()
 
+    imageid_to_filename = {}
     firstfile = True
 
     for array_path in tqdm(array_paths):
@@ -84,12 +86,12 @@ if __name__ == '__main__':
 
         # add to the cumulative inference to dataframe
         filename = os.path.basename(array_path)
-        tilename = '_'.join(os.path.splitext(filename)[0].split('_')[-4:])
-        prefix = os.path.splitext(filename)[0].split('_')[1]
+        filename, _ = os.path.splitext(filename)
+        imageid = '_'.join(filename.split('_')[-4:])
 
         tmp_building_poly_df = pd.DataFrame(
             {
-                'ImageId': tilename,
+                'ImageId': imageid,
                 #'BuildingId': 0,
                 'PolygonWKT_Pix': polys,
                 'Confidence': 1
@@ -97,34 +99,24 @@ if __name__ == '__main__':
         )
         #tmp_building_poly_df['BuildingId'] = range(len(tmp_building_poly_df))
 
-        tmp_prefix_df = pd.DataFrame(
-            {
-                'ImageId': tilename,
-                #'BuildingId': 0,
-                'PolygonWKT_Pix': polys,
-                'Confidence': 1,
-                'ImagePrefix': prefix  # with image prefix, this info is needed for LGBM train/test
-            }
-        )
-        #tmp_prefix_df['BuildingId'] = range(len(tmp_prefix_df))
+        imageid_to_filename[imageid] = f'{filename}.tif'
 
         if firstfile:
             building_poly_df = tmp_building_poly_df
-            prefix_df = tmp_prefix_df
             firstfile = False
         else:
             building_poly_df = building_poly_df.append(tmp_building_poly_df)
-            prefix_df = prefix_df.append(tmp_prefix_df)
 
+    # save solution.csv under `out_dir`
     building_poly_df.to_csv(
         os.path.join(out_dir, poly_filename()),
         index=False
     )
 
-    prefix_df.to_csv(
-        os.path.join(out_dir, prefix_filename()),
-        index=False
-    )
+    # save imageid.json under `out_dir`
+    # this is used when train/test LGBM models
+    with open(os.path.join(out_dir, imageid_filename()), 'w') as f:
+        json.dump(imageid_to_filename, f)
 
     # only for deployment phase
     output_path = config.POLY_OUTPUT_PATH

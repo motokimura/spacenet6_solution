@@ -28,25 +28,25 @@ def parse_args():
         required=True
     )
     parser.add_argument(
+        '--out',
+        help='path to output solution csv',
+        required=True
+    )
+    parser.add_argument(
         '--iou_thresh',
         help='threshold of iou_score (0, 1)',
         type=float,
-        required=True
+        default=0.15
     )
     parser.add_argument(
         '--image_dir',
         help='path directory containing SAR tif images',
-        required=True
+        default='/data/spacenet6/spacenet6/test_public/AOI_11_Rotterdam/SAR-Intensity/'
     )
     parser.add_argument(
         '--sar_orientation',
         help='path to SAR_orientations.txt',
-        required=True
-    )
-    parser.add_argument(
-        '--out',
-        help='path to output solution csv',
-        required=True
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/SummaryData/SAR_orientations.txt'
     )
     return parser.parse_args()
 

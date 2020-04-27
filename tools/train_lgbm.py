@@ -29,19 +29,19 @@ def parse_args():
         required=True
     )
     parser.add_argument(
+        '--out_dir',
+        help='path to directory to output models',
+        required=True
+    )
+    parser.add_argument(
         '--image_dir',
         help='path directory containing SAR tif images',
-        required=True
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/SAR-Intensity/'
     )
     parser.add_argument(
         '--sar_orientation',
         help='path to SAR_orientations.txt',
-        required=True
-    )
-    parser.add_argument(
-        '--out_dir',
-        help='path to directory to output models',
-        required=True
+        default='/data/spacenet6/spacenet6/train/AOI_11_Rotterdam/SummaryData/SAR_orientations.txt'
     )
     return parser.parse_args()
 

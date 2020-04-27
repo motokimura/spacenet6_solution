@@ -210,8 +210,8 @@ def compute_features(
             score_mean = score[mask_for_a_poly > 0].mean()
             score_std = score[mask_for_a_poly > 0].std()
             
-            x.append(list(score_mean))
-            x.append(list(score_std))
+            x.append(score_mean)
+            x.append(score_std)
 
             # length check
             assert len(x) == 39

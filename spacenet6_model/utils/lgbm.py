@@ -95,7 +95,7 @@ def compute_features(
 
         # load pred array
         pred_filename, _ = os.path.splitext(filename)
-        pred_filename = '{pred_filename}.npy'
+        pred_filename = f'{pred_filename}.npy'
         pred_path = os.path.join(pred_dir, pred_filename)
         pred = np.load(pred_path)
         score = compute_building_score(

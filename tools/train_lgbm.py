@@ -36,6 +36,12 @@ def parse_args():
         required=True
     )
     parser.add_argument(
+        '--pred_dirs',
+        help='path to directories containing score arrays',
+        nargs='+',
+        required=True
+    )
+    parser.add_argument(
         '--out_dir',
         help='path to directory to output models',
         required=True
@@ -80,9 +86,10 @@ if __name__ == '__main__':
 
     # get features and label (iou_score) of each polygon to train LGBM
     features, labels = [], []
-    for i, (df, imageid_to_filename) in enumerate(zip(solution_dfs, imageid_to_filename_dicts)):
+    for i, (df, imageid_to_filename, pred_dir) in \
+        enumerate(zip(solution_dfs, imageid_to_filename_dicts, args.pred_dirs)):
         print(f'processing split #{i}...')
-        feature = compute_features(df, args.image_dir, rotation_df, imageid_to_filename)
+        feature = compute_features(df, args.image_dir, pred_dir, rotation_df, imageid_to_filename)
         label = get_labels(df)
         features.append(feature)
         labels.append(label)

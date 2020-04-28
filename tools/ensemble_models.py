@@ -15,7 +15,8 @@ init_path()
 
 from spacenet6_model.configs import load_config
 from spacenet6_model.utils import (
-    ensemble_subdir, experiment_subdir, get_roi_mask
+    dump_prediction_to_png, ensemble_subdir, experiment_subdir, 
+    get_roi_mask, load_prediction_from_png
 )
 
 
@@ -46,16 +47,17 @@ if __name__ == '__main__':
 
         sar_image_filename = os.path.basename(sar_image_path)
         array_filename, _ = os.path.splitext(sar_image_filename)
-        array_filename = f'{array_filename}.npy'
+        array_filename = f'{array_filename}.png'
 
         for exp_id in config.ENSEMBLE_EXP_IDS:
             exp_subdir = experiment_subdir(exp_id)
-            score_array = np.load(
+            score_array = load_prediction_from_png(
                 os.path.join(
                     config.PREDICTION_ROOT,
                     exp_subdir,
                     array_filename
-                )
+                ),
+                n_channels=len(config.INPUT.CLASSES)
             )
             score_array[:, np.logical_not(roi_mask)] = 0
             assert score_array.min() >= 0 and score_array.max() <= 1
@@ -63,7 +65,10 @@ if __name__ == '__main__':
 
         ensembled_score = ensembled_score / N
         assert ensembled_score.min() >= 0 and ensembled_score.max() <= 1
-        np.save(os.path.join(out_dir, array_filename), ensembled_score)
+        dump_prediction_to_png(
+            os.path.join(out_dir, array_filename),
+            ensembled_score
+        )
 
     elapsed = timeit.default_timer() - t0
     print('Time: {:.3f} min'.format(elapsed / 60.0))

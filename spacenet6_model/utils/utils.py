@@ -1,3 +1,4 @@
+import cv2
 import git
 import json
 import numpy as np
@@ -109,6 +110,27 @@ def crop_center(array, crop_wh):
     bottom = crop_h + top
 
     return array[:, top:bottom, left:right]
+
+
+def dump_prediction_to_png(path, pred):
+    """
+    """
+    c, h, w = pred.shape
+    assert c <= 3
+
+    array = np.zeros(shape=[h, w, 3], dtype=np.uint8)
+    array[:, :, :c] = (pred * 255).astype(np.uint8).transpose((1, 2, 0))
+    cv2.imwrite(path, array)
+
+
+def load_prediction_from_png(path, n_channels):
+    """
+    """
+    assert n_channels <= 3
+
+    array = cv2.imread(path)
+    pred = (array.astype(float) / 255.0)[:, :, :n_channels]
+    return pred.transpose((2, 0, 1))  # HWC to CHW
 
 
 def compute_building_score(pr_score_footprint, pr_score_boundary, alpha=0.0):

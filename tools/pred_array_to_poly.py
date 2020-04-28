@@ -19,7 +19,7 @@ from spacenet6_model.configs import load_config
 from spacenet6_model.utils import (
     compute_building_score, ensemble_subdir,
     gen_building_polys_using_contours, gen_building_polys_using_watershed,
-    imageid_filename, poly_filename
+    imageid_filename, load_prediction_from_png, poly_filename
 )
 
 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         os.path.join(
             config.ENSEMBLED_PREDICTION_ROOT,
             subdir,
-            '*.npy'
+            '*.png'
         )
     )
     array_paths.sort()
@@ -48,7 +48,10 @@ if __name__ == '__main__':
     firstfile = True
 
     for array_path in tqdm(array_paths):
-        pred_array = np.load(array_path)
+        pred_array = load_prediction_from_png(
+            array_path,
+            n_channels=len(config.INPUT.CLASSES)
+        )
 
         footprint_channel = config.INPUT.CLASSES.index('building_footprint')
         boundary_channel = config.INPUT.CLASSES.index('building_boundary')

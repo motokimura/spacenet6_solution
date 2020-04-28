@@ -9,7 +9,7 @@ from skimage import io, measure
 from tqdm import tqdm
 
 from ..datasets.utils import lookup_orientation
-from .utils import compute_building_score
+from .utils import compute_building_score, load_prediction_from_png
 
 
 # evaluate solution csv to get labels (iou_score of each polygon) to train LGBM
@@ -95,9 +95,9 @@ def compute_features(
 
         # load pred array
         pred_filename, _ = os.path.splitext(filename)
-        pred_filename = f'{pred_filename}.npy'
+        pred_filename = f'{pred_filename}.png'
         pred_path = os.path.join(pred_dir, pred_filename)
-        pred = np.load(pred_path)
+        pred = load_prediction_from_png(pred_path, len(classes))
         score = compute_building_score(
             pred[classes.index('building_footprint')],
             pred[classes.index('building_boundary')],

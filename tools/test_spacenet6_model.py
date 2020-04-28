@@ -11,7 +11,7 @@ init_path()
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_test_dataloader
 from spacenet6_model.models import get_model
-from spacenet6_model.utils import crop_center, experiment_subdir
+from spacenet6_model.utils import crop_center, dump_prediction_to_png, experiment_subdir
 
 
 def main():
@@ -70,11 +70,11 @@ def main():
             assert h == 900
             assert w == 900
 
-            # dump to .npy file
+            # dump to .png file
             filename = os.path.basename(path)
             filename, _ = os.path.splitext(filename)
-            filename = f'{filename}.npy'
-            np.save(
+            filename = f'{filename}.png'
+            dump_prediction_to_png(
                 os.path.join(pred_dir, filename),
                 pred
             )

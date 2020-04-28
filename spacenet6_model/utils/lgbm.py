@@ -106,8 +106,7 @@ def compute_features(
 
         # align orientation of image/mask to north (=0)
         rot = lookup_orientation(image_path, rotation_df)
-        assert rot in [0, 1]
-        if rot == 1:
+        if rot > 0:
             image = np.fliplr(np.flipud(image))
             mask = np.fliplr(np.flipud(mask))
             score = np.fliplr(np.flipud(score))
@@ -139,8 +138,10 @@ def compute_features(
             x.append(prop.minor_axis_length)
             x.append(prop.euler_number)
             x.append(prop.equivalent_diameter)
-            assert prop.major_axis_length > 0
-            x.append(prop.minor_axis_length / prop.major_axis_length)
+            if prop.major_axis_length > 0:
+                x.append(prop.minor_axis_length / prop.major_axis_length)
+            else:
+                x.append(-1.)
             x.append(prop.perimeter ** 2 / (4 * area * np.pi))
             
             # min_area_rect related feature
@@ -152,8 +153,10 @@ def compute_features(
 
             x.append(min(min_area_rect[1]))
             x.append(max(min_area_rect[1]))
-            assert max(min_area_rect[1]) > 0
-            x.append(min(min_area_rect[1]) / max(min_area_rect[1]))
+            if max(min_area_rect[1]) > 0: 
+                x.append(min(min_area_rect[1]) / max(min_area_rect[1]))
+            else:
+                x.append(-1.)
             x.append(min_area_rect[2])
             x.append(1 * cv2.isContourConvex(cnt))
             
@@ -171,40 +174,48 @@ def compute_features(
             areas_other = areas[idxs_other]
             
             d = np.sqrt(((centroids_other - centroid) ** 2.0).sum(axis=1))
+            neighbers_50px = (d <= 50)
+            neighbers_100px = (d <= 100)
+            neighbers_150px = (d <= 150)
             neighbers_200px = (d <= 200)
-            neighbers_400px = (d <= 400)
-            neighbers_600px = (d <= 600)
-            neighbers_800px = (d <= 800)
             
+            N_50px = neighbers_50px.sum()
+            N_100px = neighbers_100px.sum()
+            N_150px = neighbers_150px.sum()
             N_200px = neighbers_200px.sum()
-            N_400px = neighbers_400px.sum()
-            N_600px = neighbers_600px.sum()
-            N_800px = neighbers_800px.sum()
 
+            med_area_50px = np.median(areas_other[neighbers_50px]) if N_50px > 0 else -1.
+            med_area_100px = np.median(areas_other[neighbers_100px]) if N_100px > 0 else -1.
+            med_area_150px = np.median(areas_other[neighbers_150px]) if N_150px > 0 else -1.
             med_area_200px = np.median(areas_other[neighbers_200px]) if N_200px > 0 else -1.
-            med_area_400px = np.median(areas_other[neighbers_400px]) if N_400px > 0 else -1.
-            med_area_600px = np.median(areas_other[neighbers_600px]) if N_600px > 0 else -1.
-            med_area_800px = np.median(areas_other[neighbers_800px]) if N_800px > 0 else -1.
             
+            area_ratio_50px = area / med_area_50px if N_50px > 0 else -1.
+            area_ratio_100px = area / med_area_100px if N_100px > 0 else -1.
+            area_ratio_150px = area / med_area_150px if N_150px > 0 else -1.
             area_ratio_200px = area / med_area_200px if N_200px > 0 else -1.
-            area_ratio_400px = area / med_area_400px if N_400px > 0 else -1.
-            area_ratio_600px = area / med_area_600px if N_600px > 0 else -1.
-            area_ratio_800px = area / med_area_800px if N_800px > 0 else -1.
             
+            x.append(N_50px)
+            x.append(N_100px)
+            x.append(N_150px)
             x.append(N_200px)
-            x.append(N_400px)
-            x.append(N_600px)
-            x.append(N_800px)
             
+            x.append(med_area_50px)
+            x.append(med_area_100px)
+            x.append(med_area_150px)
             x.append(med_area_200px)
-            x.append(med_area_400px)
-            x.append(med_area_600px)
-            x.append(med_area_800px)
             
+            x.append(area_ratio_50px)
+            x.append(area_ratio_100px)
+            x.append(area_ratio_150px)
             x.append(area_ratio_200px)
-            x.append(area_ratio_400px)
-            x.append(area_ratio_600px)
-            x.append(area_ratio_800px)
+
+            N_all = idxs_other.sum()
+            med_area_all = np.median(areas_other) if N_all > 0 else -1.
+            area_ratio_all = area / med_area_all if N_all > 0 else -1.
+
+            x.append(N_all)
+            x.append(med_area_all)
+            x.append(area_ratio_all)
 
             # predicted score feature
             score_mean = score[mask_for_a_poly > 0].mean()
@@ -213,8 +224,6 @@ def compute_features(
             x.append(score_mean)
             x.append(score_std)
 
-            # length check
-            assert len(x) == 39
             xs.append(x)
     
     return np.array(xs)

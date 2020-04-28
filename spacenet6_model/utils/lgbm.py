@@ -106,8 +106,7 @@ def compute_features(
 
         # align orientation of image/mask to north (=0)
         rot = lookup_orientation(image_path, rotation_df)
-        assert rot in [0, 1]
-        if rot == 1:
+        if rot > 0:
             image = np.fliplr(np.flipud(image))
             mask = np.fliplr(np.flipud(mask))
             score = np.fliplr(np.flipud(score))
@@ -139,8 +138,10 @@ def compute_features(
             x.append(prop.minor_axis_length)
             x.append(prop.euler_number)
             x.append(prop.equivalent_diameter)
-            assert prop.major_axis_length > 0
-            x.append(prop.minor_axis_length / prop.major_axis_length)
+            if prop.major_axis_length > 0:
+                x.append(prop.minor_axis_length / prop.major_axis_length)
+            else:
+                x.append(-1)
             x.append(prop.perimeter ** 2 / (4 * area * np.pi))
             
             # min_area_rect related feature
@@ -152,8 +153,10 @@ def compute_features(
 
             x.append(min(min_area_rect[1]))
             x.append(max(min_area_rect[1]))
-            assert max(min_area_rect[1]) > 0
-            x.append(min(min_area_rect[1]) / max(min_area_rect[1]))
+            if max(min_area_rect[1]) > 0: 
+                x.append(min(min_area_rect[1]) / max(min_area_rect[1]))
+            else:
+                x.append(-1)
             x.append(min_area_rect[2])
             x.append(1 * cv2.isContourConvex(cnt))
             
@@ -213,8 +216,6 @@ def compute_features(
             x.append(score_mean)
             x.append(score_std)
 
-            # length check
-            assert len(x) == 39
             xs.append(x)
     
     return np.array(xs)

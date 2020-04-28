@@ -121,6 +121,23 @@ ENSEMBLE_EXP_IDS='[9999,9998,9997,9996,9995]'  # previous experiments used for e
 ./tools/pred_array_to_poly.py --config configs/test_to_val_images.yml ENSEMBLE_EXP_IDS ${ENSEMBLE_EXP_IDS}
 ```
 
+### Train LGBM models
+
+All commands below have to be executed inside the container.
+
+```
+./tools/train_lgbm.py --truth_csvs ${TRUTH_CSVS} --solution_csvs ${SOLUTION_CSVS} --imageids ${IMAGEIDS} --pred_dirs ${PRED_DIRS} --out_dir ${OUT_DIR}
+```
+
+### Test LGBM models
+
+All commands below have to be executed inside the container.
+
+```
+./tools/test_lgbm.py --solution_csv ${SOLUTION_CSV} --imageid ${IMAGEID} --pred_dir ${PRED_DIR} --models ${MODELS} --out ${OUT} [--iou_thresh ${IOU_THRESH}]
+```
+
+
 ## Deployment
 
 ### Download SpaceNet6 data

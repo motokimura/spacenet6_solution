@@ -177,14 +177,16 @@ if __name__ == '__main__':
     mask_paths = glob(os.path.join(args.mask_dir, '*.geojson.png'))
     mask_paths.sort()
 
-    N = 3401
-    assert len(polygon_paths) == N
-    assert len(ms_image_paths) == N
-    assert len(pan_image_paths) == N
-    assert len(psms_image_paths) == N
-    assert len(rgb_image_paths) == N
-    assert len(sar_image_paths) == N
-    assert len(mask_paths) == N
+    #N = 3401
+    #assert len(polygon_paths) == N
+    #assert len(ms_image_paths) == N
+    #assert len(pan_image_paths) == N
+    #assert len(psms_image_paths) == N
+    #assert len(rgb_image_paths) == N
+    #assert len(sar_image_paths) == N
+    #assert len(mask_paths) == N
+
+    N = len(polygon_paths)
 
     data_list = []
     for i in range(N):
@@ -209,7 +211,7 @@ if __name__ == '__main__':
         )
 
     # check order of data_list
-    check_filename_validity(data_list)
+    #check_filename_validity(data_list)
 
     # assign split id to each tile based on x-coord
     split_ids = assign_split_id(data_list, sar_image_dir, args.split_num)

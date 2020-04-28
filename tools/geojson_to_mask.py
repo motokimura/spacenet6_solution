@@ -140,9 +140,11 @@ if __name__ == '__main__':
     building_label_paths = glob(os.path.join(building_label_dir, '*.geojson'))
     building_label_paths.sort()
 
-    N = 3401
-    assert len(building_label_paths) == N
-    assert len(sar_image_paths) == N
+    #N = 3401
+    #assert len(building_label_paths) == N
+    #assert len(sar_image_paths) == N
+
+    N = len(building_label_paths)
 
     for i in tqdm(range(N)):
         sar_image_path = sar_image_paths[i]
@@ -150,7 +152,7 @@ if __name__ == '__main__':
 
         sar_image_filename = os.path.basename(sar_image_path)
         building_label_filename = os.path.basename(building_label_path)
-        check_filenames_validity(sar_image_filename, building_label_filename)
+        #check_filenames_validity(sar_image_filename, building_label_filename)
 
         # load sar image and compute roi mask from sar intensity values
         sar_image = io.imread(sar_image_path)

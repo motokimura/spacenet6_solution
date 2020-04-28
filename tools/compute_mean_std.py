@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     image_paths = glob(os.path.join(image_dir, '*.tif'))
     N = len(image_paths)
-    assert N == 3401
+    #assert N == 3401
 
     print('computing mean...')
     for path in tqdm(image_paths):

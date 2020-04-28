@@ -1,7 +1,79 @@
 # spacenet6_solution
 a solution to spacenet6 challenge
 
-## Usage
+## Deployment instructions
+
+### Download SpaceNet6 data
+
+```
+DATA_DIR=${HOME}  # path to download SpaceNet6 dataset
+cd ${DATA_DIR}
+
+# download and extract train data
+aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_train.tar.gz .
+tar -xvf SN6_buildings_AOI_11_Rotterdam_train.tar.gz
+
+# download and extract test data
+aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz .
+tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
+```
+
+### Build image
+
+```
+cd ${CODE_DIR}  # `code` directory containing `Dockerfile`, `train.sh`, `test.sh`, and etc. 
+docker build -t spacenet6 .
+```
+
+### Prepare container
+
+```
+# launch container
+docker run --runtime nvidia -d -it --ipc=host --name spacenet6 spacenet6 /bin/bash
+
+# copy SpaceNet6 data into the container (this may take twenty to thirty minutes)
+docker cp ${DATA_DIR}/train spacenet6:/work/ && docker cp ${DATA_DIR}/test_public spacenet6:/work/
+```
+
+It's necessary to add `--ipc=host` option when run docker. 
+Otherwise multi-threaded PyTorch dataloader will crash.
+
+Instead of copying data into the container, 
+you can mount the volume to the container using `-v` option of `docker run`.
+
+### Train
+
+```
+# enter the container
+docker exec -it spacenet6 /bin/bash
+
+# start training!
+(in container) ./train.sh /work/train/AOI_11_Rotterdam
+
+# if you need logs:
+(in container) ./train.sh /work/train/AOI_11_Rotterdam 2>&1 | tee /work/train.log
+```
+
+### Test
+
+```
+# enter the container
+docker exec -it spacenet6 /bin/bash
+
+# start testing!
+(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv
+
+# if you need logs:
+(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv 2>&1 | tee /work/test.log
+```
+
+After running commands above, you will find `/work/solution.csv` in the container.
+
+You can specify the output path by the second argument of `test.sh`.
+
+## Development
+
+This section is only for the model development and **has nothing to do with final testing/scoring phase**.
 
 ### Download SpaceNet6 data
 
@@ -136,68 +208,3 @@ All commands below have to be executed inside the container.
 ```
 ./tools/test_lgbm.py --solution_csv ${SOLUTION_CSV} --imageid ${IMAGEID} --pred_dir ${PRED_DIR} --models ${MODELS} --out ${OUT} [--iou_thresh ${IOU_THRESH}]
 ```
-
-
-## Deployment
-
-### Download SpaceNet6 data
-
-```
-DATA_DIR=${HOME}  # path to download SpaceNet6 dataset
-cd ${DATA_DIR}
-
-# download and extract train data
-aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_train.tar.gz .
-tar -xvf SN6_buildings_AOI_11_Rotterdam_train.tar.gz
-
-# download and extract test data
-aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz .
-tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
-```
-
-### Build image
-
-```
-cd ${CODE_DIR}  # `code` directory containing `Dockerfile`, `train.sh`, `test.sh`, and etc. 
-docker build -t spacenet6 .
-```
-
-### Prepare container
-
-```
-# launch container
-docker run --runtime nvidia -d -it --ipc=host --name spacenet6 spacenet6 /bin/bash
-
-# copy SpaceNet6 data into the container (this may take twenty to thirty minutes)
-docker cp ${DATA_DIR}/train spacenet6:/work/ && docker cp ${DATA_DIR}/test_public spacenet6:/work/
-```
-
-### Train
-
-```
-# enter the container
-docker exec -it spacenet6 /bin/bash
-
-# start training!
-(in container) ./train.sh /work/train/AOI_11_Rotterdam
-
-# if you need logs:
-(in container) ./train.sh /work/train/AOI_11_Rotterdam 2>&1 | tee /work/train.log
-```
-
-### Test
-
-```
-# enter the container
-docker exec -it spacenet6 /bin/bash
-
-# start testing!
-(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv
-
-# if you need logs:
-(in container) ./test.sh /work/test_public/AOI_11_Rotterdam /work/solution.csv 2>&1 | tee /work/test.log
-```
-
-After running commands above, you will find `/work/solution.csv` in the container.
-
-You can specify the output path by the second argument of `test.sh`.

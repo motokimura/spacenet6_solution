@@ -1,7 +1,9 @@
 # spacenet6_solution
-a solution to spacenet6 challenge
+motokimura's solution to SpaceNet6 challenge
 
-## Deployment instructions
+## Instructions for Final Scoring
+
+This section provides instructions for the final testing/scoring phase.
 
 ### Download SpaceNet6 data
 
@@ -71,9 +73,11 @@ After running commands above, you will find `/work/solution.csv` in the containe
 
 You can specify the output path by the second argument of `test.sh`.
 
-## Development
+## Instructions for Model Development
 
-This section is only for the model development and **has nothing to do with final testing/scoring phase**.
+This section provides instructions for the model development phase.
+
+**Please ignore this section in final testing/scoring phase.**
 
 ### Download SpaceNet6 data
 

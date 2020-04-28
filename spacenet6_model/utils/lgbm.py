@@ -141,7 +141,7 @@ def compute_features(
             if prop.major_axis_length > 0:
                 x.append(prop.minor_axis_length / prop.major_axis_length)
             else:
-                x.append(-1)
+                x.append(-1.)
             x.append(prop.perimeter ** 2 / (4 * area * np.pi))
             
             # min_area_rect related feature
@@ -156,7 +156,7 @@ def compute_features(
             if max(min_area_rect[1]) > 0: 
                 x.append(min(min_area_rect[1]) / max(min_area_rect[1]))
             else:
-                x.append(-1)
+                x.append(-1.)
             x.append(min_area_rect[2])
             x.append(1 * cv2.isContourConvex(cnt))
             
@@ -208,6 +208,14 @@ def compute_features(
             x.append(area_ratio_100px)
             x.append(area_ratio_150px)
             x.append(area_ratio_200px)
+
+            N_all = idxs_other.sum()
+            med_area_all = np.median(areas_other) if N_all > 0 else -1.
+            area_ratio_all = area / med_area_all if N_all > 0 else -1.
+
+            x.append(N_all)
+            x.append(med_area_all)
+            x.append(area_ratio_all)
 
             # predicted score feature
             score_mean = score[mask_for_a_poly > 0].mean()

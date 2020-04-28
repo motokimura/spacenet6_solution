@@ -150,25 +150,25 @@ nohup /work/tools/ensemble_models.py \
 nohup /work/tools/ensemble_models.py \
     ${ENSEMBLE_ARGS} \
     ENSEMBLE_EXP_IDS "[6, 11, 16]" \
-    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_0/SAR-Intensity \
+    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_1/SAR-Intensity \
     > ${LGBM_STDOUT_DIR}/ens_0006_0011_0016.out 2>&1 &
 
 nohup /work/tools/ensemble_models.py \
     ${ENSEMBLE_ARGS} \
     ENSEMBLE_EXP_IDS "[7, 12, 17]" \
-    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_0/SAR-Intensity \
+    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_2/SAR-Intensity \
     > ${LGBM_STDOUT_DIR}/ens_0007_0012_0017.out 2>&1 &
 
 nohup /work/tools/ensemble_models.py \
     ${ENSEMBLE_ARGS} \
     ENSEMBLE_EXP_IDS "[8, 13, 18]" \
-    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_0/SAR-Intensity \
+    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_3/SAR-Intensity \
     > ${LGBM_STDOUT_DIR}/ens_0008_0013_0018.out 2>&1 &
 
 nohup /work/tools/ensemble_models.py \
     ${ENSEMBLE_ARGS} \
     ENSEMBLE_EXP_IDS "[9, 14, 19]" \
-    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_0/SAR-Intensity \
+    INPUT.TEST_IMAGE_DIR ${VAL_IMAGE_DIR}/val_4/SAR-Intensity \
     > ${LGBM_STDOUT_DIR}/ens_0009_0014_0019.out 2>&1 &
 
 wait

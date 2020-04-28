@@ -17,11 +17,17 @@ BUILDING_MIN_AREA=20
 DATA_SPLIT_DIR=${FEATURE_DIR}/split
 DATA_SPLIT_NUM=5
 
+# separate_val_images.py
+VAL_IMAGE_DIR=${FEATURE_DIR}/val_images
+
+# separate_val_labels.py
+VAL_LABEL_DIR=${FEATURE_DIR}/val_labels
+
 # train_spacenet6_model.py
 CONFIG_A_1=/work/configs/deploy/unet-scse_efficientnet-b7_ps-rgbnir_v_01.yml
 CONFIG_A_2=/work/configs/deploy/unet-scse_efficientnet-b7_v_01.yml
-CONFIG_B_1=/work/configs/deploy/unet-scse_efficientnet-b7_v_01.yml
-CONFIG_C_1=/work/configs/deploy/unet-scse_efficientnet-b7_v_03.yml
+CONFIG_B_1=/work/configs/deploy/unet-scse_timm-efficientnet-b7_v_01.yml
+CONFIG_C_1=/work/configs/deploy/unet-scse_timm-efficientnet-b8_v_01.yml
 
 TRAIN_LOG_DIR=${FEATURE_DIR}/logs
 MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
@@ -30,14 +36,21 @@ DUMP_GIT_INFO='False'
 
 TRAIN_STDOUT_DIR=/work/stdout/train
 
+# train_lgbm.py
+LGBM_MODEL_DIR=${FEATURE_DIR}/lgbm_models
+
+LGBM_STDOUT_DIR=/work/stdout/lgbm
+
 # test_spacenet6_model.py
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
+VAL_PREDICTION_DIR=${FEATURE_DIR}/val_predictions
 
 TEST_STDOUT_DIR=/work/stdout/test
 
 # ensemble_models.py
 CLASSES='["building_footprint","building_boundary"]'
-ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/predictions_ensembled
+ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/ensembled_predictions
+VAL_ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/val_ensembled_predictions
 
 # pred_array_to_poly.py
 POLY_CSV_DIR=${FEATURE_DIR}/polygons
@@ -49,3 +62,7 @@ WATERSHED_MAIN_THRESH=0.3  # for 'watershed'
 WATERSHED_SEED_THRESH=0.7  # for 'watershed'
 WATERSHED_MIN_AREA_PIXEL=80  # for 'watershed'
 WATERSHED_SEED_MIN_AREA_PIXEL=20  # for 'watershed'
+VAL_POLY_CSV_DIR=${FEATURE_DIR}/val_polygons
+
+# test_lgbm.py
+IOU_THRESH=0.15

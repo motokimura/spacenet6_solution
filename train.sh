@@ -16,5 +16,8 @@ mkdir -p ${FEATURE_DIR}
 # train CNN models
 /work/scripts/train/train_cnns.sh ${TRAIN_DIR}
 
+# train LGBM models
+/work/scripts/train/train_lgbm.sh ${TRAIN_DIR}
+
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo 'Total time for training: ' $(($ELAPSED_TIME/60+1)) '[min]'

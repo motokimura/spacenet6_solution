@@ -177,37 +177,37 @@ def compute_features(
             neighbers_50px = (d <= 50)
             neighbers_100px = (d <= 100)
             neighbers_150px = (d <= 150)
-            neighbers_250px = (d <= 200)
+            neighbers_200px = (d <= 200)
             
             N_50px = neighbers_50px.sum()
             N_100px = neighbers_100px.sum()
             N_150px = neighbers_150px.sum()
-            N_250px = neighbers_250px.sum()
+            N_200px = neighbers_200px.sum()
 
             med_area_50px = np.median(areas_other[neighbers_50px]) if N_50px > 0 else -1.
             med_area_100px = np.median(areas_other[neighbers_100px]) if N_100px > 0 else -1.
             med_area_150px = np.median(areas_other[neighbers_150px]) if N_150px > 0 else -1.
-            med_area_250px = np.median(areas_other[neighbers_250px]) if N_250px > 0 else -1.
+            med_area_200px = np.median(areas_other[neighbers_200px]) if N_200px > 0 else -1.
             
             area_ratio_50px = area / med_area_50px if N_50px > 0 else -1.
             area_ratio_100px = area / med_area_100px if N_100px > 0 else -1.
             area_ratio_150px = area / med_area_150px if N_150px > 0 else -1.
-            area_ratio_250px = area / med_area_250px if N_250px > 0 else -1.
+            area_ratio_200px = area / med_area_200px if N_200px > 0 else -1.
             
             x.append(N_50px)
             x.append(N_100px)
             x.append(N_150px)
-            x.append(N_250px)
+            x.append(N_200px)
             
             x.append(med_area_50px)
             x.append(med_area_100px)
             x.append(med_area_150px)
-            x.append(med_area_250px)
+            x.append(med_area_200px)
             
             x.append(area_ratio_50px)
             x.append(area_ratio_100px)
             x.append(area_ratio_150px)
-            x.append(area_ratio_250px)
+            x.append(area_ratio_200px)
 
             # predicted score feature
             score_mean = score[mask_for_a_poly > 0].mean()

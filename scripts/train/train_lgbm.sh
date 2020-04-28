@@ -13,7 +13,7 @@ echo 'splitting val images...'
     --split_dir ${DATA_SPLIT_DIR} \
     --split_num ${DATA_SPLIT_NUM} \
     --out_dir ${VAL_IMAGE_DIR} \
-    --image_types '["SAR-Intensity",]'
+    --image_types SAR-Intensity
 
 # prepare labels
 TRAIN_LABEL_CSV=${TRAIN_DIR}/SummaryData/SN6_Train_AOI_11_Rotterdam_Buildings.csv

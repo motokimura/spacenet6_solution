@@ -53,6 +53,12 @@ def poly_filename():
     return 'solution.csv'
 
 
+def imageid_filename():
+    """
+    """
+    return 'imageid.json'
+
+
 def train_list_filename(split_id):
     """
     """

@@ -77,7 +77,7 @@ You can specify the output path by the second argument of `test.sh`.
 
 This section provides instructions for the model development phase.
 
-**Please ignore this section in final testing/scoring phase.**
+**Please ignore this section in the final testing/scoring phase.**
 
 ### Download SpaceNet6 data
 

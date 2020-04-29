@@ -41,7 +41,7 @@ nvidia-docker build -t motokimura .
 nvidia-docker run --ipc=host -v ${DATA_DIR}:/data:ro -v ${WDATA_DIR}:/wdata -it motokimura
 ```
 
-It's necessary to add `--ipc=host` option when run docker (as written in `flags.txt`).
+It's necessary to add `--ipc=host` option when run docker (as written in [flags.txt](flags.txt)).
 Otherwise multi-threaded PyTorch dataloader will crash.
 
 ### Train

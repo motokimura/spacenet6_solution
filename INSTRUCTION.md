@@ -12,12 +12,14 @@ DATA_DIR=${HOME}/data  # path to download SpaceNet6 dataset
 mkdir -p ${DATA_DIR}
 
 # download and extract train data
-aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_train.tar.gz ${DATA_DIR}
-tar -xvf ${DATA_DIR}/SN6_buildings_AOI_11_Rotterdam_train.tar.gz
+cd ${DATA_DIR}
+aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_train.tar.gz .
+tar -xvf SN6_buildings_AOI_11_Rotterdam_train.tar.gz
 
 # download and extract test data
-aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz ${DATA_DIR}
-tar -xvf ${DATA_DIR}/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
+cd ${DATA_DIR}
+aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz .
+tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
 ```
 
 ### Prepare temporal directory

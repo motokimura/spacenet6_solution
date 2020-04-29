@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FEATURE_DIR=/work/features
+FEATURE_DIR=/wdata
 
 # path to SAR_orientations.txt
 SAR_ORIENTATION_PATH=/work/static/SAR_orientations.txt
@@ -34,18 +34,18 @@ MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
 SAVE_CHECKPOINTS='False'
 DUMP_GIT_INFO='False'
 
-TRAIN_STDOUT_DIR=/work/stdout/train
+TRAIN_STDOUT_DIR=/wdata/stdout/train
 
 # train_lgbm.py
 LGBM_MODEL_DIR=${FEATURE_DIR}/lgbm_models
 
-LGBM_STDOUT_DIR=/work/stdout/lgbm
+LGBM_STDOUT_DIR=/wdata/stdout/lgbm
 
 # test_spacenet6_model.py
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
 VAL_PREDICTION_DIR=${FEATURE_DIR}/val_predictions
 
-TEST_STDOUT_DIR=/work/stdout/test
+TEST_STDOUT_DIR=/wdata/stdout/test
 
 # ensemble_models.py
 CLASSES='["building_footprint","building_boundary"]'

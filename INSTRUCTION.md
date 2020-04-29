@@ -36,7 +36,7 @@ cd ${CODE_DIR}  # `code` directory containing `Dockerfile`, `train.sh`, `test.sh
 nvidia-docker build -t motokimura .
 ```
 
-Duing the build, my home built models are downloaded
+During the build, my home built models are downloaded
 so that `test.sh` can run without re-training the models.
 
 ### Prepare container

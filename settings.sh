@@ -1,6 +1,7 @@
 #!/bin/bash
 
 FEATURE_DIR=/wdata
+MODEL_ROOT_DIR=/work/models
 
 # path to SAR_orientations.txt
 SAR_ORIENTATION_PATH=/work/static/SAR_orientations.txt
@@ -29,15 +30,15 @@ CONFIG_A_2=/work/configs/deploy/unet-scse_efficientnet-b7_v_01.yml
 CONFIG_B_1=/work/configs/deploy/unet-scse_timm-efficientnet-b7_v_01.yml
 CONFIG_C_1=/work/configs/deploy/unet-scse_timm-efficientnet-b8_v_01.yml
 
-TRAIN_LOG_DIR=${FEATURE_DIR}/logs
-MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
+TRAIN_LOG_DIR=${MODEL_ROOT_DIR}/logs
+MODEL_WEIGHT_DIR=${MODEL_ROOT_DIR}/weights
 SAVE_CHECKPOINTS='False'
 DUMP_GIT_INFO='False'
 
 TRAIN_STDOUT_DIR=/wdata/stdout/train
 
 # train_lgbm.py
-LGBM_MODEL_DIR=${FEATURE_DIR}/lgbm_models
+LGBM_MODEL_DIR=${MODEL_ROOT_DIR}/lgbm_models
 
 LGBM_STDOUT_DIR=/wdata/stdout/lgbm
 

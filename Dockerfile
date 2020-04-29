@@ -105,4 +105,15 @@ RUN chmod a+x /work/tools/*.py
 RUN chmod a+x /work/*.sh
 ENV PATH $PATH:/work/
 
+# download pretrained models
+WORKDIR /work/models
+
+RUN wget https://motokimura-public.s3.amazonaws.com/logs.zip
+RUN wget https://motokimura-public.s3.amazonaws.com/weights.zip
+RUN wget https://motokimura-public.s3.amazonaws.com/lgbm_models.zip
+
+RUN unzip logs.zip && rm logs.zip
+RUN unzip weights.zip && rm weights.zip
+RUN unzip lgbm_models.zip && rm lgbm_models.zip
+
 WORKDIR /work

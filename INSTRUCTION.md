@@ -36,6 +36,9 @@ cd ${CODE_DIR}  # `code` directory containing `Dockerfile`, `train.sh`, `test.sh
 nvidia-docker build -t motokimura .
 ```
 
+Duing the build, my home built models are downloaded
+so that `test.sh` can run without re-training the models.
+
 ### Prepare container
 
 ```
@@ -47,6 +50,8 @@ It's necessary to add `--ipc=host` option when run docker (as written in [flags.
 Otherwise multi-threaded PyTorch dataloader will crash.
 
 ### Train
+
+**WARNING: `train.sh` updates my home built models downloaded during the docker build.**
 
 ```
 # start training!

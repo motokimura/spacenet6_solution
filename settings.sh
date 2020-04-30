@@ -7,7 +7,7 @@ MODEL_ROOT_DIR=/work/models
 SAR_ORIENTATION_PATH=/work/static/SAR_orientations.txt
 
 # compute_mean_std.py
-IMAGE_MEAN_STD_DIR=${FEATURE_DIR}/image_mean_std
+IMAGE_MEAN_STD_DIR=${MODEL_ROOT_DIR}/image_mean_std
 
 # geojson_to_mask.py
 BUILDING_MASK_DIR=${FEATURE_DIR}/masks

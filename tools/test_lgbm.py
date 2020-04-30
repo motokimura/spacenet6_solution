@@ -47,7 +47,7 @@ def parse_args():
         '--iou_thresh',
         help='threshold of iou_score (0, 1)',
         type=float,
-        default=0.15
+        default=0.1
     )
     parser.add_argument(
         '--image_dir',

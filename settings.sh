@@ -66,4 +66,4 @@ WATERSHED_SEED_MIN_AREA_PIXEL=20  # for 'watershed'
 VAL_POLY_CSV_DIR=${FEATURE_DIR}/val_polygons
 
 # test_lgbm.py
-IOU_THRESH=0.15
+IOU_THRESH=0.1

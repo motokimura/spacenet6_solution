@@ -38,7 +38,7 @@ DUMP_GIT_INFO='False'
 TRAIN_STDOUT_DIR=/wdata/stdout/train
 
 # train_lgbm.py
-LGBM_MODEL_DIR=${MODEL_ROOT_DIR}/lgbm_models
+LGBM_MODEL_DIR=${MODEL_ROOT_DIR}/gbm_models
 
 LGBM_STDOUT_DIR=/wdata/stdout/lgbm
 

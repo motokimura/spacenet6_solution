@@ -110,10 +110,10 @@ WORKDIR /work/models
 
 RUN wget https://motokimura-public-sn6.s3.amazonaws.com/logs.zip
 RUN wget https://motokimura-public-sn6.s3.amazonaws.com/weights.zip
-RUN wget https://motokimura-public-sn6.s3.amazonaws.com/lgbm_models.zip
+RUN wget https://motokimura-public-sn6.s3.amazonaws.com/gbm_models.zip
 
 RUN unzip logs.zip && rm logs.zip
 RUN unzip weights.zip && rm weights.zip
-RUN unzip lgbm_models.zip && rm lgbm_models.zip
+RUN unzip gbm_models.zip && rm gbm_models.zip
 
 WORKDIR /work

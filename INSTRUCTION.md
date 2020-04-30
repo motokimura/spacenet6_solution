@@ -20,6 +20,8 @@ tar -xvf SN6_buildings_AOI_11_Rotterdam_train.tar.gz
 cd ${DATA_DIR}
 aws s3 cp s3://spacenet-dataset/spacenet/SN6_buildings/tarballs/SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz .
 tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
+
+# please prepare private test data under `DATA_DIR`!
 ```
 
 ### Prepare temporal directory
@@ -51,7 +53,7 @@ Otherwise multi-threaded PyTorch dataloader will crash.
 
 ### Train
 
-**WARNING: `train.sh` updates my home built models downloaded during the docker build.**
+**WARNINGS: `train.sh` updates my home built models downloaded during docker build.**
 
 ```
 # start training!

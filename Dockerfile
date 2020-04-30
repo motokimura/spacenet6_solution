@@ -108,9 +108,9 @@ ENV PATH $PATH:/work/
 # download pretrained models
 WORKDIR /work/models
 
-RUN wget https://motokimura-public.s3.amazonaws.com/logs.zip
-RUN wget https://motokimura-public.s3.amazonaws.com/weights.zip
-RUN wget https://motokimura-public.s3.amazonaws.com/lgbm_models.zip
+RUN wget https://motokimura-public-sn6.s3.amazonaws.com/logs.zip
+RUN wget https://motokimura-public-sn6.s3.amazonaws.com/weights.zip
+RUN wget https://motokimura-public-sn6.s3.amazonaws.com/lgbm_models.zip
 
 RUN unzip logs.zip && rm logs.zip
 RUN unzip weights.zip && rm weights.zip

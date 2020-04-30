@@ -7,8 +7,8 @@ source activate solaris
 TRAIN_DIR=$1  # path/to/spacenet6/train/AOI_11_Rotterdam/
 source /work/settings.sh
 
-# prepare directory to output intermediate products
-mkdir -p ${FEATURE_DIR}
+# remove trained models
+rm -rf ${MODEL_ROOT_DIR}/*
 
 # preprocess dataset
 /work/scripts/train/preprocess.sh ${TRAIN_DIR}

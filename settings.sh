@@ -1,12 +1,13 @@
 #!/bin/bash
 
 FEATURE_DIR=/wdata
+MODEL_ROOT_DIR=/work/models
 
 # path to SAR_orientations.txt
 SAR_ORIENTATION_PATH=/work/static/SAR_orientations.txt
 
 # compute_mean_std.py
-IMAGE_MEAN_STD_DIR=${FEATURE_DIR}/image_mean_std
+IMAGE_MEAN_STD_DIR=${MODEL_ROOT_DIR}/image_mean_std
 
 # geojson_to_mask.py
 BUILDING_MASK_DIR=${FEATURE_DIR}/masks
@@ -29,15 +30,15 @@ CONFIG_A_2=/work/configs/deploy/unet-scse_efficientnet-b7_v_01.yml
 CONFIG_B_1=/work/configs/deploy/unet-scse_timm-efficientnet-b7_v_01.yml
 CONFIG_C_1=/work/configs/deploy/unet-scse_timm-efficientnet-b8_v_01.yml
 
-TRAIN_LOG_DIR=${FEATURE_DIR}/logs
-MODEL_WEIGHT_DIR=${FEATURE_DIR}/weights
+TRAIN_LOG_DIR=${MODEL_ROOT_DIR}/logs
+MODEL_WEIGHT_DIR=${MODEL_ROOT_DIR}/weights
 SAVE_CHECKPOINTS='False'
 DUMP_GIT_INFO='False'
 
 TRAIN_STDOUT_DIR=/wdata/stdout/train
 
 # train_lgbm.py
-LGBM_MODEL_DIR=${FEATURE_DIR}/lgbm_models
+LGBM_MODEL_DIR=${MODEL_ROOT_DIR}/gbm_models
 
 LGBM_STDOUT_DIR=/wdata/stdout/lgbm
 
@@ -65,4 +66,4 @@ WATERSHED_SEED_MIN_AREA_PIXEL=20  # for 'watershed'
 VAL_POLY_CSV_DIR=${FEATURE_DIR}/val_polygons
 
 # test_lgbm.py
-IOU_THRESH=0.15
+IOU_THRESH=0.1

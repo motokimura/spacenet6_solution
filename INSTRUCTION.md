@@ -1,11 +1,8 @@
-# spacenet6_solution
-motokimura's solution to SpaceNet6 challenge
+# Instructions for Final Scoring
 
-## Instructions for Final Scoring
+This document provides instructions for the final testing/scoring of motokimura's solution.
 
-This document provides instructions for the final testing/scoring phase.
-
-### Download SpaceNet6 data
+## Prepare SpaceNet6 data
 
 ```
 DATA_DIR=${HOME}/data  # path to download SpaceNet6 dataset
@@ -24,14 +21,14 @@ tar -xvf SN6_buildings_AOI_11_Rotterdam_test_public.tar.gz
 # please prepare private test data under `DATA_DIR`!
 ```
 
-### Prepare temporal directory
+## Prepare temporal directory
 
 ```
-WDATA_DIR=${HOME}/wdata  # path to directory for temporal files (model weights, predictions, etc.)
+WDATA_DIR=${HOME}/wdata  # path to directory for temporal files (train logs, prediction results, etc.)
 mkdir -p ${WDATA_DIR}
 ```
 
-### Build image
+## Build image
 
 ```
 cd ${CODE_DIR}  # `code` directory containing `Dockerfile`, `train.sh`, `test.sh`, and etc. 
@@ -41,7 +38,7 @@ nvidia-docker build -t motokimura .
 During the build, my home built models are downloaded
 so that `test.sh` can run without re-training the models.
 
-### Prepare container
+## Prepare container
 
 ```
 # launch container
@@ -51,7 +48,7 @@ nvidia-docker run --ipc=host -v ${DATA_DIR}:/data:ro -v ${WDATA_DIR}:/wdata -it 
 It's necessary to add `--ipc=host` option when run docker (as written in [flags.txt](flags.txt)).
 Otherwise multi-threaded PyTorch dataloader will crash.
 
-### Train
+## Train
 
 **WARNINGS: `train.sh` updates my home built models downloaded during docker build.**
 
@@ -66,7 +63,7 @@ Otherwise multi-threaded PyTorch dataloader will crash.
 Note that this is a sample call of `train.sh`. 
 i.e., you need to specify the correct path to training data folder.
 
-### Test
+## Test
 
 ```
 # start testing!

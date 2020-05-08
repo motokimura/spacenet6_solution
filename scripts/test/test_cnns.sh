@@ -22,72 +22,108 @@ TEST_ARGS="\
 mkdir -p ${TEST_STDOUT_DIR}
 
 echo ''
-echo 'predicting... (1/4)'
+echo 'predicting exp #5...'
 
 ## CONFIG_A_2
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 5 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #6...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 6 \
     ${TEST_ARGS}
+
+echo ''
+echo 'predicting exp #7...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 7 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #8...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 8 \
     ${TEST_ARGS}
 
-echo 'predicting... (2/4)'
+echo ''
+echo 'predicting exp #9...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 9 \
     ${TEST_ARGS}
+
+echo ''
+echo 'predicting exp #10...'
 
 ## CONFIG_B_1
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 10 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #11...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 11 \
     ${TEST_ARGS}
+
+echo ''
+echo 'predicting exp #12...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 12 \
     ${TEST_ARGS}
 
-echo 'predicting... (3/4)'
+echo ''
+echo 'predicting exp #13...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 13 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #14...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 14 \
     ${TEST_ARGS}
+
+echo ''
+echo 'predicting exp #15...'
 
 ## CONFIG_C_1
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 15 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #16...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 16 \
     ${TEST_ARGS}
 
-echo 'predicting... (4/4)'
+echo ''
+echo 'predicting exp #17...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 17 \
     ${TEST_ARGS}
 
+echo ''
+echo 'predicting exp #18...'
+
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 18 \
     ${TEST_ARGS}
+
+echo ''
+echo 'predicting exp #19...'
 
 CUDA_VISIBLE_DEVICES=0 /work/tools/test_spacenet6_model.py \
     --exp_id 19 \

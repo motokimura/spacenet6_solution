@@ -82,9 +82,9 @@ def get_test_dataloader(config):
         image_paths = glob(os.path.join(config.INPUT.TEST_IMAGE_DIR, '*.tif'))
 
         # for debug
-        print('[DEBUG] config.INPUT.TEST_IMAGE_DIR: ', config.INPUT.TEST_IMAGE_DIR)
-        print('[DEBUG] image_paths: ', image_paths)
-        print('[DEBUG] len(image_paths): ', len(image_paths))
+        print('[DEBUG] config.INPUT.TEST_IMAGE_DIR:', config.INPUT.TEST_IMAGE_DIR)
+        print('[DEBUG] image_paths:', image_paths)
+        print('[DEBUG] len(image_paths):', len(image_paths))
 
     dataset = SpaceNet6TestDataset(
         config,

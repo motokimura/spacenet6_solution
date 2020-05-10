@@ -46,8 +46,6 @@ LGBM_STDOUT_DIR=/wdata/stdout/lgbm
 MODEL_PREDICTION_DIR=${FEATURE_DIR}/predictions
 VAL_PREDICTION_DIR=${FEATURE_DIR}/val_predictions
 
-TEST_STDOUT_DIR=/wdata/stdout/test
-
 # ensemble_models.py
 CLASSES='["building_footprint","building_boundary"]'
 ENSEMBLED_PREDICTION_DIR=${FEATURE_DIR}/ensembled_predictions

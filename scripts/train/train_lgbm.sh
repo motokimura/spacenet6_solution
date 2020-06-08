@@ -108,7 +108,7 @@ nohup env CUDA_VISIBLE_DEVICES=2 /work/tools/test_spacenet6_model.py \
 nohup env CUDA_VISIBLE_DEVICES=3 /work/tools/test_spacenet6_model.py \
     --exp_id 16 \
     ${VAL_ARGS} \
-    > ${LGBM_STDOUT_DIR}/val_0012.out 2>&1 &
+    > ${LGBM_STDOUT_DIR}/val_0016.out 2>&1 &
 
 wait
 

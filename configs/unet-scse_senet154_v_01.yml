@@ -18,7 +18,7 @@ DATALOADER:
     TRAIN_SHUFFLE: True
 MODEL:
     ARCHITECTURE: unet
-    BACKBONE: resnet50
+    BACKBONE: senet154
     ENCODER_PRETRAINED_FROM: imagenet
     ACTIVATION: sigmoid
     DEVICE: cuda

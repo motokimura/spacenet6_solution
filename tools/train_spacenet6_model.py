@@ -3,11 +3,13 @@ import os
 import ssl
 import timeit
 
+import segmentation_models_pytorch as smp
 import torch
 from tensorboardX import SummaryWriter
 
-import segmentation_models_pytorch as smp
 from _init_path import init_path
+init_path()
+
 from spacenet6_model.configs import load_config
 from spacenet6_model.datasets import get_dataloader
 from spacenet6_model.evaluations import get_metrics
@@ -26,8 +28,6 @@ from spacenet6_model.utils import (
 )
 
 ssl._create_default_https_context = ssl._create_unverified_context
-
-init_path()
 
 
 def main():

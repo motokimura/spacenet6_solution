@@ -24,7 +24,7 @@ MODEL:
     ENCODER_PRETRAINED_FROM: noisy-student
     ACTIVATION: sigmoid
     DEVICE: cuda
-    IN_CHANNELS: 4
+    IN_CHANNELS: 3
     UNET_ENABLE_DECODER_SCSE: True
 SOLVER:
     EPOCHS: 140
